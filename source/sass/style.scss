@@ -1,0 +1,14 @@
+// Global
+@import "global/fonts.scss";
+@import "global/variables.scss";
+@import "global/animations.scss";
+@import "global/global.scss";
+
+// Mixins
+@import "mixins/**/*.scss";
+
+// Blocks
+@import "blocks/**/*.scss";
+
+// Helpers
+@import "helpers/**/*.scss";

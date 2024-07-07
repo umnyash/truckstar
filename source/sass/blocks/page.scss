@@ -1,0 +1,23 @@
+.page__body {
+  display: grid;
+  min-height: 100vh;
+  min-width: 340px;
+  margin: 0;
+  grid-template-columns: 100%;
+  grid-template-rows: auto 1fr auto;
+  font: 400 14px/17px $main-font-family;
+
+  @supports (min-height: 100dvh) {
+    min-height: 100dvh;
+  }
+
+  @media (min-width: $desktop-width) {
+    font-size: 16px;
+    line-height: 19px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    font-size: 20px;
+    line-height: 26px;
+  }
+}

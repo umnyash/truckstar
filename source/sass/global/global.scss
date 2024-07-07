@@ -1,0 +1,15 @@
+:root {
+  --edge-indent: 16px;
+
+  @media (min-width: $tablet-width) {
+    --edge-indent: 24px;
+  }
+
+  @media (min-width: $desktop-width) {
+    --edge-indent: 50px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    --edge-indent: 80px;
+  }
+}
