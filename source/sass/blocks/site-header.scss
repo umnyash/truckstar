@@ -1,0 +1,19 @@
+.site-header__logo {
+  width: 97px;
+  height: 24px;
+
+  @media (min-width: $tablet-width) {
+    width: 120px;
+    height: 130px;
+  }
+
+  @media (min-width: $desktop-width) {
+    width: 160px;
+    height: 38px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    width: 250px;
+    height: 60px;
+  }
+}
