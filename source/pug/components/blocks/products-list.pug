@@ -1,0 +1,6 @@
+mixin products-list({ products, pagination })
+  .products-list&attributes(attributes)
+    ul.products-list__items
+      each product in products
+        li.products-list__item
+          +product-card({ product })

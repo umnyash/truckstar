@@ -6,7 +6,7 @@
   &--size_xs {
     font-size: 16px;
     line-height: 19px;
-    letter-spacing: -1px;
+    font-weight: 600;
 
     @media (min-width: $tablet-width) {
       font-size: 18px;
@@ -14,8 +14,9 @@
     }
 
     @media (min-width: $wide-desktop-width) {
-      font-size: 44px;
+      font-size: 24px;
       line-height: 1;
+      letter-spacing: -1px;
     }
   }
 

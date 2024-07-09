@@ -1,0 +1,6 @@
+mixin favorites({ products })
+  .favorites.main-section&attributes(attributes)
+    .container
+      .favorites__inner
+        h1.main-section__heading.heading.heading--size_l Избранное
+        +products-list({ products })

@@ -4,7 +4,12 @@
   --text-light-color: #ffffff;
   --background-color: #ffffff;
   --background-additional-color: #f8f8f8;
+  --background-additional-color-80: rgb(248, 248, 248, 0.8);
   --accent-color: #f70f31;
+  --error-color: #f70f31;
+  --success-color: #2fa961;
+  --special-color-1: #2199fc;
+  --special-color-2: #fd852b;
   --edge-indent: 16px;
 
   @media (min-width: $tablet-width) {

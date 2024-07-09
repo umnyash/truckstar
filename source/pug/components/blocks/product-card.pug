@@ -1,0 +1,21 @@
+mixin product-card({ product })
+  article.product-card&attributes(attributes)
+    a.product-card__link(href='product.html')
+      h3.product-card__heading= product.name
+      case product.condition
+        when 'new'
+          p.product-card__condition.product-card__condition--new Новая запчасть
+        when 'used'
+          p.product-card__condition.product-card__condition--used Б/у запчасть
+      picture.product-card__image-wrapper
+        img.product-card__image(width='410' height='300' src= product.image srcset=`${product.image2x} 2x` alt='' loading='lazy')
+    p.product-card__description= product.description
+    case product.status
+      when 'in-stock'
+        p.product-card__status.status.status--in-stock В наличии
+      when 'to-order'
+        p.product-card__status.status.status--to-order Под заказ
+    .product-card__price-wrapper
+      p.product-card__price= product.price
+      a.product-card__cart-button(href='#')
+        span.visually-hidden Добавить в корзину

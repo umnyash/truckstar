@@ -1,0 +1,8 @@
+extends layout/layout
+
+block variables
+  - var title = 'Избранное'
+  - var pageClass = 'favorites-page'
+
+block content
+  +favorites({ products })
