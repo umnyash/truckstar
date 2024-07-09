@@ -1,4 +1,10 @@
 :root {
+  --text-color: #121212;
+  --text-weak-color: #8e8e8e;
+  --text-light-color: #ffffff;
+  --background-color: #ffffff;
+  --background-additional-color: #f8f8f8;
+  --accent-color: #f70f31;
   --edge-indent: 16px;
 
   @media (min-width: $tablet-width) {

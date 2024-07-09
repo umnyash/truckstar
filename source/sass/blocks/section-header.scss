@@ -1,0 +1,120 @@
+.section-header {
+  display: block;
+  text-align: center;
+  font: 400 14px/17px $main-font-family;
+
+  @media (min-width: $tablet-width) {
+    font-size: 16px;
+    line-height: 19px;
+  }
+
+  @media (min-width: $desktop-width) {
+    font-size: 20px;
+    line-height: 26px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    font-size: 24px;
+    line-height: 29px;
+  }
+}
+
+.section-header__badge {
+  margin: 0 0 12px;
+
+  @media (min-width: $tablet-width) {
+    margin-bottom: 16px;
+  }
+
+  @media (min-width: $desktop-width) {
+    margin-bottom: 24px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    margin-bottom: 32px;
+  }
+}
+
+.section-header__heading {
+  max-width: 580px; // 512-590
+  margin: 0 auto;
+
+  @media (min-width: $desktop-width) {
+    max-width: 820px; // 713-824
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    max-width: 1200px; // 1058-1213
+  }
+}
+
+.section-header__arrows {
+  justify-self: end;
+}
+
+.section-header__text {
+  max-width: 580px; // 529-592
+  margin: 8px auto 0;
+
+  @media (min-width: $tablet-width) {
+    margin-top: 12px;
+  }
+
+  @media (min-width: $desktop-width) {
+    max-width: 820px; // 741-844
+    margin-top: 16px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    max-width: 880px; // 785-889
+    margin-top: 24px;
+  }
+}
+
+.section-header--with-arrows {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas:
+    "badge   ."
+    "heading arrows"
+    "text    .";
+  place-items: center;
+
+  @media (min-width: $desktop-width) {
+    grid-template-columns: 140px 1fr 140px;
+    grid-template-areas:
+      ". badge   ."
+      ". heading arrows"
+      ". text    .";
+    column-gap: 40px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    column-gap: 80px;
+  }
+
+  .section-header__badge {
+    grid-area: badge;
+  }
+
+  .section-header__heading {
+    grid-area: heading;
+    margin: 0 20px;
+
+    @media (min-width: $tablet-width) {
+      margin: 0 32px;
+    }
+
+    @media (min-width: $desktop-width) {
+      margin: 0;
+    }
+  }
+
+  .section-header__arrows {
+    grid-area: arrows;
+  }
+
+  .section-header__text {
+    grid-area: text;
+  }
+}

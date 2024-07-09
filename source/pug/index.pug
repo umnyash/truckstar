@@ -5,4 +5,7 @@ block variables
   - var pageClass = 'index-page'
 
 block content
-  h1 «Truckstar» — Разборка тягачей из Европы
+  h1.visually-hidden «Truckstar» — Разборка тягачей из Европы
+  +products({ heading: '<b class="heading__accent">Популярные</b> запчасти' })
+  +statistics
+  +steps

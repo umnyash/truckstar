@@ -1,0 +1,9 @@
+mixin section-header({ heading, headingTag = 'h2', badge, badgeTag, text, arrows })
+  header.section-header(class= arrows && 'section-header--with-arrows')&attributes(attributes)
+    if badge
+      +badge({ text: badge, tag: badgeTag })(class='section-header__badge')
+    #{headingTag}.section-header__heading.heading.heading--size_m!= heading
+    if arrows
+      +slider-arrows(class='section-header__arrows')
+    if text
+      p.section-header__text= text

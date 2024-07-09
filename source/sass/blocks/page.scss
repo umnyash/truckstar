@@ -6,6 +6,7 @@
   grid-template-columns: 100%;
   grid-template-rows: auto 1fr auto;
   font: 400 14px/17px $main-font-family;
+  background: var(--background-color);
 
   @supports (min-height: 100dvh) {
     min-height: 100dvh;
@@ -19,5 +20,21 @@
   @media (min-width: $wide-desktop-width) {
     font-size: 20px;
     line-height: 26px;
+  }
+}
+
+.page__content > * {
+  margin: 80px 0 0;
+
+  @media (min-width: $tablet-width) {
+    margin: 100px 0 0;
+  }
+
+  @media (min-width: $desktop-width) {
+    margin: 140px 0 0;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    margin: 180px 0 0;
   }
 }
