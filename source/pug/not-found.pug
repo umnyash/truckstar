@@ -1,0 +1,28 @@
+extends layout/layout
+
+block variables
+  - var title = '404'
+  - var pageClass = 'nof-found-page'
+
+block content
+  +breadcrumbs({ links: [
+    {
+      text: 'Корзина'
+    }
+  ]})
+  +message({
+    heading: {
+      text: 'Упс! Такой страницы не существует',
+      size: 'm'
+    },
+    badge: 'Ошибка 404',
+    text: 'Уверены, Вы обязательно найдёте что&nbsp;искали на&nbsp;главной странице',
+    link: {
+      text: 'На главную',
+      href: 'index.html'
+    },
+    image: {
+      x1: 'img/decor/404.webp',
+      x2: 'img/decor/404@2x.webp'
+    }
+  })

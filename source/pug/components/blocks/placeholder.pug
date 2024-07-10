@@ -1,0 +1,15 @@
+mixin placeholder({ heading, badge, text, link, image })
+  .placeholder&attributes(attributes)
+    if badge
+      +badge({ text: badge })(class='placeholder__badge')
+    h1.placeholder__heading.heading(class=`heading--size_${heading.size}`)!= heading.text
+    if text
+      p.placeholder__text!= text
+    if link
+      +button({
+        tag: 'a',
+        text: link.text,
+        href: link.href
+      })(class='placeholder__button button--primary button--size_l')
+    if image
+      img.placeholder__image(src= image.x1 width='660' height='420' srcset=`${image.x2} 2x` alt='' loading='lazy')

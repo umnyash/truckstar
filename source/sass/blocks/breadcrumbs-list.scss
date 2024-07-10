@@ -1,0 +1,40 @@
+.breadcrumbs-list {
+  font: 400 14px/17px $main-font-family;
+
+  @media (min-width: $wide-desktop-width) {
+    font-size: 18px;
+    line-height: 22px;
+  }
+}
+
+.breadcrumbs__items {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.breadcrumbs__item {
+  display: inline-block;
+
+  &:not(:last-child)::after {
+    content: "\0020/";
+  }
+
+  &:nth-last-child(2)::after {
+    color: var(--text-weak-color);
+  }
+}
+
+.breadcrumbs__link {
+  text-decoration: none;
+  color: inherit;
+  transition: color $medium-interaction-duration;
+
+  &:not([href]) {
+    color: var(--text-weak-color);
+  }
+
+  &[href]:hover {
+    color: var(--accent-color);
+  }
+}

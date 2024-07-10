@@ -1,0 +1,112 @@
+.placeholder {
+  position: relative;
+  padding: 32px 16px;
+  border-radius: 20px;
+  text-align: center;
+  font: 500 16px/1 $main-font-family;
+  background: var(--background-additional-color);
+
+  @media (min-width: $tablet-width) {
+    padding: 48px 60px;
+    border-radius: 30px;
+    font-size: 20px;
+  }
+
+  @media (min-width: $desktop-width) {
+    padding: 64px 100px;
+    font-size: 24px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    padding: 80px 120px;
+    font-size: 32px;
+  }
+}
+
+.placeholder__badge {
+  vertical-align: middle;
+  margin: 0 0 12px;
+
+  @media (min-width: $tablet-width) {
+    margin-bottom: 16px;
+  }
+
+  @media (min-width: $desktop-width) {
+    margin-bottom: 24px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    margin-bottom: 32px;
+  }
+}
+
+.placeholder__heading {
+  margin: 0 0 12px;
+
+  @media (min-width: $desktop-width) {
+    margin-bottom: 16px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    margin-bottom: 24px;
+  }
+}
+
+.placeholder__text {
+  max-width: 460px;
+  margin: 12px auto 0;
+  letter-spacing: -0.01em;
+
+  @media (min-width: $desktop-width) {
+    max-width: 520px;
+    margin-top: 16px;
+    letter-spacing: -1px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    max-width: 720px;
+    margin-top: 24px;
+  }
+}
+
+.placeholder__button {
+  vertical-align: middle;
+  margin: 24px 0 0;
+
+  @media (min-width: $desktop-width) {
+    margin-top: 32px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    margin-top: 48px;
+  }
+}
+
+.placeholder__image {
+  display: none;
+
+  @media (min-width: $tablet-width) {
+    position: absolute;
+    right: calc(var(--edge-indent) * -1);
+    bottom: 29px;
+    width: 282px;
+    height: 180px;
+    object-fit: contain;
+    object-position: right bottom;
+    mix-blend-mode: darken;
+  }
+
+  @media (min-width: $desktop-width) {
+    right: -45px;
+    bottom: 5px;
+    width: 498px;
+    height: 317px;
+  }
+
+  @media (min-width: $desktop-width) {
+    right: -65px;
+    bottom: 24px;
+    width: 660px;
+    height: 420px;
+  }
+}

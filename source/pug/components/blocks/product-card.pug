@@ -8,7 +8,7 @@ mixin product-card({ product })
         when 'used'
           p.product-card__condition.product-card__condition--used Б/у запчасть
       picture.product-card__image-wrapper
-        img.product-card__image(width='410' height='300' src= product.image srcset=`${product.image2x} 2x` alt='' loading='lazy')
+        img.product-card__image(src= product.image width='410' height='300' srcset=`${product.image2x} 2x` alt='' loading='lazy')
     p.product-card__description= product.description
     case product.status
       when 'in-stock'

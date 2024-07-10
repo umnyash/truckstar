@@ -4,6 +4,16 @@ block variables
   - var title = 'Карта сайта'
 
 block content
-  ol
-    li #[a(href='index.html') Главная]
-    li #[a(href='favorites.html') Избранное]
+  +breadcrumbs({ links: [
+    {
+      text: 'Карта сайта'
+    }
+  ]})
+  .container
+    ol
+      li #[a(href='index.html') Главная]
+      li #[a(href='favorites.html') Избранное]
+      li #[a(href='product.html') Продукт]
+      li #[a(href='cart-empty.html') Корзина (пустая)]
+      li #[a(href='not-found.html') 404]
+      li #[a(href='dev-ui-kit.html') UI Kit]

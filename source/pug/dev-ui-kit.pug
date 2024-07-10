@@ -1,0 +1,14 @@
+extends layout/layout
+
+block variables
+  - var title = 'UI Kit'
+
+block content
+  +breadcrumbs({ links: [
+    {
+      text: 'UI Kit'
+    }
+  ]})
+  .container
+    +button({ tag: 'button', type: 'button', text: 'Кнопка'})(class='button--primary button--size_l')
+    +button({ tag: 'a', href: '#!', text: 'Кнопка'})(class='button--primary button--size_l')

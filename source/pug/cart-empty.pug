@@ -1,0 +1,13 @@
+extends layout/layout
+
+block variables
+  - var title = 'Корзина'
+  - var pageClass = 'cart-page'
+
+block content
+  +breadcrumbs({ links: [
+    {
+      text: 'Корзина'
+    }
+  ]})
+  +cart({ empty: true })

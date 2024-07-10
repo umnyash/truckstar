@@ -1,0 +1,4 @@
+mixin message({ heading, badge, text, link, image })
+  article.message&attributes(attributes)
+    .container
+      +placeholder({ heading, badge, text, link, image })

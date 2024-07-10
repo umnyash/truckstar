@@ -1,6 +1,6 @@
 mixin favorites({ products })
-  .favorites.main-section&attributes(attributes)
+  .favorites&attributes(attributes)
     .container
       .favorites__inner
-        h1.main-section__heading.heading.heading--size_l Избранное
+        h1.favorites__heading.heading.heading--size_l Избранное
         +products-list({ products })

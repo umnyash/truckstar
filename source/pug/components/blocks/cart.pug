@@ -1,0 +1,18 @@
+mixin cart({ empty })
+  .cart&attributes(attributes)
+    .container
+      .cart__inner
+        if empty
+          +placeholder({
+            heading: {
+              text: 'Корзина',
+              size: 'l'
+            },
+            text: 'Здесь пока нет товаров',
+            link: {
+              text: 'В каталог',
+              href: 'catalog.html'
+            }
+          })
+        else
+          h1.cart__heading.heading.heading--size_l Корзина
