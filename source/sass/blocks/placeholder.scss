@@ -83,7 +83,9 @@
 }
 
 .placeholder__image {
-  display: none;
+  @media (max-width: ($tablet-width - 1)) {
+    display: none;
+  }
 
   @media (min-width: $tablet-width) {
     position: absolute;
@@ -103,7 +105,7 @@
     height: 317px;
   }
 
-  @media (min-width: $desktop-width) {
+  @media (min-width: $wide-desktop-width) {
     right: -65px;
     bottom: 24px;
     width: 660px;

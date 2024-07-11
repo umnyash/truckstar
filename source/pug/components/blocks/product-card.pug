@@ -17,5 +17,5 @@ mixin product-card({ product })
         p.product-card__status.status.status--to-order Под заказ
     .product-card__price-wrapper
       p.product-card__price= product.price
-      a.product-card__cart-button(href='#')
+      button.product-card__cart-button(type='button')
         span.visually-hidden Добавить в корзину

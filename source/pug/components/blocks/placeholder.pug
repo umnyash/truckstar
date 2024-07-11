@@ -10,6 +10,6 @@ mixin placeholder({ heading, badge, text, link, image })
         tag: 'a',
         text: link.text,
         href: link.href
-      })(class='placeholder__button button--primary button--size_l')
+      })(class='placeholder__button button--primary button--right button--size_l')
     if image
       img.placeholder__image(src= image.x1 width='660' height='420' srcset=`${image.x2} 2x` alt='' loading='lazy')

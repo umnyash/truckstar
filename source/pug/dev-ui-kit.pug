@@ -4,11 +4,80 @@ block variables
   - var title = 'UI Kit'
 
 block content
+  style
+    .
+      .container div {
+        margin-bottom: 16px;
+      }
+
+      .order {
+        display: grid;
+        gap: 8px;
+        max-width: 1160px;
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .cards {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+      }
+
+      .ui-kit__buttons-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        align-items: center;
+      }
+
+
+
+
+
   +breadcrumbs({ links: [
     {
       text: 'UI Kit'
     }
   ]})
-  .container
-    +button({ tag: 'button', type: 'button', text: 'Кнопка'})(class='button--primary button--size_l')
-    +button({ tag: 'a', href: '#!', text: 'Кнопка'})(class='button--primary button--size_l')
+  .ui-kit.container
+    .ui-kit__buttons
+      .ui-kit__buttons-group
+        +button({ tag: 'button', type: 'button', text: 'В каталог'})(class='button--primary-alter button--right button--size_l')
+        +button({ tag: 'button', type: 'button', text: 'В каталог'})(class='button--primary-alter button--right button--size_l button--pending' disabled)
+        +button({ tag: 'button', type: 'button', text: 'В каталог'})(class='button--primary-alter button--right button--size_l' disabled)
+      .ui-kit__buttons-group
+        +button({ tag: 'button', type: 'button', text: 'В каталог'})(class='button--primary-alter button--right button--size_s')
+        +button({ tag: 'button', type: 'button', text: 'В каталог'})(class='button--primary-alter button--right button--size_s button--pending' disabled)
+        +button({ tag: 'button', type: 'button', text: 'В каталог'})(class='button--primary-alter button--right button--size_s' disabled)
+      .ui-kit__buttons-group
+        +button({ tag: 'button', type: 'button', text: 'В каталог'})(class='button--primary button--right button--size_l')
+        +button({ tag: 'button', type: 'button', text: 'В каталог'})(class='button--primary button--right button--size_l button--pending' disabled)
+        +button({ tag: 'button', type: 'button', text: 'В каталог'})(class='button--primary button--right button--size_l' disabled)
+      .ui-kit__buttons-group
+        +button({ tag: 'button', type: 'button', text: 'В каталог'})(class='button--primary button--right button--size_s')
+        +button({ tag: 'button', type: 'button', text: 'В каталог'})(class='button--primary button--right button--size_s button--pending' disabled)
+        +button({ tag: 'button', type: 'button', text: 'В каталог'})(class='button--primary button--right button--size_s' disabled)
+      .ui-kit__buttons-group
+        +button({ tag: 'button', type: 'button', text: 'В личный кабинет'})(class='button--secondary button--right button--size_l')
+        +button({ tag: 'button', type: 'button', text: 'В личный кабинет'})(class='button--secondary button--right button--size_l button--pending' disabled)
+        +button({ tag: 'button', type: 'button', text: 'В личный кабинет'})(class='button--secondary button--right button--size_l' disabled)
+      .ui-kit__buttons-group
+        +button({ tag: 'button', type: 'button', text: 'Смотреть запчасти'})(class='button--secondary button--right button--size_s')
+        +button({ tag: 'button', type: 'button', text: 'Смотреть запчасти'})(class='button--secondary button--right button--size_s button--pending' disabled)
+        +button({ tag: 'button', type: 'button', text: 'Смотреть запчасти'})(class='button--secondary button--right button--size_s' disabled)
+      .ui-kit__buttons-group
+        +button({ tag: 'button', type: 'button', text: 'Смотреть ещё'})(class='button--secondary button--down button--size_l')
+        +button({ tag: 'button', type: 'button', text: 'Смотреть ещё'})(class='button--secondary button--down button--size_l button--pending' disabled)
+        +button({ tag: 'button', type: 'button', text: 'Смотреть ещё'})(class='button--secondary button--down button--size_l' disabled)
+      .ui-kit__buttons-group
+        +button({ tag: 'button', type: 'button', text: 'Смотреть ещё'})(class='button--secondary button--down button--size_s')
+        +button({ tag: 'button', type: 'button', text: 'Смотреть ещё'})(class='button--secondary button--down button--size_s button--pending' disabled)
+        +button({ tag: 'button', type: 'button', text: 'Смотреть ещё'})(class='button--secondary button--down button--size_s' disabled)
+      .ui-kit__buttons-group
+        +button({ tag: 'button', type: 'button', text: 'Подробнее'})(class='button--tertiary button--right button--size_l')
+        +button({ tag: 'button', type: 'button', text: 'Подробнее'})(class='button--tertiary button--right button--size_l button--pending' disabled)
+        +button({ tag: 'button', type: 'button', text: 'Подробнее'})(class='button--tertiary button--right button--size_l' disabled)
+      .ui-kit__buttons-group
+        +button({ tag: 'button', type: 'button', text: 'Подробнее'})(class='button--tertiary button--right button--size_s')
+        +button({ tag: 'button', type: 'button', text: 'Подробнее'})(class='button--tertiary button--right button--size_s button--pending' disabled)
+        +button({ tag: 'button', type: 'button', text: 'Подробнее'})(class='button--tertiary button--right button--size_s' disabled)

@@ -8,14 +8,15 @@
 }
 
 .breadcrumbs__items {
+  display: flex;
   padding: 0;
   margin: 0;
   list-style: none;
+  flex-wrap: wrap;
+  column-gap: 0.28em;
 }
 
 .breadcrumbs__item {
-  display: inline-block;
-
   &:not(:last-child)::after {
     content: "\0020/";
   }
