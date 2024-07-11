@@ -1,0 +1,10 @@
+mixin banner-slider({ images })
+  .banner-slider.swiper&attributes(attributes)
+    ul.banner-slider__list.swiper-wrapper
+      each image in images
+        li.banner-slider__item.swiper-slide
+          picture.banner-slider__image-wrapper
+            source(media='(min-width: 1367px)' srcset=`img/banners/${image}-wide-desktop.webp 1x, img/banners/${image}-wide-desktop@2x.webp 2x` width='1920' height='960')
+            source(media='(min-width: 769px)' srcset=`img/banners/${image}-desktop.webp 1x, img/banners/${image}-desktop@2x.webp 2x` width='1366' height='684')
+            source(media='(min-width: 421px)' srcset=`img/banners/${image}-tablet.webp 1x, img/banners/${image}-tablet@2x.webp 2x` width='768' height='684')
+            img.banner-slider__image(src=`img/banners/${image}.webp` width='420' height='560' srcset=`img/banners/${image}@2x.webp 2x` alt='')

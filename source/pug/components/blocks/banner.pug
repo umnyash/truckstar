@@ -1,0 +1,14 @@
+mixin banner({ banner })
+  section.banner&attributes(attributes)
+    .container
+      .banner__inner
+        .banner__content
+          h2.banner__heading.heading.heading--size_xl!= banner.heading
+          p.banner__text!= banner.text
+          +button({
+            tag: 'a',
+            text: banner.link.text,
+            href: banner.link.href
+          })(class='banner__button button--primary-alter button--right button--size_l')
+    .banner__background
+      +banner-slider({ images: banner.images})(class='banner__background-slider')
