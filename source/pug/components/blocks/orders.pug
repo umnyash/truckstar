@@ -1,0 +1,8 @@
+mixin orders({ orders })
+  .orders&attributes(attributes)
+    .container
+      .orders__inner
+        .orders__heading-wrapper
+          h1.orders__heading.heading.heading--size_l Мои заказы
+          p.orders__number 0
+        +orders-list({ orders })(class='orders__list')

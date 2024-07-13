@@ -1,3 +1,7 @@
 mixin site-header
   header.site-header&attributes(attributes)
     +logo(class='site-header__logo')
+    +contacts-list({ groups: [
+      contactsLists.phonesAll,
+      contactsLists.email,
+    ]})(class='site-header__contacts-list contacts-list--size_l contacts-list--theme_dark contacts-list--grid_column')

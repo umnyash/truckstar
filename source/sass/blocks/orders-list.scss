@@ -1,0 +1,21 @@
+.orders-list__items {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.orders-list__item + .orders-list__item {
+  margin-top: 8px;
+
+  @media (min-width: $tablet-width) {
+    margin-top: 12px;
+  }
+
+  @media (min-width: $tablet-width) {
+    margin-top: 16px;
+  }
+
+  @media (min-width: $tablet-width) {
+    margin-top: 32px;
+  }
+}

@@ -1,0 +1,13 @@
+extends layout/layout
+
+block variables
+  - var title = 'Личный кабинет'
+  - var pageClass = 'account-page'
+
+block content
+  +breadcrumbs({ links: [
+    {
+      text: 'Личный кабинет'
+    }
+  ]})
+  +orders({ orders: [] })

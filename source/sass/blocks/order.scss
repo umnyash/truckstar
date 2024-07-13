@@ -1,0 +1,16 @@
+.order {
+  padding: 0 24px;
+  background: var(--background-additional-color);
+
+  @media (min-width: $tablet-width) {
+    padding: 0 32px;
+  }
+
+  @media (min-width: $desktop-width) {
+    padding: 0 48px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    padding: 0 56px 0 64px;
+  }
+}

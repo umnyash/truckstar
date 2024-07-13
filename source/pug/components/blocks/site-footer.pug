@@ -1,3 +1,11 @@
 mixin site-footer
   footer.site-footer&attributes(attributes)
-    +logo(class='site-footer__logo')
+    .container
+      .site-footer__inner
+        +contacts-list({ groups: [
+          contactsLists.address1,
+          contactsLists.address2,
+          contactsLists.phonesAll,
+          contactsLists.email,
+        ]})(class='site-footer__contacts-list contacts-list--size_m contacts-list--theme_light contacts-list--grid_masonry')
+        +logo(class='site-footer__logo')

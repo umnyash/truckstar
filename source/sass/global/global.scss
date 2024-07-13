@@ -13,16 +13,20 @@
   --special-color-1: #2199fc;
   --special-color-2: #fd852b;
   --edge-indent: 16px;
+  --grid-column-gap: 15px;
 
   @media (min-width: $tablet-width) {
     --edge-indent: 24px;
+    --grid-column-gap: 20px;
   }
 
   @media (min-width: $desktop-width) {
     --edge-indent: 50px;
+    --grid-column-gap: 30px;
   }
 
   @media (min-width: $wide-desktop-width) {
     --edge-indent: 80px;
+    --grid-column-gap: 40px;
   }
 }

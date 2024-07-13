@@ -1,0 +1,22 @@
+-
+  var contactsListGroupHeading = {
+    phone: 'Телефон',
+    email: 'Почта',
+    address: 'Адрес',
+    schedule: 'График работы',
+  };
+
+mixin contacts-list({ groups })
+  .contacts-list&attributes(attributes)
+    dl.contacts-list__groups
+      each group in groups
+        .contacts-list__group(class=`contacts-list__group--${group.type}`)
+          dt.contacts-list__group-heading= contactsListGroupHeading[group.type]
+          dd.contacts-list__group-list
+            ul.contacts-list__group-items
+              each item in group.items
+                if item.href
+                  li.contacts-list__group-item
+                    a.contacts-list__link(href= item.href)= item.text
+                else
+                  li.contacts-list__group-item= item.text
