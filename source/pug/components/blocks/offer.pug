@@ -1,0 +1,14 @@
+mixin offer
+  section.offer&attributes(attributes)
+    .container
+      .offer__inner
+        .offer__content
+          h2.offer__heading.heading.heading--size_m Не нашли #[span.heading__accent нужную] запчасть?#[br] Оставьте заявку, мы свяжемся с&nbsp;вами
+          p.offer__text Заполните форму, опишите интересующую запчасть, мы закажем её для вас
+          +button({
+            tag: 'a',
+            text: 'Перейти к форме',
+            href: 'request.html'
+          })(class='offer__button button--primary-alter button--right button--size_l')
+        picture.offer__image-wrapper(aria-hidden='true')
+          img.offer__image(src='img/decor/offer.webp' width='750' height='476' srcset='img/decor/offer@2x.webp 2x' alt='' loading='lazy')
