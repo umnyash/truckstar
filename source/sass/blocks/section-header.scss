@@ -55,6 +55,7 @@
 .section-header__text {
   max-width: 580px; // 529-592
   margin: 8px auto 0;
+  color: var(--text-weak-color);
 
   @media (min-width: $tablet-width) {
     margin-top: 12px;

@@ -1,0 +1,10 @@
+mixin faq
+  section.faq&attributes(attributes)
+    .container
+      .faq__inner
+        +section-header({
+          heading: 'Ответы на частые вопросы',
+          badge: 'Вопросы и ответы',
+          text: 'Собрали самые популярные вопросы от наших<br> покупателей и подробно ответили на них',
+        })(class='faq__header')
+        +faq-list

@@ -1,0 +1,122 @@
+.folds__item {
+  position: relative;
+  padding: 24px;
+  border-radius: 20px;
+  background: var(--background-additional-color);
+  overflow: hidden;
+
+  @media (min-width: $tablet-width) {
+    padding: 24px 32px;
+    border-radius: 30px;
+  }
+
+  @media (min-width: $desktop-width) {
+    padding: 32px 48px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    padding: 48px 64px;
+  }
+}
+
+.folds__item-header {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+
+  &::after {
+    content: "";
+    width: 32px;
+    height: 32px;
+    margin: 0 0 0 21px;
+    border-radius: 50%;
+    background: var(--background-additional-dark-color) url("../img/icons.svg#controls_arrow-without-tail") no-repeat center / 20px 20px;
+    transform: rotate(0);
+    pointer-events: none;
+    transition: transform $folds-animation-duration ease-in-out;
+
+    @media (min-width: $desktop-width) {
+      width: 40px;
+      height: 40px;
+      margin-left: 40px;
+      background-size: 24px 24px;
+    }
+
+    @media (min-width: $wide-desktop-width) {
+      width: 60px;
+      height: 60px;
+      margin-left: 6cqb;
+      background-size: 32px 32px;
+    }
+  }
+}
+
+.folds__button {
+  padding: 0;
+  border: none;
+  text-align: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+  background: transparent;
+  cursor: pointer;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+}
+
+.folds__item-content-wrapper {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  transition: height $folds-animation-duration ease-in-out;
+}
+
+.folds__item-content {
+  bottom: 0;
+  left: 0;
+  box-sizing: border-box;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity $folds-animation-duration ease-in-out,
+    visibility $folds-animation-duration step-end;
+}
+
+.folds__item:not(.folds__item--open) .folds__item-content-wrapper {
+  height: 0 !important; // stylelint-disable-line
+}
+
+.folds__item--open {
+  .folds__item-header::after {
+    transform: rotate(180deg);
+  }
+
+  .folds__item-content {
+    opacity: 1;
+    visibility: visible;
+    transition:
+      opacity $folds-animation-duration ease-in-out,
+      visibility $folds-animation-duration step-start;
+  }
+}
+
+.folds__item:hover {
+  .folds__item-header::after {
+    will-change: transform;
+  }
+
+  .folds__item-content-wrapper {
+    will-change: height;
+  }
+
+  .folds__item-content {
+    will-change: opacity, visibility;
+  }
+}

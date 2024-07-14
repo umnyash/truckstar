@@ -6,4 +6,4 @@ mixin section-header({ heading, headingTag = 'h2', badge, badgeTag, text, arrows
     if arrows
       +slider-arrows(class='section-header__arrows')
     if text
-      p.section-header__text= text
+      p.section-header__text!= text
