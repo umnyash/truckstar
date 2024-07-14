@@ -1,0 +1,56 @@
+.raw-content-2 {
+  font: 500 14px/17px $main-font-family;
+  color: var(--text-weak-color);
+
+  @media (min-width: $desktop-width) {
+    font-size: 16px;
+    line-height: 19px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    font-size: 20px;
+    line-height: 24px;
+  }
+
+  p {
+    margin: 8px 0;
+
+    @media (min-width: $desktop-width) {
+      margin: 16px 0;
+    }
+
+    @media (min-width: $wide-desktop-width) {
+      margin: 20px 0;
+    }
+  }
+
+  b {
+    font-weight: inherit;
+    color: var(--accent-color);
+  }
+
+  strong {
+    font-size: 16px;
+    line-height: 19px;
+    font-weight: inherit;
+    color: var(--text-color);
+
+    @media (min-width: $desktop-width) {
+      font-size: 20px;
+      line-height: 24px;
+    }
+
+    @media (min-width: $wide-desktop-width) {
+      font-size: 24px;
+      letter-spacing: -1px;
+    }
+  }
+
+  & > :first-child {
+    margin-top: 0;
+  }
+
+  & > :last-child {
+    margin-bottom: 0;
+  }
+}

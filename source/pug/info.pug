@@ -1,0 +1,13 @@
+extends layout/layout
+
+block variables
+  - var title = 'Информация для клиента'
+  - var pageClass = 'info-page'
+
+block content
+  +breadcrumbs({ links: [
+    {
+      text: 'Информация для клиента'
+    }
+  ]})
+  +info
