@@ -1,0 +1,7 @@
+mixin statistics-list({ items })
+  .statistics-list&attributes(attributes)
+    dl.statistics-list__items
+      each item in items
+        .statistics-list__item
+          dt.statistics-list__key!= item.key
+          dd.statistics-list__value!= item.value

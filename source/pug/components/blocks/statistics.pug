@@ -7,4 +7,8 @@ mixin statistics
           headingTag: 'p',
           badge: 'О нас в цифрах',
           badgeTag: 'h2',
-        })
+        })(class='statistics__header')
+        .statistics__list-wrapper
+          +statistics-list({
+            items: statistics.company
+          })

@@ -1,0 +1,22 @@
+.statistics__header {
+  margin: 0 0 24px;
+
+  @media (min-width: $tablet-width) {
+    margin-bottom: 32px;
+  }
+
+  @media (min-width: $desktop-width) {
+    margin-bottom: 48px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    margin-bottom: 80px;
+  }
+}
+
+.statistics__list-wrapper {
+  @media (min-width: $wide-desktop-width) {
+    width: 1504px;
+    margin: 0 auto;
+  }
+}
