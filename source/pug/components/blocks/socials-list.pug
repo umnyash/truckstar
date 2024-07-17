@@ -1,0 +1,21 @@
+mixin socials-list__logo({ icon, alt })
+  svg(width='32' height='32' role='img' aria-label= alt)&attributes(attributes)
+    use(href= icon)
+
+mixin socials-list__item({ name, href })
+  li.socials-list__item
+    a.socials-list__link(href= href target='_blank' rel='noopener')
+      case name
+        when 'vk'
+          +socials-list__logo({ icon: 'img/icons.svg#socials_vk', alt: 'VK.' })
+        when 'whatsapp'
+          +socials-list__logo({ icon: 'img/icons.svg#socials_whatsapp', alt: 'WhatsApp.' })
+        when 'telegram'
+          +socials-list__logo({ icon: 'img/icons.svg#socials_telegram', alt: 'Telegram.' })
+
+mixin socials-list
+  .socials-list&attributes(attributes)
+    ul.socials-list__items&attributes(attributes)
+      +socials-list__item({ name: 'vk', href: '#!' })
+      +socials-list__item({ name: 'whatsapp', href: '#!' })
+      +socials-list__item({ name: 'telegram', href: '#!' })

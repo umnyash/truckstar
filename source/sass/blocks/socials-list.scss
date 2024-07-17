@@ -1,0 +1,33 @@
+.socials-list__items {
+  display: flex;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  gap: 12px;
+
+  @media (min-width: $wide-desktop-width) {
+    gap: 16px;
+  }
+}
+
+.socials-list--alter {
+  @media (min-width: $desktop-width) {
+    gap: 16px;
+  }
+}
+
+.socials-list__link {
+  display: block;
+}
+
+.socials-list__link > * {
+  display: block;
+  width: 32px;
+  height: 32px;
+  fill: var(--text-weak-color);
+  transition: fill $medium-interaction-duration;
+}
+
+.socials-list__link:hover > * {
+  fill: var(--accent-color);
+}
