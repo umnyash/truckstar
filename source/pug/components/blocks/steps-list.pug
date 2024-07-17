@@ -1,0 +1,30 @@
+mixin steps-list
+  .steps-list&attributes(attributes)
+    ol.steps-list__items
+      li.steps-list__item
+        .steps-list__item-content
+          h3.steps-list__item-heading Выбор товара
+          p.steps-list__item-text Выберете подходящий товар из каталога и добавьте его в корзину. В корзине заполните форму и отправьте заявку.
+          p.steps-list__item-text В течение 30 минут мы свяжемся с вами, чтобы подтвердить заказ и провести сверку на совместимость с вашим автомобилем.
+        .steps-list__pagination
+          span.steps-list__pagination-item.steps-list__pagination-item--active
+          span.steps-list__pagination-item
+          span.steps-list__pagination-item
+      li.steps-list__item
+        .steps-list__item-content
+          h3.steps-list__item-heading Договор и оплата
+          p.steps-list__item-text После сверки применяемости - отправим вам договор поставки, в котором зафиксируем: наименование товара, стоимость, сроки поставки и гарантию.
+          p.steps-list__item-text Далее отправим счет на оплату первых 50% стоимости товара и предоставим чек об оплате.
+        .steps-list__pagination
+          span.steps-list__pagination-item
+          span.steps-list__pagination-item.steps-list__pagination-item--active
+          span.steps-list__pagination-item
+      li.steps-list__item
+        .steps-list__item-content
+          h3.steps-list__item-heading Доставка заказа
+          p.steps-list__item-text После оплаты ваш заказ бережно и надежно упаковывается, и отправляется на доставку.
+          p.steps-list__item-text Доставка зависит от транспортной компании, которую вы выбираете.
+        .steps-list__pagination
+          span.steps-list__pagination-item
+          span.steps-list__pagination-item
+          span.steps-list__pagination-item.steps-list__pagination-item--active
