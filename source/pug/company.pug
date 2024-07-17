@@ -1,0 +1,19 @@
+extends layout/layout
+
+block variables
+  - var title = 'О нас'
+  - var pageClass = 'company-page'
+
+block content
+  +breadcrumbs({ links: [
+    {
+      text: 'О нас'
+    }
+  ]})
+  +company({
+    headingTag: 'h1',
+    badge: 'О нас',
+  })
+  +statistics
+  +advantages
+  +steps

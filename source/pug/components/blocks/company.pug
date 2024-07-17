@@ -1,0 +1,17 @@
+mixin company({ headingTag = 'h1', badge, badgeTag, withButton })
+  section.company&attributes(attributes)
+    .container
+      .company__inner
+        +badge({ text: badge, tag: badgeTag })(class='company__badge')
+        #{headingTag}.company__heading Truckstar - Грузовая разборка тягачей из Европы, таких как: #[b.heading__accent Daf, Iveco, MAN, Mercedes-Benz, Scania, Renault, Volvo]
+        .company__description
+          p.company__lead За время работы Truckstar зарекомендовал себя как поставщик широкого ассортимента б/у и новых запчастей, с большим количеством положительных отзывов, совершенствуя точки продаж на территории страны.
+          p.company__text На текущий момент подразделения компании представляют собой современные склады в городах Нижний Новогород, Рязань.
+          if withButton
+            +button({
+              tag: 'a',
+              text: 'Подробнее',
+              href: 'company.html'
+            })(class='company__button button--secondary button--right button--size_m')
+        picture.company__image-wrapper(aria-hidden='true')
+          img.company__image(src='img/decor/company.webp' width='604' height='560' srcset='img/decor/company@2x.webp' alt='' loading='lazy')
