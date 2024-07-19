@@ -64,8 +64,28 @@ const initFolds = foldsElement => {
 /* * * * * * * * * * * * * * * * * * * * * * * */
 
 /* * * * * * * * * * * * * * * * * * * * * * * *
+ * simple-form.js
+ */
+function initSimpleForm(formElement) {
+  const fieldElement = formElement.querySelector('.simple-form__control');
+  const updateEmptyStatus = () => {
+    formElement.classList.toggle('simple-form--empty', !fieldElement.value);
+  };
+  updateEmptyStatus();
+  formElement.addEventListener('input', () => {
+    updateEmptyStatus();
+  });
+  formElement.addEventListener('reset', () => {
+    setTimeout(updateEmptyStatus, 100);
+    fieldElement.focus();
+  });
+}
+/* * * * * * * * * * * * * * * * * * * * * * * */
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
  * main.js
  */
 document.querySelectorAll('.banner-slider').forEach(initBannerSlider);
 document.querySelectorAll('.folds').forEach(initFolds);
+document.querySelectorAll('.simple-form').forEach(initSimpleForm);
 /* * * * * * * * * * * * * * * * * * * * * * * */
