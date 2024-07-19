@@ -21,3 +21,11 @@
     height: 60px;
   }
 }
+
+.site-header__search-form {
+  width: 398px;
+
+  @media (min-width: $wide-desktop-width) {
+    width: 474px;
+  }
+}

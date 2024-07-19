@@ -6,3 +6,15 @@ mixin site-header
       contactsLists.email,
     ]})(class='site-header__contacts-list contacts-list--size_l contacts-list--theme_dark contacts-list--grid_column')
     +socials-list
+    .site-header__search-form
+      +simple-form({
+        action: 'https://echo.htmlacademy.ru',
+        method: 'get',
+        field: {
+          name: 'query',
+          type: 'search',
+          placeholder: 'Найти по номеру запчасти или наименованию',
+        },
+        hidableSubmitButton: true,
+        hidableResetButton: true,
+      })(class='simple-form--alter simple-form--big simple-form--with-icon_search')

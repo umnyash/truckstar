@@ -46,3 +46,17 @@
     max-width: 1145px;
   }
 }
+
+.site-footer__subscription {
+  @media (min-width: $tablet-width) {
+    width: 318px;
+  }
+
+  @media (min-width: $desktop-width) {
+    width: 294px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    width: 338px;
+  }
+}

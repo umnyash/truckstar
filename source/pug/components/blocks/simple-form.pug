@@ -1,0 +1,19 @@
+mixin simple-form({ heading, action, method, field, hidableSubmitButton, hidableResetButton })
+  form.simple-form.simple-form--empty(action= action method= method target='_blank')&attributes(attributes)
+    if heading
+      p.simple-form__heading= heading
+    .simple-form__inner
+      label.simple-form__field
+        span.simple-form__field-inner
+          span.simple-form__control-wrapper
+            span.simple-form__placeholder= field.placeholder
+            input.simple-form__control(
+              name= field.name
+              type= field.type
+              required='true'
+            )
+      .simple-form__buttons
+        button.simple-form__button.simple-form__button--reset(class= hidableResetButton && 'simple-form__button--hidable' type='reset')
+          span.visually-hidden Очистить
+        button.simple-form__button.simple-form__button--submit(class= hidableSubmitButton && 'simple-form__button--hidable' type='submit')
+          span.visually-hidden Отправить
