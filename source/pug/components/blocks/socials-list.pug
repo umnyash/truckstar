@@ -15,7 +15,7 @@ mixin socials-list__item({ name, href })
 
 mixin socials-list
   .socials-list&attributes(attributes)
-    ul.socials-list__items&attributes(attributes)
+    ul.socials-list__items
       +socials-list__item({ name: 'vk', href: '#!' })
       +socials-list__item({ name: 'whatsapp', href: '#!' })
       +socials-list__item({ name: 'telegram', href: '#!' })

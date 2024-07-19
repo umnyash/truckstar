@@ -10,7 +10,7 @@
   }
 }
 
-.socials-list--alter {
+.socials-list--alter .socials-list__items {
   @media (min-width: $desktop-width) {
     gap: 16px;
   }

@@ -1,24 +1,63 @@
+mixin site-footer__navigation-item({ text, href, page })
+  li.site-footer__navigation-item
+    a.site-footer__navigation-link(href= !(pageClass === page) && href)&attributes(attributes)= text
+
+
 mixin site-footer
   footer.site-footer&attributes(attributes)
     .container
       .site-footer__inner
-        +contacts-list({ groups: [
-          contactsLists.address1,
-          contactsLists.address2,
-          contactsLists.phonesAll,
-          contactsLists.email,
-        ]})(class='site-footer__contacts-list contacts-list--size_m contacts-list--theme_light contacts-list--grid_masonry')
-        +logo(class='site-footer__logo')
-        .site-footer__subscription
-          +simple-form({
-            heading: 'Подписаться на рассылку:',
-            action: 'https://echo.htmlacademy.ru',
-            method: 'post',
-            field: {
-              name: 'email',
-              type: 'email',
-              placeholder: 'E-mail',
-            },
-            hidableResetButton: true,
-          })
-        +socials-list(class='socials-list--alter')
+        .site-footer__top
+          .site-footer__contacts-1
+            +contacts-list({ groups: [
+              contactsLists.address1,
+              contactsLists.address2,
+            ]})(class='contacts-list--size_m contacts-list--theme_light contacts-list--grid_column')
+          .site-footer__contacts-2
+            +contacts-list({ groups: [
+              contactsLists.phonesAll,
+              contactsLists.email,
+            ]})(class='contacts-list--size_m contacts-list--theme_light contacts-list--grid_column')
+          .site-footer__subscription
+            +simple-form({
+              heading: 'Подписаться на рассылку:',
+              action: 'https://echo.htmlacademy.ru',
+              method: 'post',
+              field: {
+                name: 'email',
+                type: 'email',
+                placeholder: 'E-mail',
+              },
+              hidableResetButton: true,
+            })
+            +socials-list(class='socials-list--alter')
+          .site-footer__logo
+            +logo
+          ul.site-footer__navigation-1
+            +site-footer__navigation-item({ text: 'О нас', href: 'company.html', page: 'company-page' })
+            +site-footer__navigation-item({ text: 'Вопрос-ответ', href: 'info.html#faq', page: 'info-page' })
+            +site-footer__navigation-item({ text: 'Гарантия', href: 'info.html#guarantee', page: 'info-page' })
+            +site-footer__navigation-item({ text: 'Отзывы', href: 'reviews.html', page: 'reviews-page' })
+            +site-footer__navigation-item({ text: 'Оплата', href: 'info.html#payment', page: 'info-page' })
+            +site-footer__navigation-item({ text: 'Контакты', href: 'contacts.html', page: 'contacts-page' })
+            +site-footer__navigation-item({ text: 'Доставка', href: 'info.html#delivery', page: 'info-page' })
+            +site-footer__navigation-item({ text: 'Мои заказы', href: 'account.html', page: 'account-page' })
+            +site-footer__navigation-item({ text: 'Обмен и возврат', href: 'info.html#exchange-and-return', page: 'info-page' })
+            +site-footer__navigation-item({ text: 'Выкуп машин', href: '#!' })
+          ul.site-footer__navigation-2
+            +site-footer__navigation-item({ text: 'Chevrolet', href: 'category.html', page: 'category-page' })
+            +site-footer__navigation-item({ text: 'Scania', href: 'category.html', page: 'category-page' })
+            +site-footer__navigation-item({ text: 'Daf', href: 'category.html', page: 'category-page' })
+            +site-footer__navigation-item({ text: 'Volvo', href: 'category.html', page: 'category-page' })
+            +site-footer__navigation-item({ text: 'Iveco', href: 'category.html', page: 'category-page' })
+            +site-footer__navigation-item({ text: 'КАМАЗ', href: 'category.html', page: 'category-page' })
+            +site-footer__navigation-item({ text: 'Man', href: 'category.html', page: 'category-page' })
+            +site-footer__navigation-item({ text: 'Lada', href: 'category.html', page: 'category-page' })
+            +site-footer__navigation-item({ text: 'Mercedes-Benz', href: 'category.html', page: 'category-page' })
+            +site-footer__navigation-item({ text: 'Tatra', href: 'category.html', page: 'category-page' })
+            +site-footer__navigation-item({ text: 'Renault', href: 'category.html', page: 'category-page' })
+        .site-footer__bottom
+          p.site-footer__copyright © 2024, Truckstar. Все права защищены
+          a.site-footer__privacy-policy(href='#!' target='_blank' rel='noopener') Политика конфиденциальности
+          .site-footer__developer
+            +developer

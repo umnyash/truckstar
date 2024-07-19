@@ -24,6 +24,7 @@
 
 .site-header__search-form {
   width: 398px;
+  max-width: 100%;
 
   @media (min-width: $wide-desktop-width) {
     width: 474px;

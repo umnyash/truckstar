@@ -1,0 +1,31 @@
+.developer {
+  font: 400 12px/1 $main-font-family;
+
+  @media (min-width: $desktop-width) {
+    font-size: 16px;
+  }
+}
+
+.developer__link {
+  display: inline-flex;
+  padding: 1px 8px;
+  border: 1px solid currentColor;
+  gap: 8px;
+  align-items: center;
+  text-decoration: none;
+  color: var(--text-color);
+  transition: background-color $medium-interaction-duration;
+
+  &:hover {
+    background: var(--developer-color);
+  }
+
+  @media (min-width: $desktop-width) {
+    padding: 5px 13px;
+    gap: 10px;
+  }
+}
+
+.developer__logo {
+  height: 20px;
+}
