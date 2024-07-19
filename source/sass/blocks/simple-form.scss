@@ -1,10 +1,5 @@
 .simple-form {
-  font: 500 14px/17px $main-font-family;
-
-  @media (min-width: $wide-desktop-width) {
-    font-size: 16px;
-    line-height: 19px;
-  }
+  font: 500 16px/19px $main-font-family;
 
   &:focus-within .simple-form__button--hidable {
     will-change: width, height, margin, opacity, visibility;
@@ -13,6 +8,8 @@
 
 .simple-form__heading {
   margin: 0 0 8px;
+  font-size: 14px;
+  line-height: 17px;
 
   @media (min-width: $desktop-width) {
     margin-bottom: 12px;
@@ -223,11 +220,6 @@
 }
 
 .simple-form--big {
-  @media (min-width: $desktop-width) {
-    font-size: 16px;
-    line-height: 19px;
-  }
-
   @media (min-width: $wide-desktop-width) {
     font-size: 20px;
     line-height: 24px;
