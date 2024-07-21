@@ -1,8 +1,8 @@
 extends layout/layout
 
 block variables
-  - var title = 'Личный кабинет'
-  - var pageClass = 'account-page'
+  - var title = 'Каталог'
+  - var pageClass = 'categories-page'
 
 block content
   +breadcrumbs({ links: [
@@ -10,4 +10,5 @@ block content
       text: title
     }
   ]})
-  +orders({ orders: [] })
+  +catalog
+  +offer

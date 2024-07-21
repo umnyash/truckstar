@@ -1,0 +1,12 @@
+mixin categories({ heading, categories })
+  section.categories&attributes(attributes)
+    .container
+      .categories__inner
+        +section-header({ heading })(class='categories__header')
+        +categories-list({
+          card: {
+            headingTag: 'h3',
+            href: 'subcategories.html'
+          },
+          categories
+        })

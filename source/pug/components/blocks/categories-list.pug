@@ -1,0 +1,6 @@
+mixin categories-list({ categories, card })
+  .categories-list&attributes(attributes)
+    ul.categories-list__items
+      each category in categories
+        li.categories-list__item
+          +category-card({ category, card })

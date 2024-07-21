@@ -1,0 +1,202 @@
+.category-card {
+  --category-card-horizontal-padding: 16px;
+  --category-card-vertical-padding: 16px;
+
+  position: relative;
+  z-index: 0;
+  box-sizing: border-box;
+  height: 196px;
+  padding: var(--category-card-vertical-padding) var(--category-card-horizontal-padding);
+  background: var(--background-additional-color);
+  border-radius: 20px;
+  outline: 1px solid transparent;
+  overflow: hidden;
+  transition: outline-color $medium-interaction-duration;
+
+  &:hover,
+  &:active,
+  &:focus-within {
+    outline-color: var(--text-color);
+
+    .category-card__image-wrapper {
+      transform: scale(1.2);
+    }
+  }
+
+  @media (min-width: $tablet-width) {
+    --category-card-horizontal-padding: 24px;
+
+    height: 200px;
+  }
+
+  @media (min-width: $desktop-width) {
+    --category-card-vertical-padding: 24px;
+    --category-card-horizontal-padding: 32px;
+
+    height: 230px;
+    border-radius: 30px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    --category-card-vertical-padding: 40px;
+    --category-card-horizontal-padding: 48px;
+
+    height: 320px;
+  }
+}
+
+.category-card__heading {
+  margin: 2px 0 0;
+  font: 500 18px/1 $main-font-family;
+  color: var(--text-weak-color);
+  letter-spacing: -0.01em;
+  overflow-wrap: break-word;
+
+  @media (min-width: $desktop-width) {
+    margin: 0;
+    font-size: 24px;
+    letter-spacing: -1px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    font-size: 32px;
+  }
+}
+
+.category-card__image-wrapper {
+  position: relative;
+  z-index: -1;
+  float: right;
+  clear: right;
+  display: block;
+  width: 216px;
+  height: 120px;
+  margin: 0 calc(var(--category-card-horizontal-padding) * -1) calc(var(--category-card-vertical-padding) * -1) 0;
+  background-color: inherit;
+  transition: transform $medium-interaction-duration;
+
+  @media (min-width: $desktop-width) {
+    width: 260px;
+    height: 150px;
+  }
+
+  @media (min-width: ($desktop-width + $browser-scrollbar-width)) {
+    width: 270px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    width: 360px;
+    height: 200px;
+  }
+}
+
+.category-card__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: right bottom;
+  background-color: inherit;
+  mix-blend-mode: darken;
+}
+
+.category-card__link {
+  float: right;
+  display: inline-flex;
+  padding: 2px 12px 4px;
+  border-radius: 1000px;
+  margin: 0 0 37px 8px;
+  // margin-bottom = height-карточки - padding-top-карточки - height-кнопки - height-картинки
+  column-gap: 4px;
+  align-items: center;
+  text-align: center;
+  font: 500 14px/17px $main-font-family;
+  text-transform: lowercase;
+  text-decoration: none;
+  color: var(--text-light-color);
+  background: var(--accent-color);
+  outline: none;
+
+  @media (min-width: $tablet-width) {
+    margin-bottom: 41px;
+  }
+
+  @media (min-width: $desktop-width) {
+    margin-bottom: 30px;
+    margin-left: 16px;
+    column-gap: 8px;
+    font-size: 16px;
+    line-height: 19px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    padding: 4px 12px 6px;
+    margin-bottom: 46px;
+    margin-left: 24px;
+    column-gap: 12px;
+    font-size: 18px;
+    line-height: 20px;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+  }
+
+  &::after {
+    content: "";
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    background: currentColor;
+    mask: url("../img/icons.svg#controls_arrow");
+
+    @media (min-width: $desktop-width) {
+      width: 20px;
+      height: 20px;
+    }
+
+    @media (min-width: $wide-desktop-width) {
+      width: 24px;
+      height: 24px;
+    }
+  }
+}
+
+.category-card--alter {
+  .category-card__link {
+    margin-bottom: 5px;
+
+    @media (min-width: $tablet-width) {
+      margin-bottom: 9px;
+    }
+
+    @media (min-width: $desktop-width) {
+      margin-bottom: 1px;
+    }
+
+    @media (min-width: $wide-desktop-width) {
+      margin-bottom: 16px;
+    }
+  }
+
+  .category-card__image-wrapper {
+    width: 185px;
+    height: 152px;
+
+    @media (min-width: $desktop-width) {
+      width: 218px;
+      height: 179px;
+    }
+
+    @media (min-width: $wide-desktop-width) {
+      width: 280px;
+      height: 230px;
+    }
+  }
+}

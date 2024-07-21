@@ -1,0 +1,16 @@
+.categories-list__items {
+  display: grid;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  gap: 16px;
+
+  @media (min-width: $tablet-width) {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--grid-column-gap);
+  }
+
+  @media (min-width: $laptop-width) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

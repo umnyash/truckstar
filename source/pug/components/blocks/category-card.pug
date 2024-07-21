@@ -1,0 +1,13 @@
+mixin category-card({ category, card })
+  article.category-card(class= card.isAlter && 'category-card--alter')&attributes(attributes)
+    a.category-card__link(href= card.href) В каталог
+    picture.category-card__image-wrapper
+      img.category-card__image(
+        src=`${category.image}.webp`
+        width= card.isAlter ? '280' : '360'
+        height= card.isAlter ? '230' : '200'
+        srcset=`${category.image}@2x.webp 2x`
+        alt=''
+        loading='lazy'
+      )
+    #{card.headingTag}.category-card__heading!= category.name

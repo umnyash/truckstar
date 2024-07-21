@@ -1,0 +1,44 @@
+mixin catalog
+  .catalog&attributes(attributes)
+    .container
+      .catalog__inner
+        h1.catalog__heading.heading.heading--size_l= title
+        case pageClass
+          when 'categories-page'
+            .catalog__categories-list
+              +categories-list({
+                card: {
+                  headingTag: 'h2',
+                  href: 'subcategories.html'
+                },
+                categories
+              })
+          when 'subcategories-page'
+            .catalog__categories-list
+              +categories-list({
+                card: {
+                  headingTag: 'h2',
+                  href: 'catalog.html'
+                },
+                categories: categories.slice(0, 7)
+              })
+          when 'truck-categories-page'
+            .catalog__categories-list
+              +categories-list({
+                card: {
+                  headingTag: 'h2',
+                  href: 'truck-subcategories.html',
+                  isAlter: true
+                },
+                categories: truckCategories.slice(0, 7)
+              })
+          when 'truck-subcategories-page'
+            .catalog__categories-list
+              +categories-list({
+                card: {
+                  headingTag: 'h2',
+                  href: 'catalog.html',
+                  isAlter: true
+                },
+                categories: truckSubcategories.slice(0, 2)
+              })

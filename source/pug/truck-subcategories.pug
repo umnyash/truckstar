@@ -1,0 +1,18 @@
+extends layout/layout
+
+block variables
+  - var title = 'Каталог Man F2000'
+  - var pageClass = 'truck-subcategories-page'
+
+block content
+  +breadcrumbs({ links: [
+    {
+      text: 'Каталог Man',
+      href: 'truck-categories.html'
+    },
+    {
+      text: title
+    }
+  ]})
+  +catalog
+  +offer
