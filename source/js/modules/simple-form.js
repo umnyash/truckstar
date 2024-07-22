@@ -3,6 +3,7 @@
  */
 function initSimpleForm(formElement) {
   const fieldElement = formElement.querySelector('.simple-form__control');
+  const clearButtonElement = formElement.querySelector('.simple-form__button--clear');
 
   const updateEmptyStatus = () => {
     formElement.classList.toggle('simple-form--empty', !fieldElement.value);
@@ -14,8 +15,9 @@ function initSimpleForm(formElement) {
     updateEmptyStatus();
   });
 
-  formElement.addEventListener('reset', () => {
-    setTimeout(updateEmptyStatus, 100);
+  clearButtonElement.addEventListener('click', () => {
+    fieldElement.value = '';
+    updateEmptyStatus();
     fieldElement.focus();
   });
 }

@@ -1,0 +1,14 @@
+extends layout/layout
+
+block variables
+  - var title = 'Поиск запчастей'
+  - var pageClass = 'search-page'
+
+block content
+  +breadcrumbs({ links: [
+    {
+      text: title
+    }
+  ]})
+  +search({ query: 'Грузовой кузов', products })
+  +offer

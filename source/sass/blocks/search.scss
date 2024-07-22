@@ -1,0 +1,48 @@
+.search__heading {
+  margin: 16px 0 0;
+
+  @media (min-width: $tablet-width) {
+    margin-top: 24px;
+  }
+
+  @media (min-width: $desktop-width) {
+    margin-top: 32px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    margin-top: 48px;
+  }
+}
+
+.search__text {
+  margin: 12px 0 0;
+  font: 500 16px/1 $main-font-family;
+  letter-spacing: -0.01em;
+
+  @media (min-width: $tablet-width) {
+    font-size: 20px;
+  }
+
+  @media (min-width: $desktop-width) {
+    margin-top: 16px;
+    font-size: 24px;
+    letter-spacing: -1px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    margin-top: 24px;
+    font-size: 32px;
+  }
+}
+
+.search__products {
+  margin: 24px 0 0;
+
+  @media (min-width: $tablet-width) {
+    margin-top: 32px;
+  }
+
+  @media (min-width: $desktop-width) {
+    margin-top: 48px;
+  }
+}

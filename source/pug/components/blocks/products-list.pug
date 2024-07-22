@@ -4,3 +4,6 @@ mixin products-list({ products, pagination })
       each product in products
         li.products-list__item
           +product-card({ product })
+    if pagination
+      .products-list__pagination-wrapper
+        +pagination

@@ -27,3 +27,17 @@
 .products-list__item {
   display: grid;
 }
+
+.products-list__pagination-wrapper {
+  display: flex;
+  margin: 48px 0 0;
+  justify-content: center;
+
+  @media (min-width: $desktop-width) {
+    margin-top: 64px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    margin-top: 80px;
+  }
+}

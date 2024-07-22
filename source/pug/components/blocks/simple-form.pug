@@ -11,9 +11,10 @@ mixin simple-form({ heading, action, method, field, hidableSubmitButton, hidable
               name= field.name
               type= field.type
               required='true'
+              value= field.value
             )
       .simple-form__buttons
-        button.simple-form__button.simple-form__button--reset(class= hidableResetButton && 'simple-form__button--hidable' type='reset')
+        button.simple-form__button.simple-form__button--clear(class= hidableResetButton && 'simple-form__button--hidable' type='button')
           span.visually-hidden Очистить
         button.simple-form__button.simple-form__button--submit(class= hidableSubmitButton && 'simple-form__button--hidable' type='submit')
           span.visually-hidden Отправить

@@ -1,0 +1,24 @@
+mixin search({ query, products })
+  .search&attributes(attributes)
+    .container
+      .search__inner
+        h1.visually-hidden Поиск запчастей
+        +simple-form({
+          action: 'https://echo.htmlacademy.ru',
+          method: 'get',
+          field: {
+            name: 'query',
+            type: 'search',
+            placeholder: 'Найти по номеру запчасти или наименованию',
+            value: query,
+          },
+          hidableSubmitButton: true,
+          hidableResetButton: true,
+        })(class='simple-form--alter simple-form--big simple-form--with-icon_search')
+        if query && products
+          p.search__heading.heading.heading--size_l= `По запросу "${query}" найдено ${products.length} товаров`
+          .search__products
+            +products-list({ products, pagination: true })
+        else if query
+          p.search__heading.heading.heading--size_l= `По запросу "${query}" товаров не найдено`
+          p.search__text Попробуйте изменить запрос
