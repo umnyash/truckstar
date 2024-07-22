@@ -1,0 +1,6 @@
+mixin products-slider({ products })
+  .products-slider.swiper
+    ul.products-slider__list.swiper-wrapper
+      each product in products
+        li.products-slider__item.swiper-slide
+          +product-card({ product })

@@ -2,5 +2,5 @@ mixin products({ heading, products })
   section.products&attributes(attributes)
     .container
       .products__inner
-        +section-header({ heading, arrows: true })
-        +products-list({ products })
+        +section-header({ heading, arrows: true })(class='products__header')
+        +products-slider({ products })
