@@ -1,0 +1,13 @@
+mixin collections({ collections })
+  .collections
+    .container
+      .collections__inner
+        h1.collections__heading.heading.heading--size_l Все разборки
+        .collections__list-wrapper
+          +collections-list({
+            card: {
+              headingTag: 'h2',
+            },
+            pagination: true,
+            collections: collections.concat(collections)
+          })

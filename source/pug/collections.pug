@@ -1,0 +1,14 @@
+extends layout/layout
+
+block variables
+  - var title = 'Все разборки'
+  - var pageClass = 'collections-page'
+
+block content
+  +breadcrumbs({ links: [
+    {
+      text: title
+    }
+  ]})
+  +collections({ collections })
+  +offer

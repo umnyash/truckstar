@@ -1,0 +1,10 @@
+mixin collection-card({ collection, card })
+  article.collection-card
+    #{card.headingTag}.collection-card__heading!= collection.name
+    picture.collection-card__image-wrapper
+      img.collection-card__image(src=`${collection.image}.webp` width='410' height='300' srcset=`${collection.image}@2x.webp 2x` alt='' loading='lazy')
+    +button({
+      tag: 'a',
+      text: '<span>Смотреть <span class="hidden hidden--m">запчасти</span></span>',
+      href: 'truck-catalog.html'
+    })(class='collection-card__button button--secondary button--right button--size_s button--cover')

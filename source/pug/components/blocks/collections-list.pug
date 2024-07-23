@@ -1,0 +1,16 @@
+mixin collections-list({ collections, card, pagination, button })
+  .collections-list&attributes(attributes)
+    ul.collections-list__items
+      each collection in collections
+        li.collections-list__item
+          +collection-card({ collection, card })
+    if button
+      .collections-list__button-wrapper
+        +button({
+          tag: 'a',
+          text: 'Смотреть все',
+          href: 'collections.html'
+        })(class='button--primary-alter button--right button--size_l')
+    if pagination
+      .collections-list__pagination-wrapper
+        +pagination

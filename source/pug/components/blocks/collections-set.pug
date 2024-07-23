@@ -1,0 +1,12 @@
+mixin collections-set({ heading, collections })
+  section.collections-set&attributes(attributes)
+    .container
+      .collections-set__inner
+        +section-header({ heading })(class='collections-set__header')
+        +collections-list({
+          card: {
+            headingTag: 'h3',
+          },
+          button: true,
+          collections
+        })
