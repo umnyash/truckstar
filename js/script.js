@@ -64,22 +64,40 @@ const initFolds = foldsElement => {
 /* * * * * * * * * * * * * * * * * * * * * * * */
 
 /* * * * * * * * * * * * * * * * * * * * * * * *
+ * process-slider.js
+ */
+function initProcessSlider(sliderWrapperElement) {
+  console.log('sdf');
+  const sliderElement = sliderWrapperElement.querySelector('.process-slider');
+  const prevButtonElement = sliderWrapperElement.querySelector('.slider-arrows__button--prev');
+  const nextButtonElement = sliderWrapperElement.querySelector('.slider-arrows__button--next');
+  new Swiper(sliderElement, {
+    slidesPerView: 2,
+    spaceBetween: 15,
+    navigation: {
+      prevEl: prevButtonElement,
+      nextEl: nextButtonElement,
+      disabledClass: 'slider-arrows__button--disabled'
+    },
+    breakpoints: {
+      768: {
+        spaceBetween: 20
+      },
+      1366: {
+        spaceBetween: 30
+      },
+      1920: {
+        spaceBetween: 40
+      }
+    }
+  });
+}
+/* * * * * * * * * * * * * * * * * * * * * * * */
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
  * products-slider.js
  */
 function initProductsSlider(sliderWrapperElement) {
-  // new Swiper(sliderElement, {
-  //   effect: 'fade',
-  //   fadeEffect: {
-  //     crossFade: true
-  //   },
-  //   loop: true,
-  //   speed: 1400,
-  //   allowTouchMove: false,
-  //   autoplay: {
-  //     delay: 1000,
-  //     disableOnInteraction: false
-  //   }
-  // });
   const sliderElement = sliderWrapperElement.querySelector('.products-slider');
   const prevButtonElement = sliderWrapperElement.querySelector('.slider-arrows__button--prev');
   const nextButtonElement = sliderWrapperElement.querySelector('.slider-arrows__button--next');
@@ -135,4 +153,5 @@ document.querySelectorAll('.banner-slider').forEach(initBannerSlider);
 document.querySelectorAll('.folds').forEach(initFolds);
 document.querySelectorAll('.simple-form').forEach(initSimpleForm);
 document.querySelectorAll('.products').forEach(initProductsSlider);
+document.querySelectorAll('.process').forEach(initProcessSlider);
 /* * * * * * * * * * * * * * * * * * * * * * * */
