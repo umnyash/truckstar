@@ -1,0 +1,9 @@
+mixin placeholder-mini({ text, button })
+  .placeholder-mini&attributes(attributes)
+    .placeholder-mini__text= text
+    if button
+      +button({
+        tag: 'a',
+        text: button.text,
+        href: button.href
+      })(class='placeholder-mini__button button--primary button--right button--size_l')

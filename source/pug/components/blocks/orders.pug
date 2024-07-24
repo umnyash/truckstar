@@ -4,5 +4,20 @@ mixin orders({ orders })
       .orders__inner
         .orders__heading-wrapper
           h1.orders__heading.heading.heading--size_l Мои заказы
-          p.orders__number 0
-        +orders-list({ orders })(class='orders__list')
+          p.orders__number= orders ? 5 : 0
+        +items-navigation({
+          links: ['Текущие', 'Архив', 'Все']
+        })
+        if orders
+          .orders__list-wrapper-2
+            .orders__list-wrapper
+              +orders-list({ orders })
+        else
+          .orders__placeholder-wrapper
+            +placeholder-mini({
+              text: 'Ничего не найдено',
+              button: {
+                text: 'В каталог',
+                href: 'categories.html'
+              }
+            })

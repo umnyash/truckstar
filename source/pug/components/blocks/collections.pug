@@ -1,13 +1,34 @@
-mixin collections({ collections })
+mixin collections({ collections, navigationCurrentIndex })
   .collections
     .container
       .collections__inner
         h1.collections__heading.heading.heading--size_l Все разборки
-        .collections__list-wrapper
-          +collections-list({
-            card: {
-              headingTag: 'h2',
-            },
-            pagination: true,
-            collections: collections.concat(collections)
-          })
+        +items-navigation({
+          links: [
+            'Все',
+            'Man',
+            'Mercedes-Benz',
+            'Scania',
+            'Renault',
+            'Daf',
+            'КАМАЗ',
+            'Lada',
+            'Iveco',
+            'ЗИЛ',
+            'MAZ',
+            'Chevrolet',
+          ],
+          currentIndex: navigationCurrentIndex
+        })
+        if collections
+          .collections__list-wrapper
+            +collections-list({
+              card: {
+                headingTag: 'h2',
+              },
+              pagination: true,
+              collections: collections.concat(collections)
+            })
+        else
+          .collections__placeholder-wrapper
+            +placeholder-mini({ text: 'Ничего не найдено'})
