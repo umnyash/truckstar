@@ -1,0 +1,14 @@
+mixin process-slider
+  .process-slider.swiper&attributes(attributes)
+    ul.process-slider__list.swiper-wrapper
+      each number in [1, 2, 3]
+        li.process-slider__item.swiper-slide
+          picture.process-slider__item-image-wrapper
+            img.process-slider__item-image(
+              src=`img/process/process-${number}.webp`
+              width='860'
+              height='464'
+              srcset=`img/process/process-${number}@2x.webp 2x`
+              alt=''
+              loading='lazy'
+            )

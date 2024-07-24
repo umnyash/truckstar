@@ -1,0 +1,13 @@
+mixin callback
+  section.callback
+    .container
+      .callback__inner
+        +section-header({
+          heading: 'Заказать <b class="heading__accent">обратный звонок</b>',
+          text: 'Воспользуйтесь нашей бесплатной консультацией перед покупкой товара, подберем деталь точно под ваш автомобиль',
+          button: {
+            text: 'Связаться с нами',
+            href: '#',
+            opener: 'callback'
+          }
+        })(class='callback__header')

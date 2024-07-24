@@ -1,4 +1,4 @@
-mixin section-header({ heading, headingTag = 'h2', badge, badgeTag, text, arrows })
+mixin section-header({ heading, headingTag = 'h2', badge, badgeTag, text, arrows, button })
   header.section-header(class= arrows && 'section-header--with-arrows')&attributes(attributes)
     if badge
       +badge({ text: badge, tag: badgeTag })(class='section-header__badge')
@@ -7,3 +7,10 @@ mixin section-header({ heading, headingTag = 'h2', badge, badgeTag, text, arrows
       +slider-arrows(class='section-header__arrows')
     if text
       p.section-header__text!= text
+    if button
+      +button({
+        tag: 'a',
+        text: button.text,
+        href: button.href,
+        opener: button.opener
+      })(class='section-header__button button--primary-alter button--right button--size_l')

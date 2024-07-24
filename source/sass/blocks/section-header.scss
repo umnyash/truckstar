@@ -72,13 +72,26 @@
   }
 }
 
+.section-header__button {
+  margin: 24px 0 0;
+
+  @media (min-width: $desktop-width) {
+    margin-top: 32px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    margin-top: 48px;
+  }
+}
+
 .section-header--with-arrows {
   display: grid;
   grid-template-columns: 1fr auto;
   grid-template-areas:
     "badge   ."
     "heading arrows"
-    "text    .";
+    "text    ."
+    "button  .";
   place-items: center;
 
   @media (min-width: $desktop-width) {
@@ -86,7 +99,8 @@
     grid-template-areas:
       ". badge   ."
       ". heading arrows"
-      ". text    .";
+      ". text    ."
+      ". button  .";
     column-gap: 40px;
   }
 

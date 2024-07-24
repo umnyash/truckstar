@@ -1,5 +1,5 @@
 mixin products-slider({ products })
-  .products-slider.swiper
+  .products-slider.swiper&attributes(attributes)
     ul.products-slider__list.swiper-wrapper
       each product in products
         li.products-slider__item.swiper-slide

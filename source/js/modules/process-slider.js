@@ -1,8 +1,9 @@
 /* * * * * * * * * * * * * * * * * * * * * * * *
- * products-slider.js
+ * process-slider.js
  */
-function initProductsSlider(sliderWrapperElement) {
-  const sliderElement = sliderWrapperElement.querySelector('.products-slider');
+function initProcessSlider(sliderWrapperElement) {
+  console.log('sdf')
+  const sliderElement = sliderWrapperElement.querySelector('.process-slider');
   const prevButtonElement = sliderWrapperElement.querySelector('.slider-arrows__button--prev');
   const nextButtonElement = sliderWrapperElement.querySelector('.slider-arrows__button--next');
 
@@ -16,10 +17,9 @@ function initProductsSlider(sliderWrapperElement) {
     },
     breakpoints: {
       768: {
-        slidesPerView: 3,
+        spaceBetween: 20,
       },
       1366: {
-        slidesPerView: 4,
         spaceBetween: 30,
       },
       1920: {

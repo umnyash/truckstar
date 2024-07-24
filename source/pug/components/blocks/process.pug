@@ -1,0 +1,9 @@
+mixin process
+  section.process&attributes(attributes)
+    .container
+      .process__inner
+        +section-header({
+          heading: '<b class="heading__accent">Процесс</b> разборки',
+          arrows: true
+        })(class='process__header')
+        +process-slider(class='process__slider')
