@@ -1,0 +1,17 @@
+mixin rating({ rating })
+  - var formattedRatingValue = rating.value.toString().replace('.', ',');
+
+  article.rating&attributes(attributes)
+    a.rating__link(href= rating.href target='_blank' rel='noopener')
+      img.rating__logo(
+        src= rating.logo.image
+        width= rating.logo.width
+        height= rating.logo.height
+        alt= rating.logo.alt
+        loading='lazy'
+      )
+      p.rating__value-wrapper
+        span.visually-hidden Рейтинг:
+        span.stars-icon.stars-icon--size_xs(data-value= rating.value)
+        span.rating__value= formattedRatingValue
+      p.rating__text= `${rating.reviews} отзывов`

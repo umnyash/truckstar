@@ -1,0 +1,13 @@
+extends layout/layout
+
+block variables
+  - var title = 'Отзывы'
+  - var pageClass = 'reviews-page'
+
+block content
+  +breadcrumbs({ links: [
+    {
+      text: title
+    }
+  ]})
+  +reviews({ ratings })

@@ -1,0 +1,19 @@
+mixin reviews({ reviews, ratings })
+  .reviews&attributes(attributes)
+    .container
+      .reviews__inner
+        .reviews__heading-wrapper
+          +main-heading({
+            text: 'Отзывы',
+            number: reviews ? 23 : 0
+          })
+        .reviews__filter-wrapper
+          +reviews-filter
+        if reviews
+          .reviews__list-wrapper
+            +reviews-list({ reviews, button: true })
+        else
+          .reviews__placeholder-wrapper
+            +placeholder-mini({ text: 'Ничего не найдено'})
+        .reviews__ratings-wrapper
+          +ratings({ ratings })

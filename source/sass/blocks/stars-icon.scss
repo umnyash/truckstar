@@ -1,0 +1,75 @@
+.stars-icon {
+  --stars-icon-gap: 4px;
+
+  display: inline-block;
+  box-sizing: border-box;
+  width: calc(var(--stars-icon-size) * var(--stars-icon-number) + var(--stars-icon-gap) * (var(--stars-icon-number) - 1));
+  height: var(--stars-icon-size);
+
+  &::before {
+    content: "";
+    display: block;
+    height: 100%;
+    background-image: url("../img/icons.svg#star");
+    background-repeat: repeat-x;
+    background-position: calc(var(--stars-icon-gap) / 2 * -1);
+    background-size: calc(var(--stars-icon-size) + var(--stars-icon-gap)) var(--stars-icon-size);
+  }
+
+  &[data-value="1"] {
+    --stars-icon-number: 1;
+  }
+
+  &[data-value^="1."],
+  &[data-value^="1,"],
+  &[data-value="2"] {
+    --stars-icon-number: 2;
+  }
+
+  &[data-value^="2."],
+  &[data-value^="2,"],
+  &[data-value="3"] {
+    --stars-icon-number: 3;
+  }
+
+  &[data-value^="3."],
+  &[data-value^="3,"],
+  &[data-value="4"] {
+    --stars-icon-number: 4;
+  }
+
+  &[data-value^="4."],
+  &[data-value^="4,"],
+  &[data-value="5"] {
+    --stars-icon-number: 5;
+  }
+
+  &[data-value*="."],
+  &[data-value*=","] {
+    padding-right: calc(var(--stars-icon-size) / 2);
+  }
+}
+
+.stars-icon--size_xs {
+  --stars-icon-size: 12px;
+
+  @media (min-width: $wide-desktop-width) {
+    --stars-icon-size: 16px;
+  }
+}
+
+.stars-icon--size_s {
+  --stars-icon-size: 16px;
+}
+
+.stars-icon--size_m {
+  --stars-icon-size: 16px;
+
+  @media (min-width: $desktop-width) {
+    --stars-icon-size: 20px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    --stars-icon-size: 24px;
+  }
+}

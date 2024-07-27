@@ -1,0 +1,6 @@
+mixin ratings-list({ ratings })
+  .ratings-list&attributes(attributes)
+    ul.ratings-list__items
+      each rating in ratings
+        li.rating-list__item
+          +rating({ rating })

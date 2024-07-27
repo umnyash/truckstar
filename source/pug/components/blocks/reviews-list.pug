@@ -1,0 +1,13 @@
+mixin reviews-list({ reviews, button })
+  .reviews-list&attributes(attributes)
+    ul.reviews-list__items
+      each review in reviews
+        li.reviews-list__item
+          +review({ review })
+    if button
+      .reviews-list__button-wrapper
+        +button({
+          tag: 'a',
+          text: 'Смотреть ещё',
+          href: '#'
+        })(class='button--secondary button--down button--size_l')

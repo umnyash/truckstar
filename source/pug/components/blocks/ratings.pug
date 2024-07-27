@@ -1,0 +1,12 @@
+mixin ratings({ ratings })
+  section.ratings
+    +badge({ text: 'Отзывы на других площадках', tag: 'h2' })(class='ratings__badge')
+    p.ratings__heading Посмотрите отзывы о&nbsp;нас на&nbsp;других площадках
+    .ratings__list-wrapper
+      +ratings-list({ ratings })
+    p.ratings__text Мы всегда стараемся предоставлять лучший сервис для наших клиентов. Мы были бы очень признательны, если вы оставите отзыв на нашей странице, чтобы другие клиенты могли узнать о нашей работе.
+    +button({
+      tag: 'a',
+      text: 'Оставить отзыв',
+      href: '#'
+    })(class='ratings__button button--primary button--right button--size_l')

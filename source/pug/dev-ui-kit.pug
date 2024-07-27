@@ -6,33 +6,20 @@ block variables
 block content
   style
     .
-      .container div {
-        margin-bottom: 16px;
+      .ui-kit__section {
+        margin-bottom: 80px;
       }
 
-      .order {
-        display: grid;
-        gap: 8px;
-        max-width: 1160px;
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .cards {
-        display: flex;
-        gap: 8px;
-        align-items: center;
-      }
-
-      .ui-kit__buttons-group {
+      .ui-kit__group {
         display: flex;
         flex-wrap: wrap;
-        gap: 8px;
+        gap: 12px;
         align-items: center;
       }
 
-
-
-
+      .ui-kit__group + .ui-kit__group {
+        margin-top: 16px;
+      }
 
   +breadcrumbs({ links: [
     {
@@ -40,48 +27,118 @@ block content
     }
   ]})
   .ui-kit.container
-    .ui-kit__buttons
-      .ui-kit__buttons-group
+    .ui-kit__section
+      .ui-kit__group
         +button({ tag: 'button', type: 'button', text: 'В каталог'})(class='button--primary-alter button--right button--size_l')
         +button({ tag: 'button', type: 'button', text: 'В каталог'})(class='button--primary-alter button--right button--size_l button--pending' disabled)
         +button({ tag: 'button', type: 'button', text: 'В каталог'})(class='button--primary-alter button--right button--size_l' disabled)
-      .ui-kit__buttons-group
+      .ui-kit__group
         +button({ tag: 'button', type: 'button', text: 'В каталог'})(class='button--primary-alter button--right button--size_s')
         +button({ tag: 'button', type: 'button', text: 'В каталог'})(class='button--primary-alter button--right button--size_s button--pending' disabled)
         +button({ tag: 'button', type: 'button', text: 'В каталог'})(class='button--primary-alter button--right button--size_s' disabled)
-      .ui-kit__buttons-group
+      .ui-kit__group
         +button({ tag: 'button', type: 'button', text: 'В каталог'})(class='button--primary button--right button--size_l')
         +button({ tag: 'button', type: 'button', text: 'В каталог'})(class='button--primary button--right button--size_l button--pending' disabled)
         +button({ tag: 'button', type: 'button', text: 'В каталог'})(class='button--primary button--right button--size_l' disabled)
-      .ui-kit__buttons-group
+      .ui-kit__group
         +button({ tag: 'button', type: 'button', text: 'В каталог'})(class='button--primary button--right button--size_s')
         +button({ tag: 'button', type: 'button', text: 'В каталог'})(class='button--primary button--right button--size_s button--pending' disabled)
         +button({ tag: 'button', type: 'button', text: 'В каталог'})(class='button--primary button--right button--size_s' disabled)
-      .ui-kit__buttons-group
+      .ui-kit__group
         +button({ tag: 'button', type: 'button', text: 'В личный кабинет'})(class='button--secondary button--right button--size_l')
         +button({ tag: 'button', type: 'button', text: 'В личный кабинет'})(class='button--secondary button--right button--size_l button--pending' disabled)
         +button({ tag: 'button', type: 'button', text: 'В личный кабинет'})(class='button--secondary button--right button--size_l' disabled)
-      .ui-kit__buttons-group
+      .ui-kit__group
         +button({ tag: 'button', type: 'button', text: 'В личный кабинет'})(class='button--secondary button--right button--size_m')
         +button({ tag: 'button', type: 'button', text: 'В личный кабинет'})(class='button--secondary button--right button--size_m button--pending' disabled)
         +button({ tag: 'button', type: 'button', text: 'В личный кабинет'})(class='button--secondary button--right button--size_m' disabled)
-      .ui-kit__buttons-group
+      .ui-kit__group
         +button({ tag: 'button', type: 'button', text: 'Смотреть запчасти'})(class='button--secondary button--right button--size_s')
         +button({ tag: 'button', type: 'button', text: 'Смотреть запчасти'})(class='button--secondary button--right button--size_s button--pending' disabled)
         +button({ tag: 'button', type: 'button', text: 'Смотреть запчасти'})(class='button--secondary button--right button--size_s' disabled)
-      .ui-kit__buttons-group
+      .ui-kit__group
         +button({ tag: 'button', type: 'button', text: 'Смотреть ещё'})(class='button--secondary button--down button--size_l')
         +button({ tag: 'button', type: 'button', text: 'Смотреть ещё'})(class='button--secondary button--down button--size_l button--pending' disabled)
         +button({ tag: 'button', type: 'button', text: 'Смотреть ещё'})(class='button--secondary button--down button--size_l' disabled)
-      .ui-kit__buttons-group
+      .ui-kit__group
         +button({ tag: 'button', type: 'button', text: 'Смотреть ещё'})(class='button--secondary button--down button--size_s')
         +button({ tag: 'button', type: 'button', text: 'Смотреть ещё'})(class='button--secondary button--down button--size_s button--pending' disabled)
         +button({ tag: 'button', type: 'button', text: 'Смотреть ещё'})(class='button--secondary button--down button--size_s' disabled)
-      .ui-kit__buttons-group
+      .ui-kit__group
         +button({ tag: 'button', type: 'button', text: 'Подробнее'})(class='button--tertiary button--right button--size_l')
         +button({ tag: 'button', type: 'button', text: 'Подробнее'})(class='button--tertiary button--right button--size_l button--pending' disabled)
         +button({ tag: 'button', type: 'button', text: 'Подробнее'})(class='button--tertiary button--right button--size_l' disabled)
-      .ui-kit__buttons-group
+      .ui-kit__group
         +button({ tag: 'button', type: 'button', text: 'Подробнее'})(class='button--tertiary button--right button--size_s')
         +button({ tag: 'button', type: 'button', text: 'Подробнее'})(class='button--tertiary button--right button--size_s button--pending' disabled)
         +button({ tag: 'button', type: 'button', text: 'Подробнее'})(class='button--tertiary button--right button--size_s' disabled)
+    .ui-kit__section
+      .ui-kit__group
+        +checker({
+          name: 'my-checkbox',
+          type: 'checkbox',
+          value: '1',
+          label: {
+            text: 'Чекбокс',
+          }
+        })
+        +checker({
+          name: 'my-checkbox',
+          type: 'checkbox',
+          value: '2',
+          disabled: true,
+          label: {
+            text: 'Чекбокс заблокированный',
+          }
+        })
+        +checker({
+          name: 'my-checkbox',
+          type: 'checkbox',
+          value: '3',
+          label: {
+            text: 'Чекбокс тёмный',
+          }
+        })(class='checker--dark')
+        +checker({
+          name: 'my-checkbox',
+          type: 'checkbox',
+          value: '4',
+          disabled: true,
+          label: {
+            text: 'Чекбокс тёмный заблокированный',
+          }
+        })(class='checker--dark')
+        +checker({
+          name: 'my-radio',
+          type: 'radio',
+          value: '1',
+          label: {
+            text: 'Радиокнопка',
+          }
+        })
+        +checker({
+          name: 'my-radio',
+          type: 'radio',
+          value: '2',
+          disabled: true,
+          label: {
+            text: 'Радиокнопка заблокированная',
+          }
+        })
+        +checker({
+          name: 'my-radio',
+          type: 'radio',
+          value: '3',
+          label: {
+            text: 'Радиокнопка тёмная',
+          }
+        })(class='checker--dark')
+        +checker({
+          name: 'my-radio',
+          type: 'radio',
+          value: '4',
+          disabled: true,
+          label: {
+            text: 'Радиокнопка тёмная заблокированная',
+          }
+        })(class='checker--dark')

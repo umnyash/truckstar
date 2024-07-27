@@ -1,0 +1,35 @@
+.reviews-list__items {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.reviews-list__item + .reviews-list__item {
+  margin-top: 8px;
+
+  @media (min-width: $tablet-width) {
+    margin-top: 12px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    margin-top: 16px;
+  }
+}
+
+.reviews-list__button-wrapper {
+  display: grid;
+  margin: 24px 0 0;
+
+  @media (min-width: $tablet-width) {
+    margin-top: 48px;
+    justify-content: center;
+  }
+
+  @media (min-width: $desktop-width) {
+    margin-top: 64px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    margin-top: 80px;
+  }
+}

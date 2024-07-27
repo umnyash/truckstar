@@ -1,0 +1,117 @@
+.checker__inner {
+  display: inline-flex;
+  align-items: center;
+}
+
+.checker__control {
+  appearance: none;
+  display: grid;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  border: 1px solid var(--border-weak-color);
+  margin: 0;
+  place-items: center;
+  background: transparent;
+  transition-property: border-color, background-color;
+  transition-duration: $medium-interaction-duration;
+
+  &::before {
+    transition: background-color $medium-interaction-duration;
+  }
+
+  &:enabled {
+    cursor: pointer;
+  }
+
+  &:disabled {
+    opacity: 0.3;
+    // pointer-events: none;
+  }
+}
+
+.checker__control:enabled + .checker__label {
+  cursor: pointer;
+}
+
+.checker__control[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+
+  &::before {
+    content: "";
+    display: block;
+    width: 14px;
+    height: 14px;
+    background: transparent;
+    mask: url("../img/icons.svg#controls_checkmark");
+  }
+
+  &:enabled:hover {
+    border-color: var(--accent-color);
+  }
+
+  &:checked {
+    border-color: var(--accent-color);
+    background: var(--accent-color);
+
+    &::before {
+      background: var(--text-light-color);
+    }
+  }
+}
+
+.checker__control[type="radio"] {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+
+  @media (min-width: $wide-desktop-width) {
+    width: 24px;
+    height: 24px;
+  }
+
+  &::before {
+    content: "";
+    width: 14px;
+    height: 14px;
+    border-radius: inherit;
+    background: var(--border-weak-color);
+
+    @media (min-width: $wide-desktop-width) {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  &:enabled:hover {
+    border-color: var(--accent-color);
+  }
+
+  &:checked {
+    border-color: var(--accent-color);
+
+    &::before {
+      background: var(--accent-color);
+    }
+  }
+}
+
+.checker--dark {
+  .checker__control {
+    border-color: var(--text-weak-color);
+  }
+
+  .checker__control:not(:checked)[type="radio"]::before {
+    background: var(--text-weak-color);
+  }
+}
+
+.checker--cover .checker__label::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}

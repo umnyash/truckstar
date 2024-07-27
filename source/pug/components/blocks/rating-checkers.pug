@@ -1,0 +1,20 @@
+mixin rating-checkers
+  -
+    var numbersOfReviews = [12, 8, 3, 0, 0];
+    var ratingValues = [5, 4, 3, 2, 1];
+
+  .rating-checkers
+    fieldset.rating-checkers__inner&attributes(attributes)
+      legend.visually-hidden Рейтинг
+      ul.rating-checkers__list
+        each value, index in ratingValues
+          .rating-checkers__item
+            +checker({
+              name: 'ratings',
+              type: 'checkbox',
+              value,
+              checked: value > 3,
+              label: {
+                text: `<span class="rating-checkers__label"><span class="visually-hidden">Рейтинг: ${value}</span> <span class="stars-icon stars-icon--size_s" data-value=${value}></span> <span class="visually-hidden">Количество:</span> <span>${numbersOfReviews[index]}</span></span>`,
+              }
+            })(class='rating-checkers__checker checker--cover')

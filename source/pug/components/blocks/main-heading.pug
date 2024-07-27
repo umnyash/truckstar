@@ -1,0 +1,7 @@
+mixin main-heading({ text, number })
+  .main-heading&attributes(attributes)
+    h1.main-heading__text.heading.heading--size_l= text
+    if number
+      p.main-heading__number
+        span.visually-hidden Количество:
+        span.main-heading__number-value= number

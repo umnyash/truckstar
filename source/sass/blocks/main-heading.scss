@@ -1,0 +1,29 @@
+.main-heading__text {
+  display: inline;
+  margin: 0;
+}
+
+.main-heading__number {
+  vertical-align: top;
+  display: inline-block;
+  margin: 0;
+  font: 400 12px/1 $main-font-family;
+  transform: translateY(-4px);
+
+  @media (min-width: $tablet-width) {
+    margin-left: 3px;
+    font-size: 14px;
+    transform: translateY(-3px);
+  }
+
+  @media (min-width: $desktop-width) {
+    margin-left: 8px;
+    font-size: 20px;
+    transform: translateY(-2px);
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    margin-left: 16px;
+    transform: translateY(2px);
+  }
+}

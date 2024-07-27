@@ -1,0 +1,12 @@
+mixin review({ review })
+  - var formattedDate =  new Date(review.date).toLocaleDateString('ru-RU');
+
+  article.review&attributes(attributes)
+    p.review__rating
+      span.visually-hidden= `Рейтинг: ${review.rating}`
+      span.stars-icon.stars-icon--size_m(data-value= review.rating)
+    .review__content
+      p!= review.text
+    footer.review__footer
+      p.review__author= review.author
+      time.review__date(datetime= review.date)= formattedDate

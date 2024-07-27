@@ -3,8 +3,10 @@ mixin orders({ orders })
     .container
       .orders__inner
         .orders__heading-wrapper
-          h1.orders__heading.heading.heading--size_l Мои заказы
-          p.orders__number= orders ? 5 : 0
+          +main-heading({
+            text: 'Мои заказы',
+            number: reviews ? 5 : 0
+          })
         +items-navigation({
           links: ['Текущие', 'Архив', 'Все']
         })
