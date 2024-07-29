@@ -47,3 +47,11 @@
     padding-top: 32px;
   }
 }
+
+.faq-list--alter {
+  .faq-list__item + .faq-list__item {
+    @media (min-width: $wide-desktop-width) {
+      margin-top: 20px;
+    }
+  }
+}

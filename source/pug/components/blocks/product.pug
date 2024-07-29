@@ -1,0 +1,77 @@
+mixin product
+  article.product&attributes(attributes)
+    .container
+      .product__inner
+        .product__info
+          header.product__header
+            h1.product__heading.heading.heading--size_s Кронштейн крыла переднего
+            a.product__collection(href='truck-subcategories.html' target='_blank') Man F2000 II Evolution / FE
+            p.product__code Артикул: 65374-4
+            p.product__price 6 000 ₽
+            .product__buttons
+              +button({
+                tag: 'button',
+                type: 'button',
+                text: 'В корзину',
+              })(class='button--primary-alter button--cart button--size_l')
+              +image-button({
+                tag: 'button',
+                type: 'button',
+                text: 'Избранное'
+              })(class='image-button--size_xl image-button--secondary image-button--icon_heart')
+          .product__info-group
+            p.product__number Номер OEM: 81612435449
+            p.product__condition Бывшая в употреблении запчасть
+            dl.product__status-list
+              dt.product__status-list-key.product__status-list-key--accent Нижний Новгород
+              dd.product__status-list-value.status.status--size_l.status--in-stock В наличии
+              dt.product__status-list-key Рязань
+              dd.product__status-list-value.status.status--size_l.status--to-order Под заказ
+              dt.product__status-list-key Москва
+              dd.product__status-list-value.status.status--size_l.status--to-order Под заказ
+              dt.product__status-list-key Сочи
+              dd.product__status-list-value.status.status--size_l.status--to-order Под заказ
+            .product__description
+              p Кронштейн крыла переднего в хорошем состоянии, снят с машины 2015 года.
+              p Кронштейн крепления крыла переднего, локера, подкрылка, брызговика, кронштейн переднего крыла задней части.
+          .product__navigation-wrapper
+            +page-navigation({
+              links: [
+                {
+                  text: 'Подходит для машин',
+                  href: '#product-target-info'
+                },
+                {
+                  text: 'Доставка',
+                  href: '#product-delivery-info'
+                },
+                {
+                  text: 'Оплата',
+                  href: '#product-payment-info'
+                },
+                {
+                  text: 'О гарантии',
+                  href: '#product-guarantee-info'
+                }
+              ]
+            })
+        .product__photo-slider-wrapper
+          +photo-slider
+        .product__links-section-wrapper
+          +links-section({ section: trucksLinksSection })
+        .product__faq-list-wrapper
+          +faq-list({
+            folds: [
+              {
+                heading: 'Доставка',
+              },
+              {
+                heading: 'Оплата',
+              },
+              {
+                heading: 'Гарантия',
+                open: true,
+              },
+            ],
+            alter: true
+          })

@@ -223,3 +223,19 @@
     }
   }
 }
+
+.product-card__like-button-wrapper {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+
+  @media (min-width: $tablet-width) {
+    top: 12px;
+    right: 12px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    top: 16px;
+    right: 16px;
+  }
+}

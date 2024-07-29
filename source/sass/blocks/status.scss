@@ -13,12 +13,6 @@
     line-height: 17px;
   }
 
-  @media (min-width: $wide-desktop-width) {
-    column-gap: 8px;
-    font-size: 20px;
-    line-height: 20px;
-  }
-
   &::before {
     content: "";
     grid-area: 1 / 1 / 2 / 2;
@@ -35,10 +29,29 @@
   }
 }
 
-.status--big {
-  @media (min-width: $wide-desktop-width) and (max-width: ($wide-desktop-width - 1)) {
+.status--size_s {
+  @media (min-width: $wide-desktop-width) {
     font-size: 18px;
     line-height: 18px;
+  }
+}
+
+.status--size_m {
+  @media (min-width: $wide-desktop-width) {
+    font-size: 20px;
+    line-height: 20px;
+  }
+}
+
+.status--size_l {
+  @media (min-width: $desktop-width) {
+    font-size: 18px;
+    line-height: 18px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    font-size: 20px;
+    line-height: 20px;
   }
 }
 

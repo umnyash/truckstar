@@ -1,0 +1,15 @@
+mixin photo-slider
+  .photo-slider&attributes(attributes)
+    .photo-slider__main-slider.swiper
+      ul.photo-slider__main-slider-list.swiper-wrapper
+        each number in [1, 2, 3, 1, 2, 3]
+          li.photo-slider__main-slider-item.swiper-slide
+            picture.photo-slider__main-slider-image-wrapper
+              img.photo-slider__main-slider-image(src=`img/product/${number}.webp` srcset=`img/product/${number}@2x.webp 2x` width='1160' height='700' alt='' loading='lazy')
+      .photo-slider__main-slider-pagination
+    .photo-slider__thumbnails-slider.swiper
+      ul.photo-slider__thumbnails-slider-list.swiper-wrapper
+        each number in [1, 2, 3, 1, 2, 3]
+          li.photo-slider__thumbnails-slider-item.swiper-slide
+            picture.photo-slider__thumbnails-slider-image-wrapper
+              img.photo-slider__thumbnails-slider-image(src=`img/product/${number}.webp` srcset=`img/product/${number}@2x.webp 2x` width='1160' height='700' alt='' loading='lazy')

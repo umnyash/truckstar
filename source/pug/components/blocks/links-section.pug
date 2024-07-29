@@ -1,0 +1,12 @@
+mixin links-section({ section })
+  section.links-section&attributes(attributes)
+    h2.links-section__heading.heading.heading--size_xs= section.heading
+    dl.links-section__groups
+      each group in section.groups
+        .links-section__group
+          dt.links-section__group-heading= group.heading
+          dd.links-section__group-list
+            ul.links-section__group-items
+              each link in group.links
+                li.links-section__group-item
+                  a.links-section__link(href='catalog.html')!= link.text

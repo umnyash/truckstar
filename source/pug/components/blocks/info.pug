@@ -33,7 +33,23 @@ mixin info
         section.info__section
           h2.info__section-heading Вопрос-ответ
           .info__section-content-wrapper
-            +faq-list
+            +faq-list({
+              folds: [
+                {
+                  heading: 'Есть ли гарантия на ваши запчасти?',
+                  open: true,
+                },
+                {
+                  heading: 'Как доставляется товар?',
+                },
+                {
+                  heading: 'Как доставляется товар?',
+                },
+                {
+                  heading: 'Как доставляется товар?',
+                },
+              ]
+            })
         section.info__section
           h2.info__section-heading Обмен и возврат
           .info__section-content-wrapper

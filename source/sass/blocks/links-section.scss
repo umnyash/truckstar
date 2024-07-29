@@ -1,0 +1,140 @@
+.links-section {
+  padding: 23px;
+  border: 1px solid var(--border-weak-color);
+  border-radius: 20px;
+  font: 400 14px/17px $main-font-family;
+
+  @media (min-width: $tablet-width) {
+    padding: 23px 31px;
+    border-radius: 30px;
+  }
+
+  @media (min-width: $desktop-width) {
+    padding: 31px 47px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    padding: 39px 79px;
+    font-size: 18px;
+    line-height: 22px;
+  }
+}
+
+.links-section__heading {
+  margin: 0 0 16px;
+
+  @media (min-width: $desktop-width) {
+    margin-bottom: 24px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    margin-bottom: 40px;
+  }
+}
+
+.links-section__groups {
+  margin: 0;
+}
+
+.links-section__group + .links-section__group {
+  margin-top: 16px;
+
+  @media (min-width: $desktop-width) {
+    margin-top: 24px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    margin-top: 40px;
+  }
+}
+
+.links-section__group-heading {
+  margin: 0 0 12px;
+  font-size: 16px;
+  line-height: 19px;
+  color: var(--text-weak-color);
+
+  @media (min-width: $tablet-width) {
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  @media (min-width: $desktop-width) {
+    font-size: 20px;
+    line-height: 26px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    margin-bottom: 20px;
+    font-size: 24px;
+    line-height: 29px;
+  }
+}
+
+.links-section__group-list {
+  margin: 0;
+}
+
+.links-section__group-items {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+
+  @media (min-width: $tablet-width) {
+    column-count: 2;
+    column-gap: 56px;
+  }
+
+  @media (min-width: $desktop-width) {
+    column-gap: 140px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    column-gap: 200px;
+  }
+}
+
+.links-section__group-item + .links-section__group-item {
+  margin-top: 12px;
+
+  @media (min-width: $tablet-width) {
+    margin-top: 16px;
+  }
+}
+
+.links-section__link {
+  display: inline-flex;
+  padding: 0 0 1px;
+  border-bottom: 1px solid var(--text-weak-color);
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 4px;
+  text-decoration: none;
+  color: inherit;
+  transition: border-bottom-color $medium-interaction-duration;
+
+  &:hover {
+    border-bottom-color: var(--accent-color);
+
+    .links-section__link-accent-text {
+      color: var(--accent-color);
+    }
+  }
+
+  &:active {
+    border-bottom-color: transparent;
+  }
+
+  @media (min-width: $desktop-width) {
+    column-gap: 8px;
+  }
+}
+
+.links-section__link-accent-text {
+  color: inherit;
+  transition: color $medium-interaction-duration;
+}
+
+.links-section__link-weak-text {
+  color: var(--text-weak-color);
+}

@@ -1,0 +1,6 @@
+mixin page-navigation({ links })
+  .page-navigation&attributes(attributes)
+    ul.page-navigation__list
+      each link in links
+        li.page-navigation__item
+          a.page-navigation__link(href= link.href)= link.text
