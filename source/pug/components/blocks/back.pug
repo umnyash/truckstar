@@ -1,0 +1,8 @@
+mixin back({ text, href })
+  .back&attributes(attributes)
+    .back__inner.container
+      +button({
+        tag: 'a',
+        text: 'В каталог',
+        href: 'categories.html'
+      })(class='button--simple button--left button--size_xs')

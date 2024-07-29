@@ -30,6 +30,11 @@
   &:active::before {
     transform: scale(0.85);
   }
+
+  &:disabled:not(.image-button--pending) {
+    opacity: 0.4;
+    pointer-events: none;
+  }
 }
 
 .image-button--size_s {

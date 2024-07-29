@@ -1,0 +1,16 @@
+mixin order-result
+  .order-result&attributes(attributes)
+    h1.order-result__heading.heading.heading--size_l Спасибо, Ваш заказ успешно оформлен!
+    p.order-result__lead Наш менеджер свяжется с вами в течении дня
+    p.order-result__text Заказ появится в личном кабинете, номер заказа: 45678
+    .order-result__buttons
+      +button({
+        tag: 'a',
+        text: 'В каталог',
+        href: 'categories.html'
+      })(class='button--primary button--right button--size_l')
+      +button({
+        tag: 'a',
+        text: 'В личный кабинет',
+        href: 'account.html'
+      })(class='button--secondary button--right button--size_l')

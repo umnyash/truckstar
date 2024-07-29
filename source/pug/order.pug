@@ -1,0 +1,9 @@
+extends layout/layout
+
+block variables
+  - var title = 'Заказ оформлен!'
+  - var pageClass = 'order-page'
+
+block content
+  +back({ text: 'В каталог', href: 'categories.html' })
+  +order

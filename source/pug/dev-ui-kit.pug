@@ -72,6 +72,17 @@ block content
         +button({ tag: 'button', type: 'button', text: 'Подробнее'})(class='button--tertiary button--right button--size_s')
         +button({ tag: 'button', type: 'button', text: 'Подробнее'})(class='button--tertiary button--right button--size_s button--pending' disabled)
         +button({ tag: 'button', type: 'button', text: 'Подробнее'})(class='button--tertiary button--right button--size_s' disabled)
+      .ui-kit__group
+        +button({
+          tag: 'a',
+          text: 'В каталог',
+          href: 'categories.html'
+        })(class='button--simple button--left button--size_xs')
+        +button({
+          tag: 'a',
+          text: 'Смотреть запчасти',
+          href: 'categories.html'
+        })(class='button--simple button--right button--size_xs')
     .ui-kit__section
       .ui-kit__group
         +checker({
@@ -91,6 +102,7 @@ block content
             text: 'Чекбокс заблокированный',
           }
         })
+      .ui-kit__group
         +checker({
           name: 'my-checkbox',
           type: 'checkbox',
@@ -108,6 +120,7 @@ block content
             text: 'Чекбокс тёмный заблокированный',
           }
         })(class='checker--dark')
+      .ui-kit__group
         +checker({
           name: 'my-radio',
           type: 'radio',
@@ -125,6 +138,7 @@ block content
             text: 'Радиокнопка заблокированная',
           }
         })
+      .ui-kit__group
         +checker({
           name: 'my-radio',
           type: 'radio',
@@ -159,6 +173,11 @@ block content
           type: 'button',
           text: 'Избранное'
         })(class='image-button--size_s image-button--secondary image-button--icon_heart image-button--pending' disabled)
+        +image-button({
+          tag: 'button',
+          type: 'button',
+          text: 'Избранное'
+        })(class='image-button--size_s image-button--secondary image-button--icon_heart' disabled)
       .ui-kit__group
         +image-button({
           tag: 'button',
@@ -175,6 +194,11 @@ block content
           type: 'button',
           text: 'Избранное'
         })(class='image-button--size_m image-button--secondary image-button--icon_heart image-button--pending' disabled)
+        +image-button({
+          tag: 'button',
+          type: 'button',
+          text: 'Избранное'
+        })(class='image-button--size_m image-button--secondary image-button--icon_heart' disabled)
       .ui-kit__group
         +image-button({
           tag: 'button',
@@ -191,6 +215,11 @@ block content
           type: 'button',
           text: 'Избранное'
         })(class='image-button--size_xl image-button--secondary image-button--icon_heart image-button--pending' disabled)
+        +image-button({
+          tag: 'button',
+          type: 'button',
+          text: 'Избранное'
+        })(class='image-button--size_xl image-button--secondary image-button--icon_heart' disabled)
       .ui-kit__group
         +image-button({
           tag: 'button',
@@ -202,6 +231,11 @@ block content
           type: 'button',
           text: 'Удалить'
         })(class='image-button--size_s image-button--secondary image-button--icon_cross image-button--pending' disabled)
+        +image-button({
+          tag: 'button',
+          type: 'button',
+          text: 'Удалить'
+        })(class='image-button--size_s image-button--secondary image-button--icon_cross' disabled)
       .ui-kit__group
         +image-button({
           tag: 'button',
@@ -213,3 +247,8 @@ block content
           type: 'button',
           text: 'В корзину'
         })(class='image-button--size_l image-button--primary image-button--icon_cart image-button--pending' disabled)
+        +image-button({
+          tag: 'button',
+          type: 'button',
+          text: 'В корзину'
+        })(class='image-button--size_l image-button--primary image-button--icon_cart' disabled)

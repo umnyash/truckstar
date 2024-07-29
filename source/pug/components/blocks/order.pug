@@ -1,8 +1,6 @@
 mixin order
-  article.order&attributes(attributes)
-    footer.order__footer
-      +contacts-list({ groups: [
-          contactsLists.address1,
-          contactsLists.phones1,
-          contactsLists.schedule,
-        ]})(class='contacts-list--size_s contacts-list--theme_light contacts-list--grid_compact')
+  .order&attributes(attributes)
+    .container
+      .order__inner
+        .order__result-wrapper
+          +order-result
