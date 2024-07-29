@@ -16,7 +16,8 @@
   color: var(--text-color);
   transition: background-color $medium-interaction-duration;
 
-  &:hover {
+  &:hover,
+  &:active {
     background: var(--developer-color);
   }
 
