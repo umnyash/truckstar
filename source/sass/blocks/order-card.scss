@@ -1,16 +1,184 @@
 .order-card {
-  padding: 0 24px;
-  background: var(--background-additional-color);
+  font: 400 14px/17px $main-font-family;
+
+  @media (min-width: $wide-desktop-width) {
+    font-size: 18px;
+    line-height: 22px;
+  }
+}
+
+.order-card__header {
+  display: grid;
+  grid-template-columns: 41% 1fr;
+  grid-template-rows: auto auto 1fr;
+  grid-template-areas:
+    "heading status"
+    "date    status"
+    "text    status";
+  font-size: 12px;
+  line-height: 14px;
 
   @media (min-width: $tablet-width) {
-    padding: 0 32px;
+    margin-right: 48px;
+    grid-template-columns: 30% 100px 1fr;
+    grid-template-rows: auto;
+    gap: 4px 32px;
+    grid-template-areas:
+      "heading date status"
+      "heading text status";
+    font-size: 14px;
+    line-height: 17px;
   }
 
   @media (min-width: $desktop-width) {
-    padding: 0 48px;
+    grid-template-columns: 26% 106px 1fr;
   }
 
   @media (min-width: $wide-desktop-width) {
-    padding: 0 56px 0 64px;
+    margin-right: 60px;
+    grid-template-columns: 27% 140px 1fr;
+    gap: 8px 48px;
+    font-size: 20px;
+    line-height: 26px;
+  }
+}
+
+.order-card__heading {
+  grid-area: heading;
+  margin: 0 0 8px;
+  font-size: 14px;
+  line-height: 17px;
+  font-weight: 500;
+
+  @media (min-width: $tablet-width) {
+    align-self: center;
+    margin: 0;
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  @media (min-width: $desktop-width) {
+    font-size: 20px;
+    line-height: 24px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    font-size: 24px;
+    letter-spacing: -1px;
+  }
+}
+
+.order-card__date {
+  grid-area: date;
+  margin: 0 0 4px;
+  color: var(--text-weak-color);
+
+  @media (min-width: $tablet-width) {
+    align-self: end;
+    margin: 0;
+  }
+}
+
+.order-card__text {
+  grid-area: text;
+  margin: 0;
+  color: var(--text-weak-color);
+}
+
+.order-card__status {
+  grid-area: status;
+  place-self: center;
+  padding: 3px 7px;
+  border: 1px solid currentColor;
+  border-radius: 1000px;
+  margin: 0 12px;
+  text-align: center;
+  text-transform: lowercase;
+  color: var(--text-weak-color);
+
+  @media (min-width: $tablet-width) {
+    margin: 0;
+  }
+
+  @media (min-width: $desktop-width) {
+    font-size: 16px;
+    line-height: 19px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    padding: 7px 11px;
+    font-size: 20px;
+    line-height: 20px;
+  }
+}
+
+.order-card__list {
+  padding: 0;
+  margin: 16px 0 0;
+  list-style: none;
+
+  @media (min-width: $tablet-width) {
+    margin-top: 24px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    margin-top: 56px;
+  }
+}
+
+.order-card__item {
+  padding: 0 0 15px;
+  border-bottom: 1px solid var(--border-weak-color);
+
+  @media (min-width: $wide-desktop-width) {
+    padding-bottom: 23px;
+  }
+}
+
+.order-card__item + .order-card__item {
+  margin-top: 16px;
+
+  @media (min-width: $wide-desktop-width) {
+    margin-top: 48px;
+  }
+}
+
+.order-card__footer {
+  margin: 16px 0 0;
+
+  @media (min-width: $tablet-width) {
+    margin-top: 24px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    margin-top: 32px;
+  }
+}
+
+.order-card__footer-text {
+  margin: 0;
+}
+
+.order-card__status--payment-process br {
+  @media (min-width: 373px) {
+    display: none;
+  }
+}
+
+.order-card__status--awaiting-payment br {
+  @media (min-width: 455px) {
+    display: none;
+  }
+}
+
+.order-card__status--sent br {
+  @media (min-width: 347px) {
+    display: none;
+  }
+}
+
+.order-card__status--awaiting-receipt br {
+  @media (min-width: 345px) {
+    display: none;
   }
 }

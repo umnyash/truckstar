@@ -1,8 +1,27 @@
-mixin order-card
-  article.order-card&attributes(attributes)
-    footer.order-card__footer
-      +contacts-list({ groups: [
-          contactsLists.address1,
-          contactsLists.phones1,
-          contactsLists.schedule,
-        ]})(class='contacts-list--size_s contacts-list--theme_light contacts-list--grid_compact')
+mixin order-card({ status, receivingMethod, open })
+  article.order-card.folds__item(class= open && 'folds__item--open')&attributes(attributes)
+    .folds__item-header
+      .folds__item-header-inner
+        header.order-card__header
+          h2.order-card__heading
+            button.folds__button(type='button' aria-expanded= open && 'true') Заказ № 45678
+          time.order-card__date(datetime='2024-07-30') 30.07.2024
+          p.order-card__text 2 товара
+          p.order-card__status(class=`order-card__status--${status.modifier}`)!= status.text
+    .folds__item-content-wrapper
+      .folds__item-content
+        ul.order-card__list
+          li.order-card__item
+            +order-item({ product: products[0] })
+          li.order-card__item
+            +order-item({ product: products[2] })
+        footer.order-card__footer
+          case receivingMethod
+            when 'delivery'
+              p.order-card__footer-text Заказ отправлен ТК СДЭК
+            when 'pickup'
+              +contacts-list({ groups: [
+                contactsLists.address1,
+                contactsLists.phones1,
+                contactsLists.schedule,
+              ]})(class='contacts-list--size_s contacts-list--theme_light contacts-list--grid_compact')

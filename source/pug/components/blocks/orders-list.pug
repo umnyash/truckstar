@@ -1,5 +1,45 @@
-mixin orders-list({ orders })
+mixin orders-list
   .orders-list&attributes(attributes)
-    ul.orders-list__items
+    ul.orders-list__items.folds
       li.orders-list__item
-        +order-card
+        +order-card({
+          status: {
+            text: 'В процессе<br> оплаты',
+            modifier: 'payment-process'
+          },
+          receivingMethod: 'delivery'
+        })
+      li.orders-list__item
+        +order-card({
+          status: {
+            text: 'Заказ собран,<br> ждёт оплаты',
+            modifier: 'awaiting-payment'
+          },
+          receivingMethod: 'delivery'
+        })
+      li.orders-list__item
+        +order-card({
+          status: {
+            text: 'Заказ<br> отправлен',
+            modifier: 'sent'
+          },
+          receivingMethod: 'delivery',
+          open: true
+        })
+      li.orders-list__item
+        +order-card({
+          status: {
+            text: 'Ждёт<br> получения',
+            modifier: 'awaiting-receipt'
+          },
+          receivingMethod: 'pickup',
+          open: true
+        })
+      li.orders-list__item
+        +order-card({
+          status: {
+            text: 'Получен',
+            modifier: 'received'
+          },
+          receivingMethod: 'pickup'
+        })

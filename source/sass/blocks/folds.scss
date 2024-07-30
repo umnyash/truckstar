@@ -29,7 +29,6 @@
     content: "";
     width: 32px;
     height: 32px;
-    margin: 0 0 0 21px;
     border-radius: 50%;
     background: var(--background-additional-dark-color) url("../img/icons.svg#controls_arrow-without-tail") no-repeat center / 20px 20px;
     transform: rotate(0);
@@ -39,14 +38,12 @@
     @media (min-width: $desktop-width) {
       width: 40px;
       height: 40px;
-      margin-left: 40px;
       background-size: 24px 24px;
     }
 
     @media (min-width: $wide-desktop-width) {
       width: 60px;
       height: 60px;
-      margin-left: 6cqb;
       background-size: 32px 32px;
     }
   }

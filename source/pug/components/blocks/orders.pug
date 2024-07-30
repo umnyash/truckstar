@@ -7,13 +7,13 @@ mixin orders({ orders })
             text: 'Мои заказы',
             number: reviews ? 5 : 0
           })
-        +items-navigation({
-          links: ['Текущие', 'Архив', 'Все']
-        })
+        .orders__navigation-wrapper
+          +items-navigation({
+            links: ['Текущие', 'Архив', 'Все']
+          })
         if orders
-          .orders__list-wrapper-2
-            .orders__list-wrapper
-              +orders-list({ orders })
+          .orders__list-wrapper
+            +orders-list
         else
           .orders__placeholder-wrapper
             +placeholder-mini({

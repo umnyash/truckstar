@@ -1,0 +1,37 @@
+.product-label {
+  display: inline-block;
+  padding: 1px 7px 3px;
+  border: 1px solid currentColor;
+  border-radius: 1000px;
+  font: 400 12px/14px $main-font-family;
+  text-transform: lowercase;
+  color: var(--text-weak-color);
+
+  @media (min-width: $tablet-width) {
+    font-size: 14px;
+    line-height: 17px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    padding: 5px 11px 7px;
+    font-size: 18px;
+    line-height: 18px;
+  }
+
+  &--new {
+    border-color: var(--special-color-1);
+  }
+
+  &--used {
+    border-color: var(--special-color-2);
+  }
+}
+
+.product-label--big {
+  @media (min-width: $wide-desktop-width) {
+    margin-bottom: 24px;
+    padding: 7px 11px;
+    font-size: 20px;
+    line-height: 20px;
+  }
+}

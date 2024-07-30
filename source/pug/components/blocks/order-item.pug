@@ -1,0 +1,16 @@
+mixin order-item({ product })
+  article.order-item&attributes(attributes)
+    header.order-item__header
+      h3.order-item__heading
+        a.order-item__link(href='product.html') Кронштейн крыла переднего
+      a.order-item__collection(href='truck-subcategories.html') Man 189138736 (2014-2017)
+      case product.condition
+        when 'new'
+          p.order-item__condition.product-label.product-label--new Новая запчасть
+        when 'used'
+          p.order-item__condition.product-label.product-label--used Б/у запчасть
+    picture.order-item__image-wrapper
+      img.order-item__image(src= product.image width='190' height='144' srcset=`${product.image2x} 2x` alt='' loading='lazy')
+    .order-item__price-wrapper
+      p.order-item__count 1 шт.
+      p.order-item__price 6 000 ₽

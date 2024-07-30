@@ -4,9 +4,9 @@ mixin product-card({ product })
       h3.product-card__heading= product.name
       case product.condition
         when 'new'
-          p.product-card__condition.product-card__condition--new Новая запчасть
+          p.product-card__condition.product-label.product-label--big.product-label--new Новая запчасть
         when 'used'
-          p.product-card__condition.product-card__condition--used Б/у запчасть
+          p.product-card__condition.product-label.product-label--big.product-label--used Б/у запчасть
       picture.product-card__image-wrapper
         img.product-card__image(src= product.image width='410' height='300' srcset=`${product.image2x} 2x` alt='' loading='lazy')
     p.product-card__description= product.description

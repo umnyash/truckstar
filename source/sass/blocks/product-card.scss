@@ -58,33 +58,10 @@
 .product-card__condition {
   order: -1;
   align-self: flex-start;
-  padding: 1px 7px 3px;
-  border: 1px solid currentColor;
-  border-radius: 1000px;
   margin: 0 var(--product-card-inner-indent) 8px;
-  font-size: 12px;
-  line-height: 14px;
-  text-transform: lowercase;
-  color: var(--text-weak-color);
-
-  @media (min-width: $tablet-width) {
-    font-size: 14px;
-    line-height: 17px;
-  }
 
   @media (min-width: $wide-desktop-width) {
     margin-bottom: 24px;
-    padding: 7px 11px;
-    font-size: 20px;
-    line-height: 20px;
-  }
-
-  &--new {
-    border-color: var(--special-color-1);
-  }
-
-  &--used {
-    border-color: var(--special-color-2);
   }
 }
 
