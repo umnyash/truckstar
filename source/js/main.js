@@ -7,4 +7,5 @@ document.querySelectorAll('.simple-form').forEach(initSimpleForm);
 document.querySelectorAll('.products').forEach(initProductsSlider);
 document.querySelectorAll('.process').forEach(initProcessSlider);
 document.querySelectorAll('.photo-slider').forEach(initPhotoSlider);
+document.querySelectorAll('.checker-cards__list').forEach(initCheckerCardsList);
 /* * * * * * * * * * * * * * * * * * * * * * * */

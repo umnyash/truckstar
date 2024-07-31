@@ -9,3 +9,11 @@
     margin-bottom: 48px;
   }
 }
+
+.cart__form {
+  margin: 31px 0 0;
+
+  @media (min-width: $tablet-width) {
+    margin-top: 47px;
+  }
+}

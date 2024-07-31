@@ -1,0 +1,34 @@
+mixin checker-cards
+  .checker-cards&attributes(attributes)
+    ul.checker-cards__list
+      li.checker-cards__item
+        +checker({
+          name: 'receiving-method',
+          type: 'radio',
+          value: 'pickup-nizhny-novgorod',
+          checked: true,
+          label: {
+            text: '<span class="checker-cards__item-label">Самовывоз <a class="checker-cards__link" href="https://yandex.ru/maps/-/CDWHyN3S" target="_blank" rel="nofollow noopener"> со склада в Нижнем Новгороде</a></span>'
+          }
+        })(class='checker-cards__item-checker checker--dark checker--cover')
+        p.checker-cards__item-text Нижегородская область, Богородский район, посёлок Окский, ул. Дорожная, д. 10А
+      li.checker-cards__item
+        +checker({
+          name: 'receiving-method',
+          type: 'radio',
+          value: 'pick-up-ryazan',
+          label: {
+            text: '<span class="checker-cards__item-label">Самовывоз <a class="checker-cards__link" href="https://yandex.ru/maps/-/CDWHyPpo" target="_blank" rel="nofollow noopener"> со склада в Рязани</a></span>'
+          }
+        })(class='checker-cards__item-checker checker--dark checker--cover')
+        p.checker-cards__item-text Рязань, ул. Новоселковская, д. 11
+      li.checker-cards__item
+        +checker({
+          name: 'receiving-method',
+          type: 'radio',
+          value: 'delivery',
+          label: {
+            text: '<span class="checker-cards__item-label">Доставка транспортной компанией</span>'
+          }
+        })(class='checker-cards__item-checker checker--dark checker--cover')
+        p.checker-cards__item-text Отправляем транспортными компаниями: СДЭК, ПЭК, Деловые Линии, Энергия, КИТ, DPD.

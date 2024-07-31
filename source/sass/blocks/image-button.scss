@@ -158,10 +158,13 @@
   color: var(--text-weak-color);
   background: var(--background-additional-color);
 
-  &:hover,
+  &:hover {
+    color: var(--accent-color);
+  }
+
   &:active,
   &.image-button--pending {
-    color: var(--accent-color);
+    color: var(--accent-dark-color);
   }
 }
 

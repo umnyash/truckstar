@@ -1,0 +1,88 @@
+.checker-cards__list {
+  --item-min-height: 116px;
+
+  display: grid;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  gap: 8px;
+
+  @media (min-width: $tablet-width) {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+}
+
+.checker-cards__item {
+  position: relative;
+  z-index: 0;
+  box-sizing: border-box;
+  padding: 16px 24px 16px 56px;
+  background: var(--background-additional-color);
+  border-radius: 20px;
+  min-height: var(--item-min-height);
+  font: 400 12px/14px $main-font-family;
+  color: var(--text-weak-color);
+
+  @media (min-width: $desktop-width) {
+    padding: 24px 32px 24px 64px;
+    font-size: 14px;
+    line-height: 17px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    padding: 32px 40px 32px 80px;
+    font-size: 16px;
+    line-height: 19px;
+  }
+}
+
+.checker-cards__item .checker__control {
+  position: absolute;
+  top: 16px;
+  left: 24px;
+
+  @media (min-width: $desktop-width) {
+    top: 24px;
+    left: 32px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    top: 32px;
+    left: 40px;
+  }
+}
+
+.checker-cards__item-label {
+  font-size: 14px;
+  line-height: 17px;
+  font-weight: 500;
+  color: var(--text-color);
+
+  @media (min-width: $desktop-width) {
+    font-size: 16px;
+    line-height: 19px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    font-size: 18px;
+    line-height: 22px;
+  }
+}
+
+.checker-cards__link {
+  position: relative;
+  z-index: 1;
+  text-decoration: none;
+  color: var(--accent-color);
+  transition: color $medium-interaction-duration;
+
+  &:hover,
+  &:active {
+    color: var(--accent-dark-color);
+  }
+}
+
+.checker-cards__item-text {
+  margin: 8px 0 0;
+}

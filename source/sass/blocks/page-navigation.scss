@@ -62,7 +62,7 @@
   }
 
   &:active {
-    color: var(--accent-color);
+    color: var(--accent-dark-color);
 
     &::after {
       transform: translateX(2px) rotate(-90deg);

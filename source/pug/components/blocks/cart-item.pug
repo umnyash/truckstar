@@ -1,0 +1,33 @@
+mixin cart-item({ product })
+  .cart-item&attributes(attributes)
+    header.cart-item__header
+      h3.cart-item__heading
+        a.cart-item__link(href='product.html' target='_blank') Кронштейн крыла переднего
+      a.cart-item__collection(href='truck-subcategories.html' target='_blank') Man 189138736 #[span.nobr (2014-2017)]
+    picture.cart-item__image-wrapper
+      img.cart-item__image(src= product.image width='190' height='144' srcset=`${product.image2x} 2x` alt='' loading='lazy')
+    .cart-item__labels
+      case product.condition
+        when 'new'
+          p.cart-item__condition.product-label.product-label--new Новая запчасть
+        when 'used'
+          p.cart-item__condition.product-label.product-label--used Б/у запчасть
+      case product.status
+        when 'in-stock'
+          p.cart-item__status.status.status--size_s.status--in-stock В наличии
+        when 'to-order'
+          p.cart-item__status.status.status--size_s.status--to-order Под заказ
+    .cart-item__price-wrapper
+      +counter({ label: 'Количество', name: 'count', value: '1' })(class='cart-item__counter')
+      p.cart-item__price= `${product.price} ₽`
+    .cart-item__actions
+      +image-button({
+        tag: 'button',
+        type: 'button',
+        text: 'Избранное'
+      })(class=`image-button--size_s image-button--secondary image-button--icon_heart ${product.favorite && 'image-button--active'}`)
+      +image-button({
+        tag: 'button',
+        type: 'button',
+        text: 'Удалить из корзины'
+      })(class='image-button--size_s image-button--secondary image-button--icon_cross')

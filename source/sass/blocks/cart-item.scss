@@ -1,0 +1,222 @@
+.cart-item {
+  font: 400 14px/17px $main-font-family;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-template-areas:
+    "image header actions"
+    "image labels labels"
+    "price price  price";
+
+  @media (min-width: $tablet-width) {
+    grid-template-areas:
+      "image header price actions"
+      "image header price actions"
+      "image labels price actions";
+    font-size: 16px;
+    line-height: 19px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    font-size: 20px;
+    line-height: 26px;
+  }
+}
+
+.cart-item__header {
+  grid-area: header;
+  display: grid;
+  justify-items: start;
+  align-content: start;
+
+  @media (min-width: $tablet-width) {
+    // align-self: center;
+    // margin-right: 48px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    // align-self: start;
+    // margin-right: 64px;
+  }
+}
+
+.cart-item__heading {
+  margin: 0 0 8px;
+  font-size: 16px;
+  line-height: 1;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+
+  @media (min-width: $tablet-width) {
+    font-size: 20px;
+  }
+
+  @media (min-width: $desktop-width) {
+    font-size: 24px;
+    letter-spacing: -1px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    margin-bottom: 16px;
+    font-size: 32px;
+  }
+}
+
+.cart-item__link {
+  text-decoration: none;
+  color: inherit;
+  transition: color $medium-interaction-duration;
+
+  &:hover,
+  &:active {
+    color: var(--accent-color);
+  }
+}
+
+.cart-item__collection {
+  margin: 0;
+  text-decoration: none;
+  color: var(--text-weak-color);
+  transition: color $medium-interaction-duration;
+
+  &:hover,
+  &:active {
+    color: var(--accent-color);
+  }
+}
+
+.cart-item__image-wrapper {
+  grid-area: image;
+  width: 80px;
+  height: 60px;
+  border-radius: 10px;
+  margin: 0 12px 0 0;
+  background: var(--background-additional-color);
+  overflow: hidden;
+
+  @media (min-width: $tablet-width) {
+    border-radius: 16px;
+    margin-right: 16px;
+    width: 140px;
+    height: 106px;
+  }
+
+  @media (min-width: $desktop-width) {
+    margin-right: 24px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    margin-right: 40px;
+    width: 190px;
+    height: 144px;
+  }
+}
+
+.cart-item__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+.cart-item__labels {
+  grid-area: labels;
+  display: flex;
+  margin: 12px 0 0;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 12px;
+
+  @media (min-width: $tablet-width) {
+    align-self: end;
+    column-gap: 16px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    margin-top: 20px;
+  }
+}
+
+.cart-item__condition,
+.cart-item__status {
+  margin: 0;
+}
+
+.cart-item__price-wrapper {
+  grid-area: price;
+  display: flex;
+  margin: 16px 0 0;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px 24px;
+
+  @media (min-width: $tablet-width) {
+    margin: 0 0 0 20px;
+    align-self: end;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    row-gap: 24px;
+  }
+}
+
+.cart-item__counter {
+  width: 101px;
+  margin: 0;
+
+  @media (min-width: $desktop-width) {
+    width: 112px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    width: 142px;
+  }
+}
+
+.cart-item__price {
+  margin: 0;
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 600;
+
+  @media (min-width: $tablet-width) {
+    font-size: 24px;
+    line-height: 29px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    font-size: 32px;
+    line-height: 38px;
+  }
+}
+
+.cart-item__actions {
+  grid-area: actions;
+  align-self: start;
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 4px;
+  align-items: center;
+  transform: translateY(-16px);
+
+  @media (min-width: $tablet-width) {
+    margin-right: 12px;
+    margin-left: 10px;
+    column-gap: 8px;
+    transform: translateY(-3px);
+  }
+
+  @media (min-width: $desktop-width) {
+    margin-right: 24px;
+    margin-left: 18px;
+    transform: none;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    column-gap: 12px;
+    margin-right: 32px;
+    margin-left: 49px;
+  }
+}
