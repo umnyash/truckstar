@@ -8,6 +8,18 @@ function getPaginationButtonCreator() {
     </button>
   `;
 }
+function debounce(callback) {
+  var _this = this;
+  let timeoutDelay = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 500;
+  let timeoutId;
+  return function () {
+    for (var _len = arguments.length, rest = new Array(_len), _key = 0; _key < _len; _key++) {
+      rest[_key] = arguments[_key];
+    }
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(_this, rest), timeoutDelay);
+  };
+}
 
 /* * * * * * * * * * * * * * * * * * * * * * * *
  * banner-slider.js
@@ -27,6 +39,25 @@ function initBannerSlider(sliderElement) {
     }
   });
 }
+/* * * * * * * * * * * * * * * * * * * * * * * */
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
+ * checker-cards-list.js
+ */
+function initCheckerCardsList(listElement) {
+  const itemElements = Array.from(listElement.querySelectorAll('.checker-cards__item'));
+  const setItemElementMinHeightValue = () => {
+    listElement.style.setProperty('--item-min-height', 0);
+    setTimeout(() => {
+      const itemElementsHeightValues = itemElements.map(itemElement => itemElement.offsetHeight);
+      const highestHeightValue = `${Math.max(...itemElementsHeightValues)}px`;
+      listElement.style.setProperty('--item-min-height', highestHeightValue);
+    }, 0);
+  };
+  setItemElementMinHeightValue();
+  window.addEventListener('resize', debounce(setItemElementMinHeightValue));
+}
+;
 /* * * * * * * * * * * * * * * * * * * * * * * */
 
 /* * * * * * * * * * * * * * * * * * * * * * * *
@@ -210,4 +241,5 @@ document.querySelectorAll('.simple-form').forEach(initSimpleForm);
 document.querySelectorAll('.products').forEach(initProductsSlider);
 document.querySelectorAll('.process').forEach(initProcessSlider);
 document.querySelectorAll('.photo-slider').forEach(initPhotoSlider);
+document.querySelectorAll('.checker-cards__list').forEach(initCheckerCardsList);
 /* * * * * * * * * * * * * * * * * * * * * * * */
