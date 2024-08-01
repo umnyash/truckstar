@@ -27,10 +27,67 @@ mixin cart-form
         })
       fieldset.cart-form__section.cart-form__section--receiving-method
         legend.cart-form__section-heading Телефон
+        .cart-form__section-inner
+          +text-field({
+            name: 'tel',
+            type: 'tel',
+            placeholder: 'Телефон',
+            required: true,
+            hidableClearButton: true,
+          })(class='cart-form__field cart-form__field--wide text-field--alter text-field--empty')
       fieldset.cart-form__section.cart-form__section--receiving-method
         legend.cart-form__section-heading Способ доставки
         .card-form__section-checker-cards-wrapper
           +checker-cards
+      fieldset.cart-form__section.cart-form__section--receiving-method
+        legend.cart-form__section-heading Данные для доставки
+        .cart-form__section-inner
+          +text-field({
+            name: 'surname',
+            type: 'text',
+            placeholder: 'Фамилия',
+            required: true,
+            hidableClearButton: true,
+          })(class='cart-form__field text-field--alter text-field--empty')
+          +text-field({
+            name: 'name',
+            type: 'text',
+            placeholder: 'Имя',
+            required: true,
+            hidableClearButton: true,
+          })(class='cart-form__field text-field--alter text-field--empty')
+          +dropdown({
+            name: 'company',
+            label: 'Выберите транспортную компанию',
+            options: [
+              {
+                text: 'ТК «Нижний Новгород»',
+                value: 'transport-company-nizhny-novgorod'
+              },
+              {
+                text: 'ЛТК-НН',
+                value: 'ltk-nn',
+              },
+              {
+                text: 'Деловые линии',
+                value: 'delovyye-linii'
+              },
+            ]
+          })(class='dropdown--big')
+          +text-field({
+            name: 'address',
+            type: 'text',
+            placeholder: 'Адрес',
+            required: true,
+            hidableClearButton: true,
+          })(class='cart-form__field text-field--alter text-field--empty')
+      fieldset.cart-form__section.cart-form__section--receiving-method
+        legend.cart-form__section-heading Комментарий
+        .cart-form__section-inner
+          +text-area({
+            name: 'comment',
+            placeholder: 'Напишите комментарий',
+          })(class='cart-form__field cart-form__field--wide text-area--empty')
     .cart-form__footer
       .cart-form__footer-total
         p.cart-form__footer-total-count Итого 2 товара

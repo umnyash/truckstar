@@ -8,7 +8,19 @@
   }
 }
 
+@keyframes text-appearance {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+/* stylelint-disable */
 @keyframes shake {
+
   0%,
   100% {
     transform: translateX(0);
@@ -29,3 +41,5 @@
     transform: translateX(5px);
   }
 }
+
+/* stylelint-enable */

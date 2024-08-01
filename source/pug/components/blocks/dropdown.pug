@@ -1,0 +1,25 @@
+mixin dropdown({ label, name, options, links })
+  -
+    var activeOption = options?.find((item) => item.active === true);
+    var activeLink = links?.find((item) => item.active === true);
+    var activeItemText = activeOption?.text || activeLink?.text;
+
+  .dropdown&attributes(attributes)
+    button.dropdown__toggle-button(type='button')
+      span.dropdown__toggle-button-text= activeItemText || label
+    .dropdown__list-wrapper
+      .dropdown__list
+        p.dropdown__list-heading= label
+        button.dropdown__close-button(type='button')
+          span.visually-hidden Закрыть
+        ul.dropdown__list-items
+          if options
+            each option in options
+              li.dropdown__list-item
+                label.dropdown__option
+                  input.dropdown__option-control.visually-hidden(name= name type='radio' value= option.value checked= option.active ? '' : false)
+                  span.dropdown__option-label= option.text
+          if links
+            each link in links
+              li.dropdown__list-item
+                a.dropdown__link(class= link.active && 'dropdown__link--active' href= link.href)= link.text

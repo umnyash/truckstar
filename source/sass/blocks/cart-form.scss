@@ -37,15 +37,33 @@
   }
 
   @media (min-width: $desktop-width) {
+    margin-bottom: 16px;
     font-size: 20px;
     line-height: 24px;
   }
 
-  @media (min-width: $desktop-width) {
+  @media (min-width: $wide-desktop-width) {
     margin-bottom: 24px;
-    font-size: 20px;
+    font-size: 24px;
     letter-spacing: -1px;
   }
+}
+
+.cart-form__section-inner {
+  display: grid;
+  gap: 8px;
+
+  @media (min-width: $tablet-width) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    gap: 12px;
+  }
+}
+
+.cart-form__field--wide {
+  grid-column: 1 / -1;
 }
 
 .cart-form__navigation-wrapper {

@@ -1,0 +1,2 @@
+const LAPTOP_WIDTH_MEDIA_QUERY = '(min-width: 1280px)';
+const MEDIUM_INTERACTION_DURATION = 400;

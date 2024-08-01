@@ -6,6 +6,7 @@
   grid-template-columns: 100%;
   grid-template-rows: auto 1fr auto;
   font: 400 14px/17px $main-font-family;
+  color: var(--text-color);
   background: var(--background-color);
 
   @supports (min-height: 100dvh) {

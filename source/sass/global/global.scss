@@ -19,6 +19,7 @@
   --grid-column-gap: 15px;
   --developer-color: #ffe457;
   --border-weak-color: #e3e3e3;
+  --overlay-color: rgba(0, 0, 0, 0.2);
 
   @media (min-width: $tablet-width) {
     --edge-indent: 24px;
@@ -34,6 +35,10 @@
     --edge-indent: 80px;
     --grid-column-gap: 40px;
   }
+}
+
+button {
+  color: #0000ff;
 }
 
 input[type="search"]::-webkit-search-decoration,

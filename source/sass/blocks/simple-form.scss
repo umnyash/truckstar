@@ -1,5 +1,6 @@
 .simple-form {
   font: 500 16px/19px $main-font-family;
+  color: var(--text-color);
 
   &:focus-within .simple-form__button--hidable {
     will-change: width, height, margin, opacity, visibility;
@@ -67,8 +68,10 @@
   border: none;
   margin: 0;
   font: inherit;
+  color: inherit;
   background: transparent;
   outline: none;
+  animation: text-appearance $medium-interaction-duration ease-in $medium-interaction-duration backwards;
 }
 
 .simple-form__placeholder {

@@ -252,3 +252,68 @@ block content
           type: 'button',
           text: 'В корзину'
         })(class='image-button--size_l image-button--primary image-button--icon_cart' disabled)
+    .ui-kit__section
+      .ui-kit__group
+        +dropdown({
+          name: 'brand',
+          label: 'Выберите марку',
+          options: [
+            {
+              text: 'Man',
+              value: 'man'
+            },
+            {
+              text: 'Mercedes-Benz',
+              value: 'mercedes-benz',
+            },
+            {
+              text: 'Scania',
+              value: 'scania'
+            },
+            {
+              text: 'КАМАЗ',
+              value: 'kamaz',
+            },
+            {
+              text: 'Chevrolet',
+              value: 'chevrolet'
+            },
+          ]
+        })
+        +dropdown({
+          name: 'company',
+          label: 'Выберите транспортную компанию',
+          options: [
+            {
+              text: 'ТК «Нижний Новгород»',
+              value: 'transport-company-nizhny-novgorod',
+            },
+            {
+              text: 'ЛТК-НН',
+              value: 'ltk-nn',
+            },
+            {
+              text: 'Деловые линии',
+              value: 'delovyye-linii',
+            },
+          ]
+        })(class='dropdown--big')
+        +dropdown({
+          name: 'brand',
+          label: 'Изменить сортировку',
+          links: [
+            {
+              text: 'По релевантности',
+              href: '#!',
+              active: true,
+            },
+            {
+              text: 'Сначала дороже',
+              href: '#!',
+            },
+            {
+              text: 'Сначала дешевле',
+              href: '#!',
+            },
+          ]
+        })
