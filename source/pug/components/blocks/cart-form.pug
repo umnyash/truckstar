@@ -89,29 +89,30 @@ mixin cart-form
             placeholder: 'Напишите комментарий',
           })(class='cart-form__field cart-form__field--wide text-area--empty')
     .cart-form__footer
-      .cart-form__footer-total
-        p.cart-form__footer-total-count Итого 2 товара
-        p.cart-form__footer-total-price 12 000 ₽
-        +button({
-          tag: 'button',
-          type: 'submit',
-          text: 'Оформить заказ',
-        })(class='cart-form__footer-submit-button button--primary-alter button--right button--size_l')
-        small.cart-form__footer-comment Нажимая на кнопку «Оформить заказ», вы даете #[a.cart-form__footer-comment-link(href='#!' target='_blank') согласие на обработку персональных данных]
-      .cart-form__footer-navigation-wrapper
-        +page-navigation({
-          links: [
-            {
-              text: 'Способы оплаты',
-              href: '#!'
-            },
-            {
-              text: 'Доставка и сборка',
-              href: '#!'
-            },
-            {
-              text: 'О гарантии',
-              href: '#!'
-            },
-          ]
-        })
+      .cart-form__footer-inner
+        .cart-form__footer-total
+          p.cart-form__footer-total-count Итого 2 товара
+          p.cart-form__footer-total-price 12 000 ₽
+          +button({
+            tag: 'button',
+            type: 'submit',
+            text: 'Оформить заказ',
+          })(class='cart-form__footer-submit-button button--primary-alter button--right button--size_l')
+          small.cart-form__footer-comment Нажимая на кнопку «Оформить заказ», вы даете #[a.cart-form__footer-comment-link(href='#!' target='_blank') согласие на обработку персональных данных]
+        .cart-form__footer-navigation-wrapper
+          +page-navigation({
+            links: [
+              {
+                text: 'Способы оплаты',
+                href: '#!'
+              },
+              {
+                text: 'Доставка и сборка',
+                href: '#!'
+              },
+              {
+                text: 'О гарантии',
+                href: '#!'
+              },
+            ]
+          })

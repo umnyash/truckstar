@@ -1,6 +1,13 @@
 /* * * * * * * * * * * * * * * * * * * * * * * *
  * main.js
  */
+let cart = null;
+const cartElement = document.querySelector('.cart');
+
+if (cartElement) {
+  cart = initCart({ cartElement });
+}
+
 document.querySelectorAll('.banner-slider').forEach(initBannerSlider);
 document.querySelectorAll('.folds').forEach(initFolds);
 document.querySelectorAll('.simple-form').forEach(initSimpleForm);
