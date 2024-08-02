@@ -1,0 +1,13 @@
+extends layout/layout
+
+block variables
+  - var title = 'Заявка на запчасть'
+  - var pageClass = 'request-page'
+
+block content
+  +breadcrumbs({ links: [
+    {
+      text: title
+    }
+  ]})
+  +request

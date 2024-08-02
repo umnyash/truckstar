@@ -1,0 +1,39 @@
+.request__inner {
+  @media (min-width: $laptop-width) {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    column-gap: var(--grid-column-gap);
+  }
+}
+
+.request__header {
+  margin: 0 0 24px;
+
+  @media (min-width: $tablet-width) {
+    margin-bottom: 32px;
+  }
+
+  @media (min-width: $laptop-width) {
+    grid-column: 1 / -1;
+  }
+
+  @media (min-width: $desktop-width) {
+    margin-bottom: 48px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    margin-bottom: 64px;
+  }
+}
+
+.request__form-wrapper {
+  max-width: 834px;
+  margin: 0 auto;
+
+  @media (min-width: $laptop-width) {
+    grid-column: 2 / 6;
+    min-width: 834px;
+    max-width: none;
+    margin: 0;
+  }
+}

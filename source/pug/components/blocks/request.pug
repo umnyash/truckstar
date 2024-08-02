@@ -1,0 +1,10 @@
+mixin request
+  .container
+    .request__inner
+      +section-header({
+        heading: 'Заявка на запчасть',
+        badge: 'Форма заявки',
+        text: 'Заполните форму, опишите интересующую запчасть,<br class="hidden hidden--m"> мы закажем её для вас',
+      })(class='request__header')
+      .request__form-wrapper
+        +request-form

@@ -1,0 +1,68 @@
+mixin request-form
+  form.request-form(action='https://echo.htmlacademy.ru' method='post' enctype='multipart/form-data' target='_blank')&attributes(attributes)
+    +dropdown({
+      name: 'brand',
+      label: 'Выберите марку',
+      options: [
+        {
+          text: 'Man',
+          value: 'man'
+        },
+        {
+          text: 'Mercedes-Benz',
+          value: 'mercedes-benz',
+        },
+        {
+          text: 'Scania',
+          value: 'scania'
+        },
+        {
+          text: 'КАМАЗ',
+          value: 'kamaz',
+        },
+        {
+          text: 'Chevrolet',
+          value: 'chevrolet'
+        },
+      ]
+    })(class='request-form__field dropdown--big')
+    +dropdown({
+      name: 'year',
+      label: 'Год выпуска',
+      options: [
+        {
+          text: '2007',
+          value: '2007'
+        },
+        {
+          text: '2012',
+          value: '2012',
+        },
+        {
+          text: '2017',
+          value: '2017'
+        },
+        {
+          text: '2020',
+          value: '2020',
+        },
+      ]
+    })(class='request-form__field dropdown--big')
+    +text-field({
+      name: 'tel',
+      type: 'tel',
+      placeholder: 'Телефон',
+      required: true,
+      hidableClearButton: true,
+    })(class='request-form__field text-field--empty')
+    +text-area({
+      name: 'description',
+      placeholder: 'Описание запчасти',
+    })(class='request-form__field text-area--empty')
+    .request-form__footer
+      +button({
+        tag: 'button',
+        type: 'submit',
+        text: 'Отправить',
+      })(class='request-form__footer-submit-button button--primary-alter button--right button--size_l')
+      small.request-form__footer-comment Нажимая на кнопку «Отправить», вы даете #[a.request-form__footer-comment-link(href='#!' target='_blank') согласие на&nbsp;обработку персональных данных]

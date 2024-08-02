@@ -263,6 +263,15 @@
 
 .cart-form__footer-comment-link {
   color: inherit;
+  transition: color $medium-interaction-duration;
+
+  &:hover {
+    color: var(--accent-color);
+  }
+
+  &:active {
+    color: var(--accent-dark-color);
+  }
 }
 
 .cart-form__footer-navigation-wrapper {
