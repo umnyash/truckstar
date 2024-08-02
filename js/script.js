@@ -34,6 +34,23 @@ function debounce(callback) {
     timeoutId = setTimeout(() => callback.apply(_this, rest), timeoutDelay);
   };
 }
+function throttle(callback, delay) {
+  var _this2 = this;
+  let lastTime = 0;
+  let timeoutId;
+  return function () {
+    for (var _len2 = arguments.length, rest = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+      rest[_key2] = arguments[_key2];
+    }
+    const now = new Date();
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(_this2, rest), delay);
+    if (now - lastTime >= delay) {
+      callback.apply(_this2, rest);
+      lastTime = now;
+    }
+  };
+}
 
 /* * * * * * * * * * * * * * * * * * * * * * * *
  * banner-slider.js
@@ -52,6 +69,61 @@ function initBannerSlider(sliderElement) {
       disableOnInteraction: false
     }
   });
+}
+/* * * * * * * * * * * * * * * * * * * * * * * */
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
+ * cart.js
+ */
+class Cart {
+  #cartElement = null;
+  #formFooterElement = null;
+  #laptopWidthMediaQueryList = window.matchMedia(LAPTOP_WIDTH_MEDIA_QUERY);
+  constructor(_ref) {
+    let {
+      cartElement
+    } = _ref;
+    this.#cartElement = cartElement;
+  }
+  #toggleFormFooterStickiness = () => {
+    if (this.#laptopWidthMediaQueryList.matches) {
+      return;
+    }
+    const documentHeight = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight, document.body.offsetHeight, document.documentElement.offsetHeight, document.body.clientHeight, document.documentElement.clientHeight);
+    const windowHeight = document.documentElement.clientHeight;
+    const scrollPosition = window.scrollY;
+    const isAtBottom = windowHeight + scrollPosition >= documentHeight;
+    this.#formFooterElement.classList.toggle('cart-form__footer--sticked', !isAtBottom);
+  };
+  #setPageBottomIndent = () => {
+    if (!this.#laptopWidthMediaQueryList.matches) {
+      const bottomValue = parseFloat(getComputedStyle(this.#formFooterElement).bottom);
+      document.body.style.paddingBottom = `${this.#formFooterElement.offsetHeight + bottomValue}px`;
+    } else {
+      document.body.style.paddingBottom = 0;
+    }
+  };
+  #onWindowResize = debounce(this.#setPageBottomIndent, 500);
+  #onWindowScroll = throttle(this.#toggleFormFooterStickiness, 100);
+  init() {
+    this.#formFooterElement = this.#cartElement.querySelector('.cart-form__footer');
+    if (!this.#formFooterElement) {
+      return;
+    }
+    this.#setPageBottomIndent();
+    this.#toggleFormFooterStickiness();
+    window.addEventListener('resize', this.#onWindowResize);
+    window.addEventListener('scroll', this.#onWindowScroll);
+  }
+}
+function initCart(_ref2) {
+  let {
+    cartElement
+  } = _ref2;
+  const cart = new Cart({
+    cartElement
+  });
+  cart.init();
 }
 /* * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -135,10 +207,10 @@ function initDropdown(dropdownElement) {
  * folds.js
  */
 const initFolds = foldsElement => {
-  foldsElement.addEventListener('click', _ref => {
+  foldsElement.addEventListener('click', _ref3 => {
     let {
       target
-    } = _ref;
+    } = _ref3;
     const buttonElement = target.closest('.folds__button');
     if (!buttonElement) {
       return;
@@ -154,10 +226,10 @@ const initFolds = foldsElement => {
     }, 20);
     buttonElement.ariaExpanded = buttonElement.ariaExpanded === 'true' ? 'false' : 'true';
   });
-  foldsElement.addEventListener('transitionend', _ref2 => {
+  foldsElement.addEventListener('transitionend', _ref4 => {
     let {
       target
-    } = _ref2;
+    } = _ref4;
     const foldElement = target.closest('.folds__item');
     if (!foldElement || !foldElement.classList.contains('folds__item--open')) {
       return;
@@ -342,6 +414,13 @@ function initTextField(fieldElement) {
 /* * * * * * * * * * * * * * * * * * * * * * * *
  * main.js
  */
+let cart = null;
+const cartElement = document.querySelector('.cart');
+if (cartElement) {
+  cart = initCart({
+    cartElement
+  });
+}
 document.querySelectorAll('.banner-slider').forEach(initBannerSlider);
 document.querySelectorAll('.folds').forEach(initFolds);
 document.querySelectorAll('.simple-form').forEach(initSimpleForm);
