@@ -1,5 +1,19 @@
 "use strict";
 
+const LAPTOP_WIDTH_MEDIA_QUERY = '(min-width: 1280px)';
+const MEDIUM_INTERACTION_DURATION = 400;
+function lockPageScroll() {
+  const bodyWidth = document.body.clientWidth;
+  document.body.classList.add('scroll-lock');
+  if (document.body.clientWidth === bodyWidth) {
+    return;
+  }
+  document.body.style.paddingRight = `${document.body.clientWidth - bodyWidth}px`;
+}
+function unlockPageScroll() {
+  document.body.classList.remove('scroll-lock');
+  document.body.style.paddingRight = '0';
+}
 function getPaginationButtonCreator() {
   let slideName = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'Слайд';
   return (index, className) => `
@@ -58,6 +72,63 @@ function initCheckerCardsList(listElement) {
   window.addEventListener('resize', debounce(setItemElementMinHeightValue));
 }
 ;
+/* * * * * * * * * * * * * * * * * * * * * * * */
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
+ * dropdown.js
+ */
+function initDropdown(dropdownElement) {
+  const laptopWidthMediaQueryList = window.matchMedia(LAPTOP_WIDTH_MEDIA_QUERY);
+  let unlockingPageTimer = null;
+  dropdownElement.addEventListener('click', evt => {
+    console.log('click');
+    if (evt.target.closest('.dropdown__toggle-button')) {
+      if (dropdownElement.classList.contains('dropdown--open')) {
+        close();
+      } else {
+        open();
+      }
+    } else {
+      const listItemElement = evt.target.closest('.dropdown__list-item');
+      if (listItemElement) {
+        const selectedElement = listItemElement.querySelector('.dropdown__option-label, .dropdown__link');
+        dropdownElement.querySelector('.dropdown__toggle-button-text').textContent = selectedElement.textContent;
+        if (selectedElement.classList.contains('dropdown__link')) {
+          dropdownElement.querySelector('.dropdown__link--active')?.classList.remove('dropdown__link--active');
+          selectedElement.classList.add('dropdown__link--active');
+        }
+        close();
+      } else if (evt.target.closest('.dropdown__close-button')) {
+        close();
+      }
+    }
+  });
+  function onDocumentClick(evt) {
+    const targetElement = evt.target.closest('.dropdown');
+    if (targetElement !== dropdownElement) {
+      close();
+    }
+  }
+  function open() {
+    if (!laptopWidthMediaQueryList.matches) {
+      lockPageScroll();
+    }
+    clearTimeout(unlockingPageTimer);
+    dropdownElement.classList.add('dropdown--open');
+    setTimeout(() => {
+      document.addEventListener('click', onDocumentClick);
+    }, 0);
+  }
+  ;
+  function close() {
+    dropdownElement.classList.remove('dropdown--open');
+    unlockingPageTimer = setTimeout(() => {
+      unlockPageScroll();
+    }, MEDIUM_INTERACTION_DURATION);
+    document.removeEventListener('click', onDocumentClick);
+  }
+  ;
+}
 /* * * * * * * * * * * * * * * * * * * * * * * */
 
 /* * * * * * * * * * * * * * * * * * * * * * * *
@@ -212,22 +283,6 @@ function initProductsSlider(sliderWrapperElement) {
 /* * * * * * * * * * * * * * * * * * * * * * * */
 
 /* * * * * * * * * * * * * * * * * * * * * * * *
- * select.js
- */
-function initSelect(selectElement) {
-  new Choices(selectElement, {
-    // eslint-disable-line
-    searchEnabled: false,
-    itemSelectText: '',
-    shouldSort: false
-    // maxItemCount: 4,
-    // placeholder: true,
-    // placeholderValue: 'fff',
-  });
-}
-/* * * * * * * * * * * * * * * * * * * * * * * */
-
-/* * * * * * * * * * * * * * * * * * * * * * * *
  * simple-form.js
  */
 function initSimpleForm(formElement) {
@@ -296,5 +351,5 @@ document.querySelectorAll('.photo-slider').forEach(initPhotoSlider);
 document.querySelectorAll('.checker-cards__list').forEach(initCheckerCardsList);
 document.querySelectorAll('.text-field').forEach(initTextField);
 document.querySelectorAll('.text-area').forEach(initTextArea);
-document.querySelectorAll('.select').forEach(initSelect);
+document.querySelectorAll('.dropdown').forEach(initDropdown);
 /* * * * * * * * * * * * * * * * * * * * * * * */
