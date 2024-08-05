@@ -128,6 +128,60 @@ function initCart(_ref2) {
 /* * * * * * * * * * * * * * * * * * * * * * * */
 
 /* * * * * * * * * * * * * * * * * * * * * * * *
+ * catalog-navigation.js
+ */
+function initCatalogNavigation(navigationElement) {
+  const innerElement = navigationElement.querySelector('.catalog-navigation__inner');
+  const listWrapperElement = innerElement.querySelector('.catalog-navigation__list');
+  const openerElement = document.querySelector('.catalog__navigation-opener');
+  const laptopWidthMediaQueryList = window.matchMedia(LAPTOP_WIDTH_MEDIA_QUERY);
+  let unlockingPageTimer = null;
+  new SimpleBar(listWrapperElement, {
+    autoHide: false
+  });
+  innerElement.addEventListener('click', evt => {
+    const groupToggleButton = evt.target.closest('.catalog-navigation__group-heading');
+    if (groupToggleButton) {
+      evt.preventDefault();
+      const groupElement = groupToggleButton.closest('.catalog-navigation__group');
+      groupElement.classList.toggle('catalog-navigation__group--open');
+    } else if (evt.target.closest('.catalog-navigation__close-button')) {
+      close();
+    }
+  });
+  function onLaptopWidthMediaQueryListChange() {
+    close();
+  }
+  function open() {
+    if (!laptopWidthMediaQueryList.matches) {
+      console.log('Это малеькая ширина');
+      lockPageScroll();
+    }
+    clearTimeout(unlockingPageTimer);
+    navigationElement.classList.remove('catalog-navigation--hidden');
+    setTimeout(() => {
+      navigationElement.classList.add('catalog-navigation--open');
+      laptopWidthMediaQueryList.addEventListener('change', onLaptopWidthMediaQueryListChange);
+    }, 0);
+  }
+  ;
+  function close() {
+    navigationElement.classList.remove('catalog-navigation--open');
+    unlockingPageTimer = setTimeout(() => {
+      navigationElement.classList.add('catalog-navigation--hidden');
+      unlockPageScroll();
+    }, MEDIUM_INTERACTION_DURATION);
+    laptopWidthMediaQueryList.removeEventListener('change', onLaptopWidthMediaQueryListChange);
+  }
+  ;
+  openerElement.addEventListener('click', evt => {
+    evt.preventDefault();
+    open();
+  });
+}
+/* * * * * * * * * * * * * * * * * * * * * * * */
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
  * checker-cards-list.js
  */
 function initCheckerCardsList(listElement) {
@@ -150,8 +204,12 @@ function initCheckerCardsList(listElement) {
  * dropdown.js
  */
 function initDropdown(dropdownElement) {
+  const listItemsElement = dropdownElement.querySelector('.dropdown__list-items');
   const laptopWidthMediaQueryList = window.matchMedia(LAPTOP_WIDTH_MEDIA_QUERY);
   let unlockingPageTimer = null;
+  new SimpleBar(listItemsElement, {
+    autoHide: false
+  });
   dropdownElement.addEventListener('click', evt => {
     console.log('click');
     if (evt.target.closest('.dropdown__toggle-button')) {
@@ -340,13 +398,19 @@ function initProductsSlider(sliderWrapperElement) {
     },
     breakpoints: {
       768: {
-        slidesPerView: 3
+        slidesPerView: 3,
+        spaceBetween: 15
+      },
+      1280: {
+        slidesPerView: 4,
+        spaceBetween: 20
       },
       1366: {
         slidesPerView: 4,
         spaceBetween: 30
       },
       1920: {
+        slidesPerView: 4,
         spaceBetween: 40
       }
     }
@@ -431,4 +495,5 @@ document.querySelectorAll('.checker-cards__list').forEach(initCheckerCardsList);
 document.querySelectorAll('.text-field').forEach(initTextField);
 document.querySelectorAll('.text-area').forEach(initTextArea);
 document.querySelectorAll('.dropdown').forEach(initDropdown);
+document.querySelectorAll('.catalog-navigation').forEach(initCatalogNavigation);
 /* * * * * * * * * * * * * * * * * * * * * * * */
