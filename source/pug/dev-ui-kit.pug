@@ -299,7 +299,7 @@ block content
           ]
         })(class='dropdown--big')
         +dropdown({
-          name: 'brand',
+          name: 'sorting',
           label: 'Изменить сортировку',
           links: [
             {
@@ -314,6 +314,51 @@ block content
             {
               text: 'Сначала дешевле',
               href: '#!',
+            },
+          ]
+        })
+    .ui-kit__section
+      .ui-kit__group
+        +variants({
+          checkers: [
+            {
+              name: 'my-radio-name',
+              type: 'radio',
+              value: 'active',
+              label: 'Активная радиокнопка',
+              checked: true
+            },
+            {
+              value: 'default',
+              label: 'Обычная радиокнопка'
+            },
+            {
+              value: 'default',
+              label: 'Обычная радиокнопка'
+            },
+            {
+              value: 'disabled',
+              label: 'Заблокированная радиокнопка',
+              disabled: true
+            },
+          ]
+        })
+      .ui-kit__group
+        +variants({
+          links: [
+            {
+              text: 'Активная ссылка (без href)',
+              active: true
+            },
+            {
+              text: 'Обычная ссылка',
+            },
+            {
+              text: 'Обычная ссылка',
+            },
+            {
+              text: '"Заблокированная" ссылка (без href)',
+              disabled: true
             },
           ]
         })

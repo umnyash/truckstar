@@ -8,8 +8,19 @@ mixin orders({ orders })
             number: reviews ? 5 : 0
           })
         .orders__navigation-wrapper
-          +items-navigation({
-            links: ['Текущие', 'Архив', 'Все']
+          +variants({
+            links: [
+              {
+                text: 'Текущие',
+                active: true
+              },
+              {
+                text: 'Архив',
+              },
+              {
+                text: 'Все',
+              },
+            ]
           })
         if orders
           .orders__list-wrapper

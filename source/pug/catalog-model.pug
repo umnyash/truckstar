@@ -1,8 +1,8 @@
 extends layout/layout
 
 block variables
-  - var title = 'Каталог Man F2000'
-  - var pageClass = 'truck-subcategories-page'
+  - var title = 'Запчасти для Man F2000 I Evolution / FE'
+  - var pageClass = 'catalog-page'
 
 block content
   +breadcrumbs({ links: [
@@ -11,9 +11,17 @@ block content
       href: 'truck-categories.html'
     },
     {
+      text: 'Каталог Man F2000',
+      href: 'truck-subcategories.html'
+    },
+    {
       text: title
     }
   ]})
-  +catalog({})
+  +catalog({
+    filter: {
+      modelSelection: false
+    },
+  })
   +products({ heading: '<b class="heading__accent">Популярные</b> запчасти', products })
   +offer

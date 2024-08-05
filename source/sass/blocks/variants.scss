@@ -1,0 +1,67 @@
+.variants__list {
+  display: flex;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+  font: 500 14px/17px $main-font-family;
+
+  @media (min-width: $desktop-width) {
+    font-size: 16px;
+    line-height: 19px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    font-size: 20px;
+    line-height: 24px;
+  }
+}
+
+.variants__button {
+  display: block;
+  padding: 7px 11px;
+  border: 1px solid currentColor;
+  border-radius: 1000px;
+  text-decoration: none;
+  color: var(--text-color);
+  background: transparent;
+  cursor: default;
+  transition-property: border-color, color, background-color;
+  transition-duration: $medium-interaction-duration;
+}
+
+// Курсор доступной кнопки
+.variants__control:enabled:not(:checked) + .variants__button,
+.variants__button[href] {
+  cursor: pointer;
+}
+
+// Наведение
+.variants__control:enabled:not(:checked) + .variants__button:hover,
+.variants__button[href]:hover {
+  color: var(--accent-color);
+}
+
+// Нажатие
+.variants__control:enabled:not(:checked) + .variants__button:active,
+.variants__button[href]:active {
+  color: var(--text-light-color);
+  background: var(--accent-color);
+  border-color: var(--accent-color);
+}
+
+// Активная кнопка
+.variants__button--active,
+.variants__control:checked + .variants__button {
+  color: var(--text-light-color);
+  background: var(--accent-color);
+  border-color: var(--accent-color);
+}
+
+// Недоступная кнопка
+a.variants__button:not([href]):not(.variants__button--active),
+.variants__control:disabled + .variants__button {
+  opacity: 0.3;
+}

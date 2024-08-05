@@ -9,3 +9,147 @@
     margin-bottom: 48px;
   }
 }
+
+.catalog__body {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 12px;
+  grid-auto-flow: dense;
+  align-items: start;
+
+  @media (min-width: $laptop-width) {
+    grid-template-columns: calc((100% - (var(--grid-column-gap) * 3)) / 4) repeat(3, 1fr); // (1)
+    column-gap: var(--grid-column-gap);
+  }
+}
+
+.catalog__filter-wrapper {
+  grid-column: 1 / -1;
+  padding: 0 0 11px;
+  border-bottom: 1px solid var(--border-weak-color);
+  margin: 0 0 24px;
+
+  @media (min-width: $desktop-width) {
+    padding-bottom: 15px;
+    margin-bottom: 48px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    padding-bottom: 23px;
+  }
+}
+
+.catalog__filter-wrapper--compact {
+  padding: 0;
+  border: none;
+  margin-bottom: 16px;
+
+  @media (min-width: $tablet-width) {
+    margin-bottom: 24px;
+  }
+
+  @media (min-width: $laptop-width) {
+    grid-column: 2 / 4;
+    align-self: center;
+    margin-bottom: 0;
+  }
+}
+
+.catalog__shortcuts-wrapper {
+  @media (max-width: ($laptop-width - 1)) {
+    display: none;
+  }
+
+  @media (min-width: $laptop-width) {
+    grid-column: 2 / -1;
+    margin: 0 0 48px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    margin-bottom: 64px;
+  }
+}
+
+.catalog__navigation-opener {
+  align-self: stretch;
+
+  @media (min-width: $laptop-width) {
+    display: none;
+  }
+}
+
+.catalog__navigation-wrapper {
+  height: 100%;
+
+  @media (max-width: ($laptop-width - 1)) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    width: 100%;
+    visibility: hidden;
+  }
+
+  @media (min-width: $laptop-width) {
+    --catalog-navigation-list-max-height: 740px;
+
+    grid-column: 1 / 2;
+    grid-row-end: span 4;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    --catalog-navigation-list-max-height: 1072px;
+  }
+}
+
+.catalog__navigation {
+  height: 100%;
+}
+
+.catalog__sorting {
+  @media (min-width: $tablet-width) {
+    justify-self: end;
+    min-width: 268px;
+  }
+
+  @media (min-width: $laptop-width) {
+    grid-column: 2 / -1;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    min-width: 284px;
+  }
+}
+
+.catalog--compact .catalog__sorting {
+  @media (min-width: $laptop-width) {
+    grid-column: 4 / 5;
+  }
+}
+
+.catalog__products-list-wrapper {
+  grid-column: 1 / -1;
+  margin: 24px 0 0;
+
+  @media (min-width: $tablet-width) {
+    margin-top: 32px;
+  }
+
+  @media (min-width: $laptop-width) {
+    grid-column: 2 / -1;
+  }
+
+  @media (min-width: $desktop-width) {
+    margin-top: 24px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    margin-top: 32px;
+  }
+}
+
+/*
+ * Почему не задать repeat(4, 1fr)?
+ * При ресайзе навигация иногда занимает больше места и растягивает свою колонку.
+ * Не знаю почему. Возможно, это как-то связано с плагином "simplebar".
+ */

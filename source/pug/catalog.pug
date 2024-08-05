@@ -1,8 +1,8 @@
 extends layout/layout
 
 block variables
-  - var title = 'Двигатель'
-  - var pageClass = 'subcategories-page'
+  - var title = 'Выпускной коллектор'
+  - var pageClass = 'catalog-page'
 
 block content
   +breadcrumbs({ links: [
@@ -11,9 +11,18 @@ block content
       href: 'categories.html'
     },
     {
-      text: title
+      text: 'Двигатель',
+      href: 'subcategories.html'
+    },
+    {
+      text: title,
     }
   ]})
-  +catalog({})
+  +catalog({
+    filter: {
+      modelSelection: true
+    },
+    shortcuts: true,
+  })
   +products({ heading: '<b class="heading__accent">Популярные</b> запчасти', products })
   +offer

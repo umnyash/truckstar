@@ -97,6 +97,28 @@
   }
 }
 
+.checker--simple {
+  font: 400 14px/17px $main-font-family;
+
+  @media (min-width: $desktop-width) {
+    font-size: 16px;
+    line-height: 19px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    font-size: 20px;
+    line-height: 24px;
+  }
+
+  .checker__inner {
+    column-gap: 8px;
+
+    @media (min-width: $desktop-width) {
+      column-gap: 10px;
+    }
+  }
+}
+
 .checker--dark {
   .checker__control {
     border-color: var(--text-weak-color);

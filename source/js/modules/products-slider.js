@@ -17,12 +17,18 @@ function initProductsSlider(sliderWrapperElement) {
     breakpoints: {
       768: {
         slidesPerView: 3,
+        spaceBetween: 15,
+      },
+      1280: {
+        slidesPerView: 4,
+        spaceBetween: 20,
       },
       1366: {
         slidesPerView: 4,
         spaceBetween: 30,
       },
       1920: {
+        slidesPerView: 4,
         spaceBetween: 40,
       },
     }

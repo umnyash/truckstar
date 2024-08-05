@@ -10,7 +10,7 @@ mixin dropdown({ label, name, options, links })
     .dropdown__list-wrapper
       .dropdown__list
         p.dropdown__list-heading= label
-        button.dropdown__close-button(type='button')
+        +close-button(class='dropdown__close-button')
           span.visually-hidden Закрыть
         ul.dropdown__list-items
           if options

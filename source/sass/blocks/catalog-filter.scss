@@ -1,0 +1,132 @@
+.catalog-filter {
+  font-family: $main-font-family;
+}
+
+.catalog-filter__section {
+  padding: 0;
+  border: none;
+  margin: 0;
+}
+
+.catalog-filter__section-inner {
+  display: grid;
+  row-gap: 8px;
+
+  @media (min-width: $tablet-width) {
+    min-height: 43px;
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: var(--grid-column-gap);
+    align-items: center;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    min-height: 56px;
+  }
+}
+
+.catalog-filter__section + .catalog-filter__section {
+  margin-top: 24px;
+
+  @media (min-width: $tablet-width) {
+    margin-top: 8px;
+  }
+
+  @media (min-width: $desktop-width) {
+    margin-top: 12px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    margin-top: 16px;
+  }
+}
+
+.catalog-filter__section-heading {
+  float: left;
+  padding: 0;
+  margin: 0;
+  font-size: 14px;
+  line-height: 17px;
+  font-weight: 500;
+  color: var(--text-weak-color);
+
+  @media (min-width: $tablet-width) {
+    grid-column: 1 / 2;
+  }
+
+  @media (min-width: $desktop-width) {
+    padding-left: 32px;
+    font-size: 16px;
+    line-height: 19px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    padding-left: 48px;
+    font-size: 20px;
+    line-height: 24px;
+  }
+}
+
+.catalog-filter__section-fields {
+  @media (min-width: $tablet-width) {
+    grid-column: 2 / -1;
+  }
+
+  &--checkbox {
+    padding-left: 12px;
+  }
+
+  &--columns {
+    display: grid;
+    gap: 8px;
+
+    @media (min-width: $tablet-width) {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    @media (min-width: $desktop-width) {
+      gap: 12px 16px;
+    }
+
+    @media (min-width: $wide-desktop-width) {
+      gap: 16px 24px;
+    }
+  }
+}
+
+.catalog-filter--compact {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  column-gap: 24px;
+
+  @media (min-width: $tablet-width) {
+    column-gap: 32px;
+    justify-content: flex-start;
+  }
+
+  @media (min-width: $desktop-width) {
+    column-gap: 64px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    column-gap: 80px;
+  }
+
+  .catalog-filter__section {
+    margin: 0;
+  }
+
+  .catalog-filter__section-inner {
+    display: block;
+    min-height: auto;
+  }
+
+  .catalog-filter__section-heading {
+    @include visually-hidden;
+  }
+
+  .catalog-filter__section-fields {
+    padding: 0;
+  }
+}

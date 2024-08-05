@@ -1,6 +1,0 @@
-mixin items-navigation({ links, currentIndex = 0 })
-  .items-navigation&attributes(attributes)
-    ul.items-navigation__list
-      each link, index in links
-        li.items-navigation__item
-          a.items-navigation__link(class= (index === currentIndex) && 'items-navigation__link--current' href= (index === currentIndex) ? false : '#!')= link

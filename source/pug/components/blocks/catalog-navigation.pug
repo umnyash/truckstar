@@ -1,0 +1,56 @@
+mixin catalog-navigation__group({ heading })
+  li.catalog-navigation__group&attributes(attributes)
+    button.catalog-navigation__group-heading= heading
+    ul.catalog-navigation__group-list
+      li.catalog-navigation__group-item
+        a.catalog-navigation__group-link(href='#!') Балка заднего моста
+      li.catalog-navigation__group-item
+        a.catalog-navigation__group-link.catalog-navigation__group-link--active Выпускной коллектор
+      li.catalog-navigation__group-item
+        a.catalog-navigation__group-link(href='#!') Главная передача
+      li.catalog-navigation__group-item
+        a.catalog-navigation__group-link(href='#!') Дополнительный мост
+      li.catalog-navigation__group-item
+        a.catalog-navigation__group-link(href='#!') Задний мост в сборе
+      li.catalog-navigation__group-item
+        a.catalog-navigation__group-link(href='#!') Редутор в сборе
+      li.catalog-navigation__group-item
+        a.catalog-navigation__group-link(href='#!') Ремо комплект
+
+mixin catalog-navigation
+  section.catalog-navigation&attributes(attributes)
+    .catalog-navigation__inner
+      header.catalog-navigation__header
+        h2.catalog-navigation__heading Категории
+        +close-button(class='catalog-navigation__close-button')
+      .catalog-navigation__search-form-wrapper
+        +simple-form({
+          action: 'https://echo.htmlacademy.ru',
+          method: 'get',
+          field: {
+            name: 'query',
+            type: 'search',
+            placeholder: 'Найти по каталогу',
+          },
+          hidableResetButton: true,
+        })(class='simple-form--alter-2')
+      .catalog-navigation__list-wrapper
+        .catalog-navigation__list
+          ul.catalog-navigation__list-items
+            li.catalog-navigation__list-item
+              a.catalog-navigation__link(href='#!') Все запчасти
+            +catalog-navigation__group({ heading: 'Грузовой кузов' })
+            +catalog-navigation__group({ heading: 'Двигатель' })(class='catalog-navigation__group--open')
+            +catalog-navigation__group({ heading: 'Дополнительное оборудование' })
+            +catalog-navigation__group({ heading: 'Кабина и комплектующие' })
+            +catalog-navigation__group({ heading: 'Карданный вал' })
+            +catalog-navigation__group({ heading: 'Контрольные приборы' })
+            +catalog-navigation__group({ heading: 'Передний мост' })
+            +catalog-navigation__group({ heading: 'Подвеска задняя' })
+            +catalog-navigation__group({ heading: 'Система охлаждения' })
+            +catalog-navigation__group({ heading: 'Сцепление' })
+            +catalog-navigation__group({ heading: 'Топливная и выпускная системы' })
+            +catalog-navigation__group({ heading: 'Тормозная система' })
+            +catalog-navigation__group({ heading: 'Тормозная система' })
+            +catalog-navigation__group({ heading: 'Электрическая система' })
+            +catalog-navigation__group({ heading: 'Система охлаждения' })

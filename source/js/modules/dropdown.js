@@ -2,8 +2,11 @@
  * dropdown.js
  */
 function initDropdown(dropdownElement) {
+  const listItemsElement = dropdownElement.querySelector('.dropdown__list-items');
   const laptopWidthMediaQueryList = window.matchMedia(LAPTOP_WIDTH_MEDIA_QUERY);
   let unlockingPageTimer = null;
+
+  new SimpleBar(listItemsElement, { autoHide: false });
 
   dropdownElement.addEventListener('click', (evt) => {
     console.log('click');

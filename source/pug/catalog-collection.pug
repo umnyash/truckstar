@@ -1,19 +1,20 @@
 extends layout/layout
 
 block variables
-  - var title = 'Каталог Man F2000'
-  - var pageClass = 'truck-subcategories-page'
+  - var title = 'Запчасти для Man TGX II 2017 г.'
+  - var pageClass = 'catalog-page'
 
 block content
   +breadcrumbs({ links: [
     {
-      text: 'Каталог Man',
-      href: 'truck-categories.html'
-    },
-    {
-      text: title
+      text: title,
     }
   ]})
-  +catalog({})
+  +catalog({
+    filter: {
+      modelSelection: false,
+      compact: true
+    },
+  })
   +products({ heading: '<b class="heading__accent">Популярные</b> запчасти', products })
   +offer

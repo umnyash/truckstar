@@ -1,5 +1,5 @@
-mixin catalog
-  .catalog&attributes(attributes)
+mixin catalog({ filter, shortcuts })
+  .catalog(class= (pageClass === 'catalog-page' && filter.compact && 'catalog--compact'))&attributes(attributes)
     .container
       .catalog__inner
         h1.catalog__heading.heading.heading--size_l= title
@@ -37,8 +37,45 @@ mixin catalog
               +categories-list({
                 card: {
                   headingTag: 'h2',
-                  href: 'catalog.html',
+                  href: 'catalog-model.html',
                   isAlter: true
                 },
                 categories: truckSubcategories.slice(0, 2)
               })
+          when 'catalog-page'
+            .catalog__body
+              .catalog__filter-wrapper(class= filter.compact && 'catalog__filter-wrapper--compact')
+                +catalog-filter({ modelSelection: filter.modelSelection, compact: filter.compact })
+              if shortcuts
+                .catalog__shortcuts-wrapper
+                  +catalog-shortcuts
+              +button({
+                tag: 'a',
+                text: 'Категории',
+                href: 'categories.html',
+                withoutIcon: true
+              })(class='catalog__navigation-opener button--primary button--size_l button--without-icon')
+              .catalog__navigation-wrapper
+                +catalog-navigation(class='catalog__navigation catalog-navigation--hidden')
+              .catalog__sorting
+                +dropdown({
+                  name: 'sorting',
+                  label: 'Изменить сортировку',
+                  links: [
+                    {
+                      text: 'По релевантности',
+                      href: '#!',
+                      active: true,
+                    },
+                    {
+                      text: 'Сначала дороже',
+                      href: '#!',
+                    },
+                    {
+                      text: 'Сначала дешевле',
+                      href: '#!',
+                    },
+                  ]
+                })(class='dropdown--small')
+              .catalog__products-list-wrapper
+                +products-list({ products: products.slice(0, 6) })

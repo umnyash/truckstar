@@ -1,4 +1,5 @@
-mixin button({tag, text, type, href, target, rel, opener})
+mixin button({tag, text, type, href, target, rel, opener, withoutIcon })
   #{tag}.button(type= type href= href target= target rel= rel data-modal-opener= opener)&attributes(attributes)
     span.button__inner!= text
-      span.button__icon
+      if !withoutIcon
+        span.button__icon

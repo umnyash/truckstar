@@ -13,14 +13,22 @@
     grid-template-columns: repeat(3, 1fr);
   }
 
+  @media (min-width: $laptop-width) {
+    grid-template-columns: repeat(auto-fill, minmax(288px, 1fr));
+    column-gap: var(--grid-column-gap);
+  }
+
   @media (min-width: $desktop-width) {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 64px 30px;
+    row-gap: 64px;
+    grid-template-columns: repeat(auto-fill, minmax(289px, 1fr));
+  }
+
+  @media (min-width: 1660px) {
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
   }
 
   @media (min-width: $wide-desktop-width) {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 80px 40px;
+    row-gap: 80px;
   }
 }
 

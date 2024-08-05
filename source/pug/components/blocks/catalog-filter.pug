@@ -1,0 +1,106 @@
+mixin catalog-filter({ modelSelection, compact })
+  form.catatlog-filter(class= compact && 'catalog-filter--compact')&attributes(attributes)
+    if modelSelection
+      fieldset.catalog-filter__section
+        .catalog-filter__section-inner
+          legend.catalog-filter__section-heading Марка + модель
+          .catalog-filter__section-fields.catalog-filter__section-fields--columns
+            +dropdown({
+              name: 'brand',
+              label: 'Выберите марку',
+              options: [
+                {
+                  text: 'Man',
+                  value: 'man'
+                },
+                {
+                  text: 'Mercedes-Benz',
+                  value: 'mercedes-benz',
+                },
+                {
+                  text: 'Scania',
+                  value: 'scania'
+                },
+                {
+                  text: 'КАМАЗ',
+                  value: 'kamaz',
+                },
+                {
+                  text: 'Chevrolet',
+                  value: 'chevrolet'
+                },
+              ]
+            })
+            +dropdown({
+              name: 'model',
+              label: 'Выберите модель',
+              options: [
+                {
+                  text: '1-Serie',
+                  value: '1-ыerie'
+                },
+                {
+                  text: 'F2000',
+                  value: 'f2000',
+                },
+                {
+                  text: 'F2000 I',
+                  value: 'f2000 i'
+                },
+                {
+                  text: 'F2000 II Evolution / FE',
+                  value: 'f2000 ii evolution / fe',
+                },
+                {
+                  text: 'L2000',
+                  value: 'l2000',
+                },
+                {
+                  text: 'L2000 I',
+                  value: 'l2000 i'
+                },
+                {
+                  text: 'L2000 II Evolution / FE',
+                  value: 'l2000 ii evolution / fe',
+                },
+                {
+                  text: 'F90',
+                  value: 'chevrolet'
+                },
+              ]
+            })
+    fieldset.catalog-filter__section
+      .catalog-filter__section-inner
+        legend.catalog-filter__section-heading Состояние
+        .catalog-filter__section-fields
+          +variants({
+            checkers: [
+              {
+                name: 'condition',
+                type: 'radio',
+                value: 'any',
+                label: 'Все',
+                checked: true
+              },
+              {
+                value: 'new',
+                label: 'Новые'
+              },
+              {
+                value: 'used',
+                label: 'Б/у'
+              },
+            ]
+          })
+    fieldset.catalog-filter__section
+      .catalog-filter__section-inner
+        legend.catalog-filter__section-heading Наличие
+        .catalog-filter__section-fields.catalog-filter__section-fields--checkbox
+          +checker({
+            name: 'in-stock',
+            type: 'checkbox',
+            checked: 'true',
+            label: {
+              text: 'В наличии'
+            }
+          })(class='checker--simple')

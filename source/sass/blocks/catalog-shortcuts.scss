@@ -1,0 +1,53 @@
+.catalog-shortcuts {
+  font: 400 14px/17px $main-font-family;
+
+  @media (min-width: $wide-desktop-width) {
+    font-size: 18px;
+    line-height: 22px;
+  }
+}
+
+.catalog-shortcuts__list {
+  display: flex;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  flex-wrap: wrap;
+  gap: 12px;
+
+  @media (min-width: $wide-desktop-width) {
+    gap: 16px;
+  }
+}
+
+.catalog-shortcuts__link {
+  display: block;
+  padding: 11px 15px;
+  border: 1px solid var(--background-additional-color);
+  border-radius: 16px;
+  text-align: center;
+  text-decoration: none;
+  color: inherit;
+  background: var(--background-additional-color);
+  transition: color $medium-interaction-duration;
+
+  &:hover {
+    color: var(--accent-color);
+  }
+
+  &:active {
+    color: var(--accent-dark-color);
+  }
+
+  &--active {
+    border-color: currentColor;
+  }
+
+  &:not([href]) {
+    pointer-events: none;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    padding: 15px 23px;
+  }
+}

@@ -280,6 +280,20 @@
   }
 }
 
+.simple-form--alter-2 {
+  @media (max-width: ($laptop-width - 1)) {
+    .simple-form__inner {
+      border-color: var(--text-color);
+      background: var(--background-color);
+    }
+
+    .simple-form__button--clear {
+      background: var(--background-additional-color);
+    }
+  }
+}
+
+
 .simple-form--empty {
   .simple-form__placeholder {
     opacity: 1;

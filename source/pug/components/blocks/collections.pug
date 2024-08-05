@@ -3,22 +3,46 @@ mixin collections({ collections, navigationCurrentIndex })
     .container
       .collections__inner
         h1.collections__heading.heading.heading--size_l Все разборки
-        +items-navigation({
+        +variants({
           links: [
-            'Все',
-            'Man',
-            'Mercedes-Benz',
-            'Scania',
-            'Renault',
-            'Daf',
-            'КАМАЗ',
-            'Lada',
-            'Iveco',
-            'ЗИЛ',
-            'MAZ',
-            'Chevrolet',
-          ],
-          currentIndex: navigationCurrentIndex
+            {
+              text: 'Все',
+              active: true
+            },
+            {
+              text: 'Man',
+            },
+            {
+              text: 'Mercedes-Benz',
+            },
+            {
+              text: 'Scania',
+            },
+            {
+              text: 'Renault',
+            },
+            {
+              text: 'Daf',
+            },
+            {
+              text: 'КАМАЗ',
+            },
+            {
+              text: 'Lada',
+            },
+            {
+              text: 'Iveco',
+            },
+            {
+              text: 'ЗИЛ',
+            },
+            {
+              text: 'MAZ',
+            },
+            {
+              text: 'Chevrolet',
+            },
+          ]
         })
         if collections
           .collections__list-wrapper

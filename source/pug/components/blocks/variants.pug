@@ -1,0 +1,22 @@
+mixin variants({ links, checkers })
+  .variants&attributes(attributes)
+    ul.variants__list
+      if links
+        each link in links
+          li.variants__item
+            a.variants__button(
+              class= link.active && 'variants__button--active'
+              href= link.active || link.disabled ? false : link.href || '#!'
+            )= link.text
+      if checkers
+        each checker in checkers
+          li.variants__item
+            label.variants__button-wrapper&attributes(attributes)
+              input.visually-hidden.variants__control(
+                name= checker.name || checkers[0].name
+                type= checker.type || checkers[0].type
+                value= checker.value
+                checked= checker.checked ? '' : false
+                disabled= checker.disabled ? '' : false
+              )
+              span.variants__button= checker.label

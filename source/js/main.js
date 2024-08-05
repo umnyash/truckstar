@@ -18,4 +18,5 @@ document.querySelectorAll('.checker-cards__list').forEach(initCheckerCardsList);
 document.querySelectorAll('.text-field').forEach(initTextField);
 document.querySelectorAll('.text-area').forEach(initTextArea);
 document.querySelectorAll('.dropdown').forEach(initDropdown);
+document.querySelectorAll('.catalog-navigation').forEach(initCatalogNavigation);
 /* * * * * * * * * * * * * * * * * * * * * * * */
