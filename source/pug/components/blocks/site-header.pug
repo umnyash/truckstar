@@ -1,20 +1,31 @@
 mixin site-header
   header.site-header&attributes(attributes)
-    +logo(class='site-header__logo')
-    +contacts-list({ groups: [
-      contactsLists.phonesAll,
-      contactsLists.email,
-    ]})(class='site-header__contacts-list contacts-list--size_l contacts-list--theme_dark contacts-list--grid_column')
-    +socials-list
-    .site-header__search-form
-      +simple-form({
-        action: 'https://echo.htmlacademy.ru',
-        method: 'get',
-        field: {
-          name: 'query',
-          type: 'search',
-          placeholder: 'Найти по номеру запчасти или наименованию',
-        },
-        hidableSubmitButton: true,
-        hidableResetButton: true,
-      })(class='simple-form--alter simple-form--big simple-form--with-icon_search')
+    .site-header__container
+      .site-header__inner
+        .site-header__logo-wrapper
+          +logo(class='site-header__logo')
+          +button({
+            tag: 'button',
+            type: 'button',
+            text: '<span class="button__text">Каталог</span>'
+          })(class='site-header__burger button--primary button--burger')
+        +site-navigation(class='site-header__navigation')
+        .site-header__search-form
+          +simple-form({
+            action: 'https://echo.htmlacademy.ru',
+            method: 'get',
+            field: {
+              name: 'query',
+              type: 'search',
+              placeholder: 'Найти по номеру запчасти или наименованию',
+            },
+            hidableSubmitButton: true,
+            hidableResetButton: true,
+          })(class='simple-form--alter simple-form--big simple-form--with-icon_search')
+        .site-header__user-navigation
+          a.site-header__user-navigation-link.site-header__user-navigation-link--search(href='search.html')
+            span.visually-hidden Поиск по сайту
+          a.site-header__user-navigation-link.site-header__user-navigation-link--phone.site-header__user-navigation-link--accent(href='tel:+79965645029')
+            span.visually-hidden +7 (996) 564-50-29 (Нижний Новгород)
+          +shortcuts(class='site-header__shortcuts')
+      .site-header__search-form-outer-wrapper

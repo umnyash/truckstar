@@ -1,0 +1,36 @@
+.site-navigation {
+  font: 400 16px/19px $main-font-family;
+
+  @media (min-width: $wide-desktop-width) {
+    font-size: 20px;
+    line-height: 26px;
+  }
+}
+
+.site-navigation__list {
+  display: flex;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  align-items: center;
+
+  @media (min-width: $wide-desktop-width) {
+    gap: 12px 40px;
+  }
+}
+
+.site-navigation__link {
+  text-decoration: none;
+  color: inherit;
+  transition: color $medium-interaction-duration;
+
+  &:hover {
+    color: var(--accent-color);
+  }
+
+  &:active {
+    color: var(--accent-dark-color);
+  }
+}

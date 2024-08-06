@@ -7,11 +7,13 @@ mixin dropdown({ label, name, options, links })
   .dropdown&attributes(attributes)
     button.dropdown__toggle-button(type='button')
       span.dropdown__toggle-button-text= activeItemText || label
+
+
+
     .dropdown__list-wrapper
       .dropdown__list
         p.dropdown__list-heading= label
         +close-button(class='dropdown__close-button')
-          span.visually-hidden Закрыть
         ul.dropdown__list-items
           if options
             each option in options

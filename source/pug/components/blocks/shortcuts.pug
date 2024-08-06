@@ -1,0 +1,32 @@
+mixin shortcuts
+  .shortcuts&attributes(attributes)
+    ul.shortcuts__list
+      li.shortcuts__item
+        a.shortcuts__link.shortcuts__link--favorites(href='favorites.html')
+          span.visually-hidden Избранное
+      li.shortcuts__item
+        a.shortcuts__link.shortcuts__link--cart(href='cart.html')
+          span.visually-hidden Корзина
+      li.shortcuts__item.shortcuts__item--user
+        a.shortcuts__link.shortcuts__link--user(href='#')
+          span.visually-hidden Меню пользователя
+
+
+
+        .shortcuts__menu
+          .shortcuts__menu-inner
+            p.shortcuts__menu-heading Личный кабинет
+            +close-button(class='shortcuts__menu-close-button')
+            ul.shortcuts__menu-list
+              li.shortcuts__menu-item
+                a.shortcuts__menu-link.shortcuts__menu-link--login(href='#!')
+                  span.shorcuts__menu-phone +7 960 471 83 25
+                  span.shorcuts__menu-right Другой телефон
+              li.shortcuts__menu-item
+                a.shortcuts__menu-link(href='account.html') Текущие заказы
+              li.shortcuts__menu-item
+                a.shortcuts__menu-link(href='account.html') Все заказы
+              li.shortcuts__menu-item
+                a.shortcuts__menu-link(href='account.html') Архив
+              li.shortcuts__menu-item
+                a.shortcuts__menu-link.shortcuts__menu-link--logout(href='#!') Выйти

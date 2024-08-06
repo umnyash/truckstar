@@ -1,6 +1,13 @@
 /* * * * * * * * * * * * * * * * * * * * * * * *
  * main.js
  */
+
+// initSiteHeader(document.querySelector('.site-header'));
+const laptopWidthMediaQueryList = window.matchMedia(LAPTOP_WIDTH_MEDIA_QUERY);
+const desktopWidthMediaQueryList = window.matchMedia(DESKTOP_WIDTH_MEDIA_QUERY);
+
+document.querySelectorAll('.site-header').forEach(initSiteHeader);
+
 let cart = null;
 const cartElement = document.querySelector('.cart');
 

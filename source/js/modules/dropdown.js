@@ -9,9 +9,6 @@ function initDropdown(dropdownElement) {
   new SimpleBar(listItemsElement, { autoHide: false });
 
   dropdownElement.addEventListener('click', (evt) => {
-    console.log('click');
-
-
     if (evt.target.closest('.dropdown__toggle-button')) {
       if (dropdownElement.classList.contains('dropdown--open')) {
         close();

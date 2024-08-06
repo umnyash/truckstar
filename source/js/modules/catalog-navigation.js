@@ -29,7 +29,6 @@ function initCatalogNavigation(navigationElement) {
 
   function open() {
     if (!laptopWidthMediaQueryList.matches) {
-      console.log('Это малеькая ширина')
       lockPageScroll();
     }
 

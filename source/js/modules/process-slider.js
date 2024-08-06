@@ -2,7 +2,6 @@
  * process-slider.js
  */
 function initProcessSlider(sliderWrapperElement) {
-  console.log('sdf')
   const sliderElement = sliderWrapperElement.querySelector('.process-slider');
   const prevButtonElement = sliderWrapperElement.querySelector('.slider-arrows__button--prev');
   const nextButtonElement = sliderWrapperElement.querySelector('.slider-arrows__button--next');

@@ -21,7 +21,7 @@ html.page(class= pageClass lang='ru')
     meta(name='description' content='«Truckstar» — Грузовая разборка тягачей из Европы, таких как: Daf, Iveco, MAN, Mercedes-Benz, Scania, Renault, Volvo.')
     meta(name='keywords' content='Truckstar, разборка тягачей, новые детали тягачей, б/у детали тягачей, поставка деталей тягачей.')
   body.page__body
-    +site-header(class='page__site-header')
+    +site-header(class=`page__site-header ${pageClass === 'index-page' && 'site-header--transparent'}`)
     main.page__content
       block content
     +site-footer(class='page__site-footer')

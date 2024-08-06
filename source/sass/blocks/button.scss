@@ -482,3 +482,62 @@
     }
   }
 }
+
+.button--burger {
+  padding: 10px;
+  border-radius: 50%;
+  font-size: 14px;
+  line-height: 1;
+
+  @media (min-width: $tablet-width) {
+    padding: 8px 16px;
+    border-radius: 1000px;
+    font-size: 16px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    padding: 5px 20px;
+    font-size: 20px;
+  }
+
+  .button__inner {
+    flex-direction: row-reverse;
+    column-gap: 8px;
+
+    @media (min-width: $tablet-width) {
+      column-gap: 12px;
+    }
+
+    @media (min-width: $wide-desktop-width) {
+      column-gap: 10px;
+    }
+  }
+
+  .button__text {
+    // margin-bottom: 2px;
+
+    @media (max-width: ($tablet-width - 1)) {
+      @include visually-hidden;
+    }
+  }
+
+
+  .button__icon {
+    width: 20px;
+    height: 20px;
+
+    &::after {
+      mask: url("../img/icons.svg#controls_burger");
+    }
+
+    @media (min-width: $tablet-width) {
+      width: 24px;
+      height: 24px;
+    }
+
+    @media (min-width: $wide-desktop-width) {
+      width: 40px;
+      height: 40px;
+    }
+  }
+}

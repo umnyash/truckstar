@@ -1,0 +1,312 @@
+.shortcuts__list {
+  display: flex;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  flex-wrap: wrap;
+  align-items: center;
+
+  @media (min-width: $wide-desktop-width) {
+    gap: 5px;
+  }
+}
+
+.shortcuts__link {
+  display: flex;
+  width: 32px;
+  height: 32px;
+  color: inherit;
+  transition: color $medium-interaction-duration;
+
+  @media (min-width: $tablet-width) {
+    width: 40px;
+    height: 40px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    width: 50px;
+    height: 50px;
+  }
+
+  &::before {
+    content: "";
+    width: 20px;
+    height: 20px;
+    margin: auto;
+    background: currentColor;
+    transition: transform $little-interaction-duration;
+
+    @media (min-width: $wide-desktop-width) {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  &--favorites::before {
+    mask: url("../img/icons.svg#controls_heart-empty");
+  }
+
+  &--cart::before {
+    mask: url("../img/icons.svg#controls_cart");
+  }
+
+  &--user::before {
+    mask: url("../img/icons.svg#controls_user");
+  }
+
+  &:hover {
+    color: var(--accent-color);
+  }
+
+  &:active {
+    color: var(--accent-dark-color);
+
+    &::before {
+      transform: scale(0.85);
+    }
+  }
+}
+
+.shortcuts__menu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 2;
+  display: grid;
+  width: 100%;
+  height: 100%;
+  font: 500 14px/17px $main-font-family;
+  color: var(--text-color);
+  overflow: auto;
+
+  @media (max-width: ($laptop-width - 1)) {
+    visibility: hidden;
+    transition-property: background-color, transform, visibility;
+    transition-duration: $medium-interaction-duration;
+    transition-timing-function: ease-in-out;
+  }
+
+  @media (min-width: $laptop-width) {
+    position: absolute;
+    top: calc(100% + 8px);
+    max-width: 400px;
+    height: auto;
+    background: transparent;
+    overflow: visible;
+    visibility: hidden;
+    opacity: 0;
+    transition-property: opacity, visibility;
+    transition-duration: $medium-interaction-duration;
+    transition-timing-function: ease-in-out;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: -20px;
+      right: -12px;
+      left: -12px;
+      height: 100%;
+    }
+  }
+
+  @media (min-width: $desktop-width) {
+    font-size: 16px;
+    line-height: 19px;
+
+    &::before {
+      top: -24px;
+    }
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    max-width: 460px;
+    font-size: 20px;
+    line-height: 24px;
+
+    &::before {
+      top: -32px;
+    }
+  }
+}
+
+.shortcuts__menu-inner {
+  position: relative;
+  box-sizing: border-box;
+  padding: 32px 24px;
+  border-radius: 30px 30px 0 0;
+  margin: auto 0 0;
+  background: var(--background-color);
+
+  @media (max-width: ($laptop-width - 1)) {
+    transform: translateY(100%);
+    visibility: hidden;
+    transition-property: transform, visibility;
+    transition-duration: $medium-interaction-duration;
+    transition-timing-function: ease-in-out;
+  }
+
+  @media (min-width: $tablet-width) {
+    padding: 32px 56px;
+  }
+
+  @media (min-width: $laptop-width) {
+    padding: 0;
+    border-radius: 24px;
+    border: 1px solid var(--border-weak-color);
+    overflow: hidden;
+
+    @include main-shadow;
+  }
+}
+
+.shortcuts__menu-heading {
+  margin: 0 0 12px;
+  padding-right: 50px;
+  font-size: 20px;
+  line-height: 1;
+  letter-spacing: -0.01em;
+
+  @media (min-width: $tablet-width) {
+    font-size: 24px;
+    letter-spacing: -1px;
+  }
+
+  @media (min-width: $laptop-width) {
+    @include visually-hidden;
+  }
+}
+
+.shortcuts__menu-close-button {
+  position: absolute;
+  top: 16px;
+  right: 24px;
+
+  @media (min-width: $tablet-width) {
+    right: 32px;
+  }
+
+  @media (min-width: $laptop-width) {
+    display: none;
+  }
+}
+
+.shortcuts__menu-list {
+  padding: 0;
+  list-style: none;
+  margin: 0;
+}
+
+.shortcuts__menu-link {
+  display: block;
+  padding: 12px 16px 11px;
+  border-bottom: 1px solid var(--border-weak-color);
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+
+  &--logout {
+    color: var(--text-weak-color);
+  }
+
+  &:hover {
+    background: var(--background-additional-color);
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    padding: 16px 16px 15px;
+  }
+}
+
+.shortcuts__menu-link--login {
+  display: flex;
+  padding-top: 15px;
+  padding-bottom: 14px;
+  justify-content: space-between;
+  align-items: center;
+  column-gap: 32px;
+
+  @media (min-width: $wide-desktop-width) {
+    padding-top: 21px;
+    padding-bottom: 20px;
+    column-gap: 40px;
+  }
+}
+
+.shortcuts__menu-item:last-child .shortcuts__menu-link {
+  border-bottom-color: transparent;
+}
+
+.shorcuts__menu-right {
+  display: inline-flex;
+  align-items: center;
+  column-gap: 4px;
+  text-transform: lowercase;
+
+  @media (min-width: $desktop-width) {
+    column-gap: 8px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    column-gap: 12px;
+  }
+
+  &::after {
+    content: "";
+    width: 16px;
+    height: 16px;
+    background: currentColor;
+    mask: url("../img/icons.svg#controls_arrow");
+
+    @media (min-width: $desktop-width) {
+      width: 20px;
+      height: 20px;
+    }
+
+    @media (min-width: $wide-desktop-width) {
+      width: 24px;
+      height: 24px;
+    }
+  }
+}
+
+.shortcuts__item--user:hover .shortcuts__link--user:not(.shortcuts__link--user_not-authorized) + .shortcuts__menu {
+  @media (min-width: $laptop-width) {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+.shortcuts__item--user {
+  &::before {
+    @media (min-width: $laptop-width) {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 56px;
+    }
+
+    @media (min-width: $desktop-width) {
+      width: 72px;
+    }
+
+    @media (min-width: $wide-desktop-width) {
+      width: 90px;
+    }
+  }
+}
+
+.shortcuts__menu--open {
+  @media (max-width: ($laptop-width - 1)) {
+    background: var(--overlay-color);
+    visibility: visible;
+  }
+
+  .shortcuts__menu-inner {
+    @media (max-width: ($laptop-width - 1)) {
+      transform: translateY(0);
+      visibility: visible;
+    }
+  }
+}
