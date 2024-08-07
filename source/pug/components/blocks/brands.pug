@@ -1,0 +1,22 @@
+mixin brands__item({ name, image })
+  li.brands__item&attributes(attributes)
+    a.brands__link(href='truck-categories.html')= name
+      img.brands__image(src= image.src width= image.width height= image.height alt='' loading='lazy')
+
+mixin brands
+  section.brands&attributes(attributes)
+    .container
+      .brands__inner
+        h2.visually-hidden Марки
+        ul.brands__list
+          +brands__item({ name: 'Man', image: { src: 'img/brands/man.svg', width: 60, height: 34 } })
+          +brands__item({ name: 'Scania', image: { src: 'img/brands/scania-2.svg', width: 60, height: 56 } })
+          +brands__item({ name: 'Mercedes-Benz', image: { src: 'img/brands/mercedes-benz.svg', width: 60, height: 60 } })
+          +brands__item({ name: 'Scania', image: { src: 'img/brands/scania-2.svg', width: 60, height: 56 } })
+          +brands__item({ name: 'Man', image: { src: 'img/brands/man.svg', width: 60, height: 34 } })
+          +brands__item({ name: 'Mercedes-Benz', image: { src: 'img/brands/mercedes-benz.svg', width: 60, height: 60 } })
+          +brands__item({ name: 'Scania', image: { src: 'img/brands/scania-2.svg', width: 60, height: 56 } })
+          +brands__item({ name: 'Mercedes-Benz', image: { src: 'img/brands/mercedes-benz.svg', width: 60, height: 60 } })
+          +brands__item({ name: 'Scania', image: { src: 'img/brands/scania-2.svg', width: 60, height: 56 } })
+          +brands__item({ name: 'Man', image: { src: 'img/brands/man.svg', width: 60, height: 34 } })
+          +brands__item({ name: 'Mercedes-Benz', image: { src: 'img/brands/mercedes-benz.svg', width: 60, height: 60 } })

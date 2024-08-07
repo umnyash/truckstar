@@ -1,0 +1,100 @@
+.brands__list {
+  display: grid;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  grid-template-columns: repeat(auto-fill, minmax(79px, 1fr));
+  gap: 9px;
+  font: 400 12px/14px $main-font-family;
+
+  @media (min-width: $tablet-width) {
+    grid-template-columns: repeat(auto-fill, minmax(83px, 1fr));
+    gap: 8px;
+  }
+
+  @media (min-width: $desktop-width) {
+    grid-template-columns: repeat(auto-fill, minmax(102px, 1fr));
+    gap: 10px;
+    font-size: 14px;
+    line-height: 17px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    grid-template-columns: repeat(auto-fill, minmax(142px, 1fr));
+    gap: 16px;
+    font-size: 16px;
+    line-height: 19px;
+  }
+}
+
+.brands__item {
+  // box-sizing: border-box;
+  // width: 79px;
+  // flex-grow: 1;
+}
+
+.brands__link {
+  display: flex;
+  box-sizing: border-box;
+  height: 100%;
+  min-height: 79px;
+  padding: 8px 8px 9px;
+  border-radius: 12px;
+  flex-direction: column;
+  row-gap: 4px;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  text-decoration: none;
+  color: var(--text-weak-light-color);
+  background: var(--background-additional-color);
+  transition: color $medium-interaction-duration;
+
+  &:hover {
+    color: var(--text-weak-color);
+  }
+
+  @media (min-width: $tablet-width) {
+    padding-bottom: 11px;
+    min-height: 83px;
+    row-gap: 6px;
+  }
+
+  @media (min-width: $desktop-width) {
+    padding: 8px 12px 16px;
+    min-height: 106px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    padding-top: 12px;
+    padding-bottom: 33px;
+    min-height: 145px;
+    row-gap: 21px;
+  }
+}
+
+.brands__image {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  object-position: top center;
+  transition: transform $little-interaction-duration;
+
+  @media (min-width: $desktop-width) {
+    width: 42px;
+    height: 42px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+.brands__link:active {
+  color: var(--text-weak-color);
+
+  .brands__image {
+    transform: scale(0.9);
+  }
+}
