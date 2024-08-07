@@ -1,8 +1,86 @@
+mixin menu__catalog-navigation-list({ prefix, mode })
+  ul.menu__catalog-navigation-list(data-level='1')
+    each i in [1, 2, 3]
+      li.menu__catalog-navigation-item
+        button.menu__catalog-navigation-button(class= `menu__catalog-navigation-button--${mode}`)= `${prefix} - ${i}`
+          if mode === 'brand'
+            img.menu__catalog-navigation-button-image(src='img/brands/man.svg' width='60' height='34' alt='Man.' loading='lazy')
+        ul.menu__catalog-navigation-list(data-level='2')
+          each j in [1, 2, 3]
+            li.menu__catalog-navigation-item
+              a.menu__catalog-navigation-link(
+                class= `menu__catalog-navigation-link--${mode}`
+                href= mode === 'brand' ? 'catalog-model.html' : 'catalog.html'
+              )= `${prefix} ${i} ${j * 1000}`
+                if mode === 'brand'
+                  img.menu__catalog-navigation-button-image(src='img/brands/man.svg' width='60' height='34' alt='Man.' loading='lazy')
+
 mixin menu
-  .menu&attributes(attributes)
-    nav.menu__inner
-      +contacts-list({ groups: [
-        contactsLists.phonesAll,
-        contactsLists.email,
-      ]})(class='site-header__contacts-list contacts-list--size_l contacts-list--theme_dark contacts-list--grid_column')
-      +socials-list
+  dialog.menu(data-level='0')&attributes(attributes)
+    .menu__inner
+      .menu__buttons
+        button.menu__button.menu__button--back(type='button')
+          span.visually-hidden Назад
+        button.menu__button.menu__button--close(type='button')
+          span.visually-hidden Закрыть
+      .menu__header
+        .menu__headings
+          button.menu__heading.menu__heading--active(type='button' data-name='brands') Марки
+          button.menu__heading(type='button' data-name='categories') Категории
+          p.menu__heading.menu__heading--group
+        +button({ tag: 'a', href: 'catalog.html', text: 'Смотреть все товары' })(class='menu__header-button button--tertiary-light button--right button--size_s')
+      nav.menu__content-wrapper
+        .menu__content
+          .menu__catalog-navigation
+            .menu__catalog-navigation-section.menu__catalog-navigation-section--active(data-name='brands')
+              ul.menu__catalog-navigation-list(data-level='0')
+                li.menu__catalog-navigation-item
+                  button.menu__catalog-navigation-button.menu__catalog-navigation-button--brand Mercedes-Benz
+                    img.menu__catalog-navigation-button-image(src='img/brands/mercedes-benz.svg' width='60' height='60' alt='Mercedes-Benz.' loading='lazy')
+                  +menu__catalog-navigation-list({ prefix: 'Mercedes-Benz', mode: 'brand' })
+                li.menu__catalog-navigation-item
+                  button.menu__catalog-navigation-button.menu__catalog-navigation-button--brand Man
+                    img.menu__catalog-navigation-button-image(src='img/brands/man.svg' width='60' height='34' alt='Man.' loading='lazy')
+                  +menu__catalog-navigation-list({ prefix: 'Man', mode: 'brand' })
+                li.menu__catalog-navigation-item
+                  button.menu__catalog-navigation-button.menu__catalog-navigation-button--brand Scania
+                    img.menu__catalog-navigation-button-image(src='img/brands/scania.svg' width='60' height='56' alt='Scania.' loading='lazy')
+                  +menu__catalog-navigation-list({ prefix: 'Scania', mode: 'brand' })
+                li.menu__catalog-navigation-item
+                  button.menu__catalog-navigation-button.menu__catalog-navigation-button--brand Mercedes-Benz
+                    img.menu__catalog-navigation-button-image(src='img/brands/mercedes-benz.svg' width='60' height='60' alt='Mercedes-Benz.' loading='lazy')
+                  +menu__catalog-navigation-list({ prefix: 'Mercedes-Benz', mode: 'brand' })
+                li.menu__catalog-navigation-item
+                  button.menu__catalog-navigation-button.menu__catalog-navigation-button--brand Man
+                    img.menu__catalog-navigation-button-image(src='img/brands/man.svg' width='60' height='34' alt='Man.' loading='lazy')
+                  +menu__catalog-navigation-list({ prefix: 'Man', mode: 'brand' })
+                li.menu__catalog-navigation-item
+                  button.menu__catalog-navigation-button.menu__catalog-navigation-button--brand Scania
+                    img.menu__catalog-navigation-button-image(src='img/brands/scania.svg' width='60' height='56' alt='Scania.' loading='lazy')
+                  +menu__catalog-navigation-list({ prefix: 'Scania', mode: 'brand' })
+            .menu__catalog-navigation-section(data-name='categories')
+              ul.menu__catalog-navigation-list(data-level='0')
+                li.menu__catalog-navigation-item
+                  a.menu__catalog-navigation-link.menu__catalog-navigation-button--category(href='catalog.html') Все запчасти
+                li.menu__catalog-navigation-item
+                  button.menu__catalog-navigation-button.menu__catalog-navigation-button--category Грузовой кузов
+                  +menu__catalog-navigation-list({ prefix: 'Грузовой кузов', mode: 'category' })
+                li.menu__catalog-navigation-item
+                  button.menu__catalog-navigation-button.menu__catalog-navigation-button--category Двигатель
+                  +menu__catalog-navigation-list({ prefix: 'Двигатель', mode: 'category' })
+                li.menu__catalog-navigation-item
+                  button.menu__catalog-navigation-button.menu__catalog-navigation-button--category Дополнительное оборудование
+                  +menu__catalog-navigation-list({ prefix: 'Дополнительное оборудование', mode: 'category' })
+                li.menu__catalog-navigation-item
+                  button.menu__catalog-navigation-button.menu__catalog-navigation-button--category Кабина и комплектующие
+                  +menu__catalog-navigation-list({ prefix: 'Кабина и комплектующие', mode: 'category' })
+                li.menu__catalog-navigation-item
+                  button.menu__catalog-navigation-button.menu__catalog-navigation-button--category Карданный вал
+                  +menu__catalog-navigation-list({ prefix: 'Карданный вал', mode: 'category' })
+          .menu__content-bottom
+            +site-navigation({})(class='menu__site-navigation site-navigation--grid_column')
+            +contacts-list({ groups: [
+              contactsLists.phonesAll,
+              contactsLists.email,
+            ]})(class='menu__contacts-list contacts-list--size_l contacts-list--theme_dark contacts-list--grid_column')
+            +socials-list

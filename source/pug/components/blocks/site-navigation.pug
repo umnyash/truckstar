@@ -1,9 +1,33 @@
-mixin site-navigation
+//- mixin site-navigation
+//-   .site-navigation&attributes(attributes)
+//-     ul.site-navigation__list
+//-       li.site-navigation__item
+//-         a.site-navigation__link(href='#!') Гарантия
+//-       li.site-navigation__item
+//-         a.site-navigation__link(href='#!') Оплата
+//-       li.site-navigation__item
+//-         a.site-navigation__link(href='#!') Доставка
+
+
+mixin site-navigation__item({ text, href, page })
+  li.site-navigation__item
+    a.site-navigation__link(
+      class= pageClass === page ? 'site-navigation__link--active' : false
+      href= pageClass === page ? false : href
+    )&attributes(attributes)= text
+
+mixin site-navigation({ short })
   .site-navigation&attributes(attributes)
-    ul.site-navigation__list
-      li.site-navigation__item
-        a.site-navigation__link(href='#!') Гарантия
-      li.site-navigation__item
-        a.site-navigation__link(href='#!') Оплата
-      li.site-navigation__item
-        a.site-navigation__link(href='#!') Доставка
+    ul.site-navigation__list&attributes(attributes)
+      if !short
+        +site-navigation__item({ text:'О нас', href: 'company.html', page: 'company-page' })
+      +site-navigation__item({ text:'Гарантия', href: pageClass === page ? '#guarantee' :'info.html#guarantee', page: 'info-page' })
+      +site-navigation__item({ text:'Оплата', href: pageClass === page ? '#payment' :'info.html#payment', page: 'info-page' })
+      +site-navigation__item({ text:'Доставка', href: pageClass === page ? '#delivery' :'info.html#delivery', page: 'info-page' })
+      if !short
+        +site-navigation__item({ text:'Обмен и возврат', href: pageClass === page ? '#exchange-and-return' :'info.html#exchange-and-return', page: 'info-page' })
+        +site-navigation__item({ text:'Вопрос-ответ', href: pageClass === page ? '#faq' :'info.html#faq', page: 'info-page' })
+        +site-navigation__item({ text:'Отзывы', href: 'reviews.html', page: 'reviews-page' })
+        +site-navigation__item({ text:'Мои заказы', href: 'account.html', page: 'account-page' })
+        +site-navigation__item({ text:'Выкуп машин', href: 'company.html', page: 'company-page' })
+        +site-navigation__item({ text:'Контакты', href: 'contacts.html', page: 'contacts-page' })

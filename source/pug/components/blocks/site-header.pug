@@ -9,7 +9,7 @@ mixin site-header
             type: 'button',
             text: '<span class="button__text">Каталог</span>'
           })(class='site-header__burger button--primary button--burger')
-        +site-navigation(class='site-header__navigation')
+        +site-navigation({ short: true })(class='site-header__navigation')
         .site-header__search-form
           +simple-form({
             action: 'https://echo.htmlacademy.ru',
@@ -29,3 +29,4 @@ mixin site-header
             span.visually-hidden +7 (996) 564-50-29 (Нижний Новгород)
           +shortcuts(class='site-header__shortcuts')
       .site-header__search-form-outer-wrapper
+      +menu
