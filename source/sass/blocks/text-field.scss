@@ -174,3 +174,14 @@
     transition-timing-function: ease-in;
   }
 }
+
+.text-field--invalid .text-field__inner {
+  border-color: var(--error-color);
+}
+
+.text-field__error-text {
+  margin: 4px 0 0;
+  font-size: 12px;
+  line-height: 14px;
+  color: var(--error-color);
+}

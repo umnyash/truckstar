@@ -49,7 +49,7 @@ mixin request-form
       ]
     })(class='request-form__field dropdown--big')
     +text-field({
-      name: 'tel',
+      name: 'phone',
       type: 'tel',
       placeholder: 'Телефон',
       required: true,
@@ -58,6 +58,7 @@ mixin request-form
     +text-area({
       name: 'description',
       placeholder: 'Описание запчасти',
+      required: true,
     })(class='request-form__field text-area--empty')
     .request-form__footer
       +button({

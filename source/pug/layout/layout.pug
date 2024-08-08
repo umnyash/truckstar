@@ -26,6 +26,10 @@ html.page(class= pageClass lang='ru')
       block content
     +site-footer(class='page__site-footer')
     block modals
+      +modal(class='modal--position_center modal--with_form' data-modal='callback-form')
+        +callback-modal-form(class='modal__form')
     script(src='vendor/swiper/swiper-bundle.min.js')
     script(src='vendor/simplebar/simplebar.min.js')
+    script(src='vendor/pristine/pristine.min.js')
     script(src='js/script.js')
+    script(src='js/demo.js')

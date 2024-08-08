@@ -1,0 +1,10 @@
+mixin alert({ heading, text, status, buttonText })
+  article.alert(class= status === 'error' ? 'alert--error' : '')
+    h2.alert__heading= heading
+    if text
+      p.alert__text= text
+    +button({
+      tag: 'button',
+      type: 'button',
+      text: buttonText
+    })(class='alert__button button--secondary button--right button--size_l')

@@ -1,6 +1,7 @@
 // Viewports
 $mobile-width: 360px;
 $tablet-width: 768px;
+$wide-tablet-width: 1024px;
 $laptop-width: 1280px;
 $desktop-width: 1366px;
 $wide-desktop-width: 1920px;
@@ -18,3 +19,4 @@ $small-animation-duration: 300ms;
 $medium-interaction-duration: 400ms;
 $long-interaction-duration: 1000ms;
 $folds-animation-duration: 300ms;
+$modal-animation-duration: 500ms; // Соответствует MODAL_ANIMATION_DURATION в const.js

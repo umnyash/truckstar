@@ -1,12 +1,13 @@
 /* * * * * * * * * * * * * * * * * * * * * * * *
  * main.js
  */
-
-// initSiteHeader(document.querySelector('.site-header'));
 const laptopWidthMediaQueryList = window.matchMedia(LAPTOP_WIDTH_MEDIA_QUERY);
 const desktopWidthMediaQueryList = window.matchMedia(DESKTOP_WIDTH_MEDIA_QUERY);
+const inputEvent = new Event('input', { bubbles: true });
 
-document.querySelectorAll('.site-header').forEach(initSiteHeader);
+initSiteHeader(document.querySelector('.site-header'));
+
+// document.querySelectorAll('.site-header').forEach(initSiteHeader);
 
 let cart = null;
 const cartElement = document.querySelector('.cart');
@@ -27,4 +28,26 @@ document.querySelectorAll('.text-area').forEach(initTextArea);
 document.querySelectorAll('.dropdown').forEach(initDropdown);
 document.querySelectorAll('.catalog-navigation').forEach(initCatalogNavigation);
 document.querySelectorAll('.menu').forEach(initMenu);
+
+let requestForm = null;
+const requestFormElement = document.querySelector('.request-form');
+
+if (requestFormElement) {
+  requestForm = new Form(requestFormElement);
+}
+
+let callbackModalForm = null;
+let callbackModalFormElement = document.querySelector('[data-modal="callback-form"]');
+
+if (callbackModalFormElement) {
+  callbackModalForm = new ModalForm(callbackModalFormElement);
+}
+
+// Пример использования:
+// showAlert({
+//   status: 'error',
+//   heading: 'Ошибка',
+//   text: 'Что-то пошло не так...',
+//   buttonText: 'Понял'
+// });
 /* * * * * * * * * * * * * * * * * * * * * * * */

@@ -55,10 +55,22 @@ export default {
     src: [
       `${pathSrc}/js/const.js`,
       `${pathSrc}/js/util.js`,
+      `${pathSrc}/js/api/api.js`,
+      `${pathSrc}/js/classes/modal.js`,
+      `${pathSrc}/js/classes/alert.js`,
+      `${pathSrc}/js/classes/form-validator.js`,
+      `${pathSrc}/js/classes/form.js`,
+      `${pathSrc}/js/classes/modal-form.js`,
       `${pathSrc}/js/modules/*.js`,
       `${pathSrc}/js/main.js`,
     ],
     watch: `${pathSrc}/js/**/*.js`,
+    dest: `${pathDest}/js`
+  },
+
+  processDemoScript: {
+    src: `${pathSrc}/js/demo.js`,
+    watch: `${pathSrc}/js/demo.js`,
     dest: `${pathDest}/js`
   },
 

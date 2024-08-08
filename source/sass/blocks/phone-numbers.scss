@@ -1,0 +1,100 @@
+.phone-numbers {
+  padding: 16px 24px;
+  border-radius: 24px;
+  font: 400 14px/17px $main-font-family;
+  background: var(--background-additional-color);
+
+  @media (min-width: $desktop-width) {
+    padding: 24px 32px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    font-size: 18px;
+    line-height: 22px;
+  }
+}
+
+.phone-numbers__text {
+  max-width: 520px;
+  margin: 0 0 12px;
+  font-size: 16px;
+  line-height: 19px;
+  font-weight: 500;
+
+  @media (min-width: $desktop-width) {
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    margin-bottom: 16px;
+    font-size: 24px;
+    line-height: 24px;
+    letter-spacing: -1px;
+  }
+}
+
+.phone-numbers__list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.phone-numbers__item + .phone-numbers__item {
+  margin-top: 8px;
+
+  @media (min-width: $wide-desktop-width) {
+    margin-top: 12px;
+  }
+}
+
+.phone-numbers__link {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  column-gap: 8px;
+  text-decoration: none;
+  color: inherit;
+  transition: color $medium-interaction-duration;
+
+  @media (min-width: $wide-desktop-width) {
+    column-gap: 12px;
+  }
+
+  &::before {
+    content: "";
+    grid-area: 1 / 1 / 2 / 2;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--accent-color);
+
+    @media (min-width: $wide-desktop-width) {
+      width: 32px;
+      height: 32px;
+    }
+  }
+
+  &::after {
+    content: "";
+    grid-area: 1 / 1 / 2 / 2;
+    width: 12px;
+    height: 12px;
+    margin: auto;
+    background: var(--text-light-color);
+    mask: url("../img/icons.svg#controls_phone");
+
+    @media (min-width: $wide-desktop-width) {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  &:hover {
+    color: var(--accent-color);
+  }
+
+  &:active {
+    color: var(--accent-dark-color);
+  }
+}

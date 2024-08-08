@@ -1,0 +1,119 @@
+.alert {
+  padding: 32px 24px;
+  border-radius: 30px 30px 0 0;
+  font: 500 14px/17px $main-font-family;
+  background: var(--background-color);
+
+  @media (min-width: $tablet-width) {
+    padding: 32px 56px;
+  }
+
+  @media (min-width: $wide-tablet-width) {
+    border-radius: 30px;
+  }
+
+  @media (min-width: $desktop-width) {
+    padding: 40px 64px;
+    font-size: 16px;
+    line-height: 19px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    padding: 64px 80px;
+    font-size: 20px;
+    line-height: 24px;
+  }
+}
+
+.alert__heading {
+  padding: 0 48px 0 0;
+  margin: 0 0 12px;
+  font-size: 20px;
+  line-height: 1;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+
+  @media (min-width: $tablet-width) {
+    font-size: 24px;
+    letter-spacing: -1px;
+  }
+
+  @media (min-width: $desktop-width) {
+    margin-bottom: 8px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    margin-bottom: 16px;
+    font-size: 32px;
+  }
+}
+
+.alert__text {
+  margin: 12px 0;
+
+  @media (min-width: $desktop-width) {
+    margin: 8px 0;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    margin: 12px 0;
+  }
+}
+
+.alert__button {
+  width: 100%;
+  margin: 12px 0 0;
+
+  @media (min-width: $desktop-width) {
+    margin-top: 24px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    margin-top: 28px;
+  }
+}
+
+.alert--error .alert__heading {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 8px;
+  align-items: center;
+
+  @media (min-width: $wide-desktop-width) {
+    column-gap: 16px;
+  }
+
+  &::before {
+    content: "";
+    grid-area: 1 / 1 / 2 / 2;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--error-color);
+
+    @media (min-width: $desktop-width) {
+      width: 40px;
+      height: 40px;
+    }
+
+    @media (min-width: $wide-desktop-width) {
+      width: 56px;
+      height: 56px;
+    }
+  }
+
+  &::after {
+    content: "";
+    grid-area: 1 / 1 / 2 / 2;
+    width: 24px;
+    height: 24px;
+    margin: auto;
+    background: var(--text-light-color);
+    mask: url("../img/icons.svg#controls_cross");
+
+    @media (min-width: $wide-desktop-width) {
+      width: 32px;
+      height: 32px;
+    }
+  }
+}

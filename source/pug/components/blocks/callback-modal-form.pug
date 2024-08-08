@@ -1,0 +1,27 @@
+mixin callback-modal-form
+  form.modal-form(action='https://fakestoreapi.com/products' method='post' target='_blank')&attributes(attributes)
+    .modal-form__inner(data-form-inner)
+      .modal-form__header
+        h2.modal-form__heading.heading.heading--size_s Заказать обратный звонок
+      +text-field({
+        name: 'name',
+        type: 'text',
+        placeholder: 'Имя',
+        required: true,
+        hidableClearButton: true,
+      })(class='modal-form__field text-field--alter text-field--empty')
+      +text-field({
+        name: 'phone',
+        type: 'tel',
+        placeholder: 'Телефон',
+        required: true,
+        hidableClearButton: true,
+      })(class='modal-form__field text-field--alter text-field--empty')
+      .modal-form__footer
+        +button({
+          tag: 'button',
+          type: 'submit',
+          text: 'Свяжитесь со мной'
+        })(class='modal-form__submit-button button--secondary button--right button--size_l' data-submit-button)
+        small.modal-form__comment Нажимая на кнопку «Свяжитесь со мной», вы даете #[a.modal-form__comment-link(href='#!') согласие на обработку персональных данных]
+      +phone-numbers(class='modal-form__phone-numbers')

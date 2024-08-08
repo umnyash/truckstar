@@ -1,6 +1,6 @@
-mixin text-area({ name, value, placeholder })
+mixin text-area({ name, value, placeholder, required })
   .text-area&attributes(attributes)
     label.text-area__inner
       span.text-area__control-wrapper
         span.text-area__placeholder= placeholder
-        textarea.text-area__control(name= name)= value
+        textarea.text-area__control(name= name required = required && '' data-name='message')= value

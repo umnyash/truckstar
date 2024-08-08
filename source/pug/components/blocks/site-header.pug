@@ -25,8 +25,8 @@ mixin site-header
         .site-header__user-navigation
           a.site-header__user-navigation-link.site-header__user-navigation-link--search(href='search.html')
             span.visually-hidden Поиск по сайту
-          a.site-header__user-navigation-link.site-header__user-navigation-link--phone.site-header__user-navigation-link--accent(href='tel:+79965645029')
-            span.visually-hidden +7 (996) 564-50-29 (Нижний Новгород)
+          a.site-header__user-navigation-link.site-header__user-navigation-link--phone.site-header__user-navigation-link--accent(href='#' data-modal-opener='callback-form')
+            span.visually-hidden Заказать обратный звонок
           +shortcuts(class='site-header__shortcuts')
       .site-header__search-form-outer-wrapper
       +menu

@@ -5,7 +5,7 @@ mixin text-field({ name, type, value, placeholder, required, hidableClearButton 
         span.text-field__field-inner
           span.text-field__control-wrapper
             span.text-field__placeholder= placeholder
-            input.text-field__control(name= name, type= type, value= value, required= !!required)
+            input.text-field__control(name= name, type= type, value= value, required= required && '' data-name= name)
       .text-field__buttons
         button.text-field__button.text-field__button--clear(class= hidableClearButton && 'text-field__button--hidable' type='button')
           span.visually-hidden Очистить

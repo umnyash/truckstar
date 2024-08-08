@@ -108,3 +108,14 @@
     transition-timing-function: ease-in;
   }
 }
+
+.text-area--invalid .text-area__inner {
+  border-color: var(--error-color);
+}
+
+.text-area__error-text {
+  margin: 4px 0 0;
+  font-size: 12px;
+  line-height: 14px;
+  color: var(--error-color);
+}
