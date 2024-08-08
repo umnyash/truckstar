@@ -1,0 +1,1 @@
+"use strict";callbackModalForm&&callbackModalForm.setHandlers((()=>{showAlert({heading:"Ваша заявка успешно отправлена",text:"Наш менеджер свяжется с вам в течение дня",buttonText:"Закрыть"})}),(()=>{showAlert({heading:"Ошибка",status:"error",text:"Не удалось отправить заявку",buttonText:"Повторить"})}));

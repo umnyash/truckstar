@@ -3,6 +3,8 @@
 const LAPTOP_WIDTH_MEDIA_QUERY = '(min-width: 1280px)';
 const DESKTOP_WIDTH_MEDIA_QUERY = '(min-width: 1366px)';
 const MEDIUM_INTERACTION_DURATION = 400;
+const MODAL_ANIMATION_DURATION = 500; // Соответствует $modal-animation-duration в variables.scss
+
 function lockPageScroll() {
   const bodyWidth = document.body.clientWidth;
   document.body.classList.add('scroll-lock');
@@ -52,6 +54,248 @@ function throttle(callback, delay) {
     }
   };
 }
+function createElementByString(template) {
+  const newElement = document.createElement('div');
+  newElement.innerHTML = template;
+  return newElement.firstElementChild;
+}
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
+ * api.js
+ */
+async function sendData(url, body) {
+  let onSuccess = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : () => {};
+  let onFail = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : () => {};
+  let onFinally = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : () => {};
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      body
+    });
+    if (!response.ok) {
+      const errorData = await response.text();
+      throw new Error(`${response.status} – ${response.statusText}: ${errorData}`);
+    }
+    const data = await response.json();
+    onSuccess(data);
+  } catch (err) {
+    console.error(err.message);
+    onFail();
+  } finally {
+    onFinally();
+  }
+}
+/* * * * * * * * * * * * * * * * * * * * * * * */
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
+ * modal.js
+ */
+class Modal {
+  constructor(modalElement) {
+    this.modalElement = modalElement;
+    this.name = modalElement.dataset.modal;
+    this.initOpeners();
+    this.closebutton = this.modalElement.querySelector('.modal__close-button');
+    this.closebutton.addEventListener('click', () => this.close());
+    this.modalElement.addEventListener('close', () => this.onModalClose());
+    if (!document.body.contains(this.modalElement)) {
+      document.body.append(this.modalElement);
+    }
+  }
+  initOpeners = () => {
+    const openerElements = document.querySelectorAll(`[data-modal-opener="${this.name}"]`);
+    openerElements.forEach(openerElement => {
+      openerElement.addEventListener('click', evt => {
+        evt.preventDefault();
+        this.open();
+      });
+    });
+  };
+  open = () => {
+    lockPageScroll();
+    requestAnimationFrame(() => {
+      this.modalElement.showModal();
+    });
+  };
+  close = () => {
+    this.modalElement.close();
+  };
+  onModalClose = () => {
+    setTimeout(() => {
+      unlockPageScroll();
+      if (this.modalElement.classList.contains('modal--with_alert')) {
+        this.modalElement.remove();
+        this.modalElement = null;
+      }
+    }, MODAL_ANIMATION_DURATION);
+  };
+}
+/* * * * * * * * * * * * * * * * * * * * * * * */
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
+ * alert.js
+ */
+class Alert extends Modal {
+  constructor(_ref) {
+    let {
+      heading,
+      status,
+      text,
+      buttonText
+    } = _ref;
+    const modalElement = Alert.createElement({
+      heading,
+      status,
+      text,
+      buttonText
+    });
+    document.body.append(modalElement);
+    super(modalElement);
+    modalElement.querySelector('.alert__button').addEventListener('click', evt => {
+      evt.preventDefault();
+      this.close();
+    });
+  }
+  static createElement(_ref2) {
+    let {
+      heading,
+      status,
+      text,
+      buttonText
+    } = _ref2;
+    const modalString = `
+      <dialog class="modal modal--position_center modal--with_alert">
+        <div class="modal__inner">
+          <button class="modal__close-button" type="button">
+            <span class="visually-hidden">Закрыть</span>
+          </button>
+          <section class="alert modal__alert ${status === 'error' ? 'alert--error' : ''}">
+            <h2 class="alert__heading heading">${heading}</h2>
+            ${text ? `<p class="alert__text">${text}</p>` : ''}
+            <button class="alert__button button--secondary button--right button--size_l" type="button">
+              <span class="button__inner">${buttonText || 'Закрыть'}<span class="button__icon"></span></span>
+            </button>
+          </section>
+        </div>
+      </dialog>
+    `;
+    return createElementByString(modalString);
+  }
+}
+/* * * * * * * * * * * * * * * * * * * * * * * */
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
+ * form-validator.js
+ */
+class FormValidator {
+  constructor(formElement) {
+    this.formElement = formElement;
+    this.addCustomErrorMessages();
+    this.pristine = new Pristine(formElement, {
+      classTo: 'pristine-item',
+      errorClass: 'pristine-item--invalid',
+      errorTextParent: 'pristine-item',
+      errorTextTag: 'p',
+      errorTextClass: 'pristine-item__error-text'
+    });
+  }
+  addCustomErrorMessages() {
+    const nameFieldElement = this.formElement.querySelector('[data-name="name"]');
+    const phoneFieldElement = this.formElement.querySelector('[data-name="phone"]');
+    const messageFieldElement = this.formElement.querySelector('[data-name="message"]');
+    if (nameFieldElement) {
+      nameFieldElement.closest('.text-field').classList.add('pristine-item');
+      nameFieldElement.dataset.pristinePattern = '/^[a-zа-яЁё -]+$/i';
+      nameFieldElement.dataset.pristineRequiredMessage = 'Заполните это поле.';
+      nameFieldElement.dataset.pristinePatternMessage = 'Допустимы только буквы, дефисы и пробелы.';
+    }
+    if (phoneFieldElement) {
+      phoneFieldElement.closest('.text-field').classList.add('pristine-item');
+      phoneFieldElement.dataset.pristineRequiredMessage = 'Заполните это поле.';
+    }
+    if (messageFieldElement) {
+      messageFieldElement.closest('.text-area').classList.add('pristine-item');
+      messageFieldElement.dataset.pristineRequiredMessage = 'Заполните это поле.';
+    }
+  }
+  validate() {
+    return this.pristine.validate();
+  }
+  reset() {
+    this.pristine.reset();
+  }
+}
+/* * * * * * * * * * * * * * * * * * * * * * * */
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
+ * form.js
+ */
+class Form {
+  constructor(formElement) {
+    this.formElement = formElement;
+    this.formInnerElement = this.formElement.querySelector('[data-form-inner]');
+    this.textFieldControlElements = this.formElement.querySelectorAll('.text-field__control');
+    this.actionUrl = this.formElement.action;
+    this.submitButtonElement = this.formElement.querySelector('[data-submit-button]');
+    this.validator = new FormValidator(this.formElement);
+    this.successHandler = null;
+    this.errorHandler = null;
+    this.init();
+  }
+  setHandlers = (successHandler, errorHandler) => {
+    this.successHandler = successHandler;
+    this.errorHandler = errorHandler;
+  };
+  init = () => {
+    this.formElement.addEventListener('submit', evt => {
+      evt.preventDefault();
+      const isValid = this.validator.validate();
+      if (isValid) {
+        this.submitButtonElement.disabled = true;
+        this.submitButtonElement.classList.add('button--pending');
+        sendData(this.actionUrl, new FormData(evt.target), data => {
+          this.formElement.reset();
+          this.successHandler(data);
+        }, data => {
+          this.errorHandler(data);
+        }, () => {
+          this.submitButtonElement.disabled = false;
+          this.submitButtonElement.classList.remove('button--pending');
+        });
+      } else {
+        this.formInnerElement.classList.remove('shake');
+        setTimeout(() => this.formInnerElement.classList.add('shake'), 50);
+      }
+    });
+    this.formElement.addEventListener('reset', () => {
+      setTimeout(() => {
+        this.textFieldControlElements.forEach(textFieldElement => {
+          textFieldElement.dispatchEvent(inputEvent);
+        });
+        this.validator.reset();
+      }, 0);
+    });
+  };
+}
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
+ * modal-form.js
+ */
+class ModalForm extends Modal {
+  constructor(modalElement) {
+    super(modalElement);
+    this.formElement = modalElement.querySelector('.modal-form');
+    this.form = new Form(this.formElement);
+  }
+  setHandlers = (successHandler, errorHandler) => {
+    this.form.setHandlers(() => {
+      successHandler();
+      this.modalElement.close();
+    }, () => {
+      errorHandler();
+    });
+  };
+}
 
 /* * * * * * * * * * * * * * * * * * * * * * * *
  * banner-slider.js
@@ -80,10 +324,10 @@ class Cart {
   #cartElement = null;
   #formFooterElement = null;
   #laptopWidthMediaQueryList = window.matchMedia(LAPTOP_WIDTH_MEDIA_QUERY);
-  constructor(_ref) {
+  constructor(_ref3) {
     let {
       cartElement
-    } = _ref;
+    } = _ref3;
     this.#cartElement = cartElement;
   }
   #toggleFormFooterStickiness = () => {
@@ -117,10 +361,10 @@ class Cart {
     window.addEventListener('scroll', this.#onWindowScroll);
   }
 }
-function initCart(_ref2) {
+function initCart(_ref4) {
   let {
     cartElement
-  } = _ref2;
+  } = _ref4;
   const cart = new Cart({
     cartElement
   });
@@ -264,10 +508,10 @@ function initDropdown(dropdownElement) {
  * folds.js
  */
 const initFolds = foldsElement => {
-  foldsElement.addEventListener('click', _ref3 => {
+  foldsElement.addEventListener('click', _ref5 => {
     let {
       target
-    } = _ref3;
+    } = _ref5;
     const buttonElement = target.closest('.folds__button');
     if (!buttonElement) {
       return;
@@ -283,10 +527,10 @@ const initFolds = foldsElement => {
     }, 20);
     buttonElement.ariaExpanded = buttonElement.ariaExpanded === 'true' ? 'false' : 'true';
   });
-  foldsElement.addEventListener('transitionend', _ref4 => {
+  foldsElement.addEventListener('transitionend', _ref6 => {
     let {
       target
-    } = _ref4;
+    } = _ref6;
     const foldElement = target.closest('.folds__item');
     if (!foldElement || !foldElement.classList.contains('folds__item--open')) {
       return;
@@ -480,6 +724,22 @@ function initProductsSlider(sliderWrapperElement) {
 }
 /* * * * * * * * * * * * * * * * * * * * * * * */
 
+function showAlert(_ref7) {
+  let {
+    heading,
+    status,
+    text,
+    buttonText
+  } = _ref7;
+  const alert = new Alert({
+    heading,
+    status,
+    text,
+    buttonText
+  });
+  alert.open();
+}
+
 /* * * * * * * * * * * * * * * * * * * * * * * *
  * simple-form.js
  */
@@ -624,11 +884,15 @@ function initTextField(fieldElement) {
 /* * * * * * * * * * * * * * * * * * * * * * * *
  * main.js
  */
-
-// initSiteHeader(document.querySelector('.site-header'));
 const laptopWidthMediaQueryList = window.matchMedia(LAPTOP_WIDTH_MEDIA_QUERY);
 const desktopWidthMediaQueryList = window.matchMedia(DESKTOP_WIDTH_MEDIA_QUERY);
-document.querySelectorAll('.site-header').forEach(initSiteHeader);
+const inputEvent = new Event('input', {
+  bubbles: true
+});
+initSiteHeader(document.querySelector('.site-header'));
+
+// document.querySelectorAll('.site-header').forEach(initSiteHeader);
+
 let cart = null;
 const cartElement = document.querySelector('.cart');
 if (cartElement) {
@@ -648,4 +912,22 @@ document.querySelectorAll('.text-area').forEach(initTextArea);
 document.querySelectorAll('.dropdown').forEach(initDropdown);
 document.querySelectorAll('.catalog-navigation').forEach(initCatalogNavigation);
 document.querySelectorAll('.menu').forEach(initMenu);
+let requestForm = null;
+const requestFormElement = document.querySelector('.request-form');
+if (requestFormElement) {
+  requestForm = new Form(requestFormElement);
+}
+let callbackModalForm = null;
+let callbackModalFormElement = document.querySelector('[data-modal="callback-form"]');
+if (callbackModalFormElement) {
+  callbackModalForm = new ModalForm(callbackModalFormElement);
+}
+
+// Пример использования:
+// showAlert({
+//   status: 'error',
+//   heading: 'Ошибка',
+//   text: 'Что-то пошло не так...',
+//   buttonText: 'Понял'
+// });
 /* * * * * * * * * * * * * * * * * * * * * * * */
