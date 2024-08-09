@@ -1,0 +1,29 @@
+mixin contacts-maps({ link1, link2 })
+  .contacts-maps&attributes(attributes)
+    ul.contacts-maps__list
+      li.contacts-maps__item
+        +contacts-map({
+          heading: {
+            tag: 'h2',
+            text: 'Отдел продаж филиал Нижний Новгород:'
+          },
+          place: 'Нижний Новгород',
+          map: {
+            latitude: 56.302058,
+            longitude: 43.574579,
+          },
+          link: link1
+        })
+      li.contacts-maps__item
+        +contacts-map({
+          heading: {
+            tag: 'h2',
+            text: 'Отдел продаж филиал Рязань:'
+          },
+          place: 'Рязань',
+          map: {
+            latitude: 54.57490,
+            longitude: 39.811555,
+          },
+          link: link2
+        })

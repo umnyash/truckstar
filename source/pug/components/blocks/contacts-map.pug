@@ -1,0 +1,26 @@
+//- mixin contacts-map({ map })
+//-   .contacts-map&attributes(attributes)
+//-     +contacts-card({
+//-       heading: {
+//-         tag: 'h2',
+//-         text: 'Отдел продаж филиал Нижний Новгород:'
+
+//-       }
+//-     })
+//-     +contacts-card({
+//-       heading: {
+//-         tag: 'h2',
+//-         text: 'Отдел продаж филиал Рязань:'
+//-       }
+//-     })
+//-     .contacts-map__map
+//-       +map({ latitude: map.latitude, longitude: map.longitude })
+
+mixin contacts-map({ heading, map, place, link})
+  .contacts-map&attributes(attributes)
+    +contacts-card({
+      heading,
+      place,
+      link,
+    })(class='contacts-map__card')
+    +map({ latitude: map.latitude, longitude: map.longitude })(class='contacts-map__map')

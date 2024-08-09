@@ -1,0 +1,19 @@
+.map-marker {
+  width: 151px;
+  height: 151px;
+}
+
+.map-marker__image {
+  display: block;
+  width: 94px;
+  height: auto;
+  transform: translate(-50%, -54%);
+
+  @media (min-width: $desktop-width) {
+    width: 126px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    width: 151px;
+  }
+}

@@ -1,0 +1,54 @@
+mixin contacts-card({ heading, place, link })
+  article.contacts-card&attributes(attributes)
+    if place === 'Нижний Новгород'
+      if heading
+        #{heading.tag}.contacts-card__heading= heading.text
+      ul.contacts-card__list
+        li.contacts-card__group.contacts-card__group--location
+          .contacts-card__group__inner
+            span.contacts-card__item Нижегородская область, городской округ Дзержинск, посёлок Гнилицкие Дворики, 17с1
+            if link
+              +button({
+                tag: 'a',
+                text: 'Построить маршрут',
+                href: link,
+                target: '_blank',
+                rel: 'nofollow noopener'
+              })(class='banner__button button--secondary button--right button--size_s')
+        li.contacts-card__group.contacts-card__group--phone
+          .contacts-card__group__inner
+            a.contacts-card__item.contacts-card__item--link(href='tel:+79058692357') +7 (905) 869-23-57 (Нижний Новгород)
+            a.contacts-card__item.contacts-card__item--link(href='tel:+79965645029') +7 (996) 564-50-29 (Нижний Новгород)
+        li.contacts-card__group.contacts-card__group--time
+          .contacts-card__group__inner
+            span.contacts-card__item Пн-Пт: 09.00-18.00.
+            span.contacts-card__item Сб-Вс:	выходной
+        li.contacts-card__group.contacts-card__group--email
+          .contacts-card__group__inner
+            a.contacts-card__item.contacts-card__item--link(href="mailto:truckstar@gmail.com") truckstar@gmail.com
+    else
+      if heading
+        #{heading.tag}.contacts-card__heading= heading.text
+      ul.contacts-card__list
+        li.contacts-card__group.contacts-card__group--location
+          .contacts-card__group__inner
+            span.contacts-card__item Рязань, ул. Новоселковская, д. 11
+            if link
+              +button({
+                tag: 'a',
+                text: 'Построить маршрут',
+                href: link,
+                target: '_blank',
+                rel: 'nofollow noopener'
+              })(class='banner__button button--secondary button--right button--size_s')
+        li.contacts-card__group.contacts-card__group--phone
+          .contacts-card__group__inner
+            a.contacts-card__item.contacts-card__item--link(href='tel:+79875485078') +7 (987) 548-50-78 (Рязань)
+            a.contacts-card__item.contacts-card__item--link(href='tel:+79092964479') +7 (909) 296-44-79 (Рязань)
+        li.contacts-card__group.contacts-card__group--time
+          .contacts-card__group__inner
+            span.contacts-card__item Пн-Пт: 09.00-18.00.
+            span.contacts-card__item Сб-Вс:	выходной
+        li.contacts-card__group.contacts-card__group--email
+          .contacts-card__group__inner
+            a.contacts-card__item.contacts-card__item--link(href="mailto:truckstar@gmail.com") truckstar@gmail.com

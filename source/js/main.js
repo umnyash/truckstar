@@ -28,6 +28,10 @@ document.querySelectorAll('.text-area').forEach(initTextArea);
 document.querySelectorAll('.dropdown').forEach(initDropdown);
 document.querySelectorAll('.catalog-navigation').forEach(initCatalogNavigation);
 document.querySelectorAll('.menu').forEach(initMenu);
+document.querySelectorAll('.map').forEach(initMap);
+document.querySelectorAll('[data-modal="contacts-map"]').forEach((modalElement) => {
+  initContactsModal(modalElement, openModal);
+});
 
 let requestForm = null;
 const requestFormElement = document.querySelector('.request-form');
@@ -42,6 +46,8 @@ let callbackModalFormElement = document.querySelector('[data-modal="callback-for
 if (callbackModalFormElement) {
   callbackModalForm = new ModalForm(callbackModalFormElement);
 }
+
+
 
 // Пример использования:
 // showAlert({
