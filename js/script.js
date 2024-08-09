@@ -445,6 +445,22 @@ function initCheckerCardsList(listElement) {
 /* * * * * * * * * * * * * * * * * * * * * * * */
 
 /* * * * * * * * * * * * * * * * * * * * * * * *
+ * contacts-modal-map.js
+ */
+function initContactsModal(modalElement, openModal) {
+  document.querySelectorAll(`[data-modal-opener="contacts-map"]`).forEach(openerElement => {
+    const locationsList = modalElement.querySelector('.contacts-maps__list');
+    openerElement.addEventListener('click', evt => {
+      evt.preventDefault();
+      const locationId = evt.target.dataset.locationId;
+      locationsList.dataset.activeItem = locationId;
+      openModal(modalElement);
+    });
+  });
+}
+/* * * * * * * * * * * * * * * * * * * * * * * */
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
  * dropdown.js
  */
 function initDropdown(dropdownElement) {
@@ -548,6 +564,52 @@ const initFolds = foldsElement => {
 /* * * * * * * * * * * * * * * * * * * * * * * */
 
 /* * * * * * * * * * * * * * * * * * * * * * * *
+ * map.js
+ */
+async function initMap(mapElement) {
+  const latitude = mapElement.dataset.latitude;
+  const longitude = mapElement.dataset.longitude;
+  const zoom = mapElement.dataset.zoom;
+  // const COORDINATES = [44.008906, 56.323592];
+
+  // 56.302058, 43.574579
+  const coordinates = [longitude, latitude];
+  console.log(coordinates);
+  const containerElement = mapElement.querySelector('.map__inner');
+  containerElement.classList.remove('map__inner--hidden');
+  containerElement.style.filter = 'hue-rotate(-180deg) grayscale(0.9)';
+  await ymaps3.ready;
+  const {
+    YMap,
+    YMapDefaultSchemeLayer,
+    YMapMarker,
+    YMapDefaultFeaturesLayer
+  } = ymaps3;
+  const map = new YMap(containerElement, {
+    location: {
+      center: coordinates,
+      zoom
+    }
+  });
+  map.addChild(new YMapDefaultSchemeLayer());
+  map.addChild(new YMapDefaultFeaturesLayer());
+  const markerElement = document.querySelector('#map-marker-template').content.querySelector('.map-marker').cloneNode(true);
+  const marker = new YMapMarker({
+    coordinates: coordinates
+  }, markerElement);
+  const timerId = setInterval(() => {
+    const canvasElement = mapElement.querySelector('canvas');
+    if (canvasElement) {
+      clearInterval(timerId);
+      canvasElement.style.filter = 'hue-rotate(-180deg) grayscale(0.9)';
+      containerElement.style.filter = '';
+      map.addChild(marker);
+    }
+  }, 1000);
+}
+/* * * * * * * * * * * * * * * * * * * * * * * */
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
  * menu.js
  */
 function initMenu(menuElement) {
@@ -608,6 +670,41 @@ function initMenu(menuElement) {
     breadcrumbs.pop()?.classList.remove('menu__catalog-navigation-item--active');
     groupTitleEement.textContent = breadcrumbs.at(-1)?.querySelector('.menu__catalog-navigation-button').textContent;
   });
+}
+/* * * * * * * * * * * * * * * * * * * * * * * */
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
+ * modal.js
+ */
+const MODAL_CLOSING_ANIMATION_DURATION = 450;
+function onModalClose(evt) {
+  const modalElement = evt.currentTarget;
+  modalElement.removeEventListener('close', onModalClose);
+  modalElement.removeEventListener('click', onModalClick);
+  setTimeout(() => {
+    unlockPageScroll();
+  }, MODAL_CLOSING_ANIMATION_DURATION);
+  if (modalElement.classList.contains('modal--with_alert')) {
+    setTimeout(() => {
+      modalElement.remove();
+    }, MODAL_CLOSING_ANIMATION_DURATION);
+  }
+}
+function onModalClick(evt) {
+  const modalElement = evt.currentTarget;
+  if (evt.target.classList.contains('modal__close-button') || evt.target.classList.contains('alert__button')) {
+    modalElement.close();
+    return;
+  }
+  if (modalElement.classList.contains('modal--with_photo') && evt.target === modalElement) {
+    modalElement.close();
+  }
+}
+function openModal(modalElement) {
+  lockPageScroll();
+  modalElement.addEventListener('close', onModalClose);
+  modalElement.addEventListener('click', onModalClick);
+  modalElement.showModal();
 }
 /* * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -912,6 +1009,10 @@ document.querySelectorAll('.text-area').forEach(initTextArea);
 document.querySelectorAll('.dropdown').forEach(initDropdown);
 document.querySelectorAll('.catalog-navigation').forEach(initCatalogNavigation);
 document.querySelectorAll('.menu').forEach(initMenu);
+document.querySelectorAll('.map').forEach(initMap);
+document.querySelectorAll('[data-modal="contacts-map"]').forEach(modalElement => {
+  initContactsModal(modalElement, openModal);
+});
 let requestForm = null;
 const requestFormElement = document.querySelector('.request-form');
 if (requestFormElement) {
