@@ -1,0 +1,135 @@
+.contacts-card {
+  box-sizing: border-box;
+  padding: 23px;
+  border: 1px solid var(--border-weak-color);
+  border-radius: 30px;
+  font: 400 14px/17px $main-font-family;
+  background: var(--background-color);
+
+  @media (min-width: $tablet-width) {
+    padding: 23px 31px;
+  }
+
+  @media (min-width: $desktop-width) {
+    padding: 31px 47px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    padding: 39px 63px;
+    font-size: 20px;
+    line-height: 26px;
+  }
+}
+
+.contacts-card__heading {
+  margin: 0 0 16px;
+  font-size: 16px;
+  line-height: 1;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+
+  @media (min-width: $tablet-width) {
+    margin-bottom: 24px;
+    font-size: 20px;
+  }
+
+  @media (min-width: $desktop-width) {
+    margin-bottom: 24px;
+    font-size: 24px;
+    letter-spacing: -1px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    margin-bottom: 32px;
+    font-size: 32px;
+  }
+}
+
+.contacts-card__groups {
+  margin: 0;
+}
+
+.contacts-card__group {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 8px;
+  align-items: start;
+}
+
+.contacts-card__group + .contacts-card__group {
+  margin: 16px 0 0;
+
+  @media (min-width: $desktop-width) {
+    margin-top: 24px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    margin-top: 32px;
+  }
+}
+
+.contacts-card__group-heading {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--accent-color) no-repeat 50% 50% / 12px 12px;
+
+  @media (min-width: $wide-desktop-width) {
+    width: 32px;
+    height: 32px;
+    background-size: 16px 16px;
+  }
+
+  &--address {
+    background-image: url("../img/icons.svg#contacts_location");
+  }
+
+  &--schedule {
+    background-image: url("../img/icons.svg#contacts_clock");
+  }
+
+  &--email {
+    background-image: url("../img/icons.svg#contacts_email");
+  }
+
+  &--phone {
+    background-image: url("../img/icons.svg#contacts_phone");
+  }
+}
+
+.contacts-card__group-list {
+  align-self: center;
+  margin: 0;
+}
+
+.contacts-card__group-items {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.contacts-card__group-item + .contacts-card__group-item {
+  margin-top: 8px;
+}
+
+.contacts-card__link {
+  text-decoration: none;
+  color: inherit;
+  transition: color $medium-interaction-duration;
+
+  &:hover {
+    color: var(--accent-color);
+  }
+
+  &:active {
+    color: var(--accent-dark-color);
+  }
+}
+
+.contacts-card__address-button {
+  margin: 4px 0 0;
+
+  @media (min-width: $wide-desktop-width) {
+    margin-top: 8px;
+  }
+}

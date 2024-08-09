@@ -1,0 +1,15 @@
+extends layout/layout
+
+block variables
+  - var title = 'Контакты'
+  - var pageClass = 'contacts-page'
+
+block content
+  +breadcrumbs({ links: [
+    {
+      text: title
+    }
+  ]})
+  +locations({ withCardHeadings: true })
+  +offer
+  +map-marker-template(true)

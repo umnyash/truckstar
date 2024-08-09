@@ -1,0 +1,45 @@
+.locations__list {
+  display: grid;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  gap: 64px;
+
+  @media (min-width: $tablet-width) {
+    gap: 80px;
+  }
+
+  @media (min-width: $desktop-width) {
+    gap: 64px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    gap: 80px;
+  }
+}
+
+.locations__list:not([data-active-item]) .locations__item:nth-child(even) .location__card {
+  @media (min-width: $laptop-width) {
+    margin-left: auto;
+  }
+}
+
+.locations__list[data-active-item="1"] {
+  .locations__item {
+    display: none;
+  }
+
+  .locations__item:nth-child(1) {
+    display: block;
+  }
+}
+
+.locations__list[data-active-item="2"] {
+  .locations__item {
+    display: none;
+  }
+
+  .locations__item:nth-child(2) {
+    display: block;
+  }
+}

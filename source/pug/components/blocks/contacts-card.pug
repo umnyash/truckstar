@@ -1,0 +1,26 @@
+mixin contacts-card({ heading, groups, addressLink })
+  article.contacts-card&attributes(attributes)
+    if heading
+      #{heading.tag}.contacts-card__heading= heading.text
+    dl.contacts-card__groups
+      each group in groups
+        .contacts-card__group
+          dt.contacts-card__group-heading(class=`contacts-card__group-heading--${group.type}`)
+            span.visually-hidden= contactsListGroupHeading[group.type]
+          dd.contacts-card__group-list
+            ul.contacts-card__group-items
+              each item in group.items
+                if item.href
+                  li.contacts-card__group-item
+                    a.contacts-card__link(href= item.href)= item.text
+                else
+                  li.contacts-card__group-item= item.text
+                  if group.type === 'address' && addressLink
+                    li.contacts-card__group-item
+                      +button({
+                        tag: 'a',
+                        text: 'Построить маршрут',
+                        href: addressLink,
+                        target: '_blank',
+                        rel: 'nofollow noopener'
+                      })(class='contacts-card__address-button button--secondary button--right button--size_s')

@@ -11,7 +11,7 @@
   height: 100vh;
   padding: 0;
   border: none;
-  margin: auto 0 0;
+  margin: 0;
   background: transparent;
   overflow-y: auto;
   visibility: hidden;
@@ -19,6 +19,10 @@
   transition-timing-function: ease-in-out;
   transition-duration: $modal-animation-duration;
   z-index: 10;
+
+  &::backdrop {
+    background: transparent;
+  }
 
   @supports (height: 100dvh) {
     height: 100dvh;
@@ -30,15 +34,17 @@
   z-index: 0;
   box-sizing: border-box;
   width: 100%;
-  margin: auto 0 0;
+  // margin: auto 0 0;
   // background: var(--background-color);
-  transform: translateY(100%);
+  // transform: translateY(100%);
   transition: transform $modal-animation-duration ease-in-out;
 }
 
 .modal[open] {
-  background-color: var(--overlay-color);
+  // background-color: var(--overlay-color);
+  background: #ff0000;
   visibility: visible;
+  transition-duration: calc($modal-animation-duration / 1.5);
 
   .modal__inner {
     opacity: 1;
@@ -110,12 +116,16 @@
 
 .modal--position_center {
   .modal__inner {
+    margin: auto 0 0;
+    transform: translateY(100%);
+
     @media (min-width: $wide-tablet-width) {
       margin: auto;
       opacity: 0;
       transform: scale(0.8);
       transition-property: opacity, transform;
       transition-duration: calc($modal-animation-duration / 1.5);
+      // transition-duration: $modal-animation-duration;
     }
   }
 
@@ -124,20 +134,34 @@
       transition-timing-function: ease-in;
     }
   }
+}
 
-  // .modal__close-button {
-  //   color: var(--text-light-color);
-  // }
+.modal--position_cover {
+  .modal__inner {
+    transform: translateY(-100%);
+    // margin: 0 0 auto;
 
-  // .modal__close-button::after {
-  //   width: 32px;
-  //   height: 32px;
-  //   mask: url("../img/icons.svg#modal_x-rounded");
-  // }
+    @media (min-width: $wide-tablet-width) {
+      // margin: auto;
+      opacity: 0;
+      transform: scale(0.9);
+      transition-property: opacity, transform;
+      transition-duration: calc($modal-animation-duration / 1.5);
+      // transition-duration: $modal-animation-duration;
+    }
+  }
+
+  &[open] .modal__inner {
+    @media (min-width: $wide-tablet-width) {
+      transition-timing-function: ease-in;
+    }
+  }
 }
 
 .modal--position_side {
+  margin: auto 0 0;
   overflow-x: hidden;
+  transform: translateY(100%);
 
   .modal__inner {
     @media (min-width: $tablet-width) {
@@ -150,7 +174,6 @@
   .modal__close-button {
     top: 18px;
     right: 18px;
-    color: #a8a8a8;
 
     @media (min-width: $laptop-width) {
       top: 28px;
@@ -183,11 +206,6 @@
   }
 
   .modal__inner {
-    // padding: 20px 0 0;
-    // @media (min-width: $tablet-width) {
-    //   max-width: 608px;
-    // }
-
     @media (min-width: $wide-tablet-width) {
       max-width: 600px;
     }
@@ -196,16 +214,18 @@
       max-width: 796px;
     }
   }
+}
 
-  // .modal__close-button {
-  //   bottom: 100%;
-  //   left: 100%;
-  //   color: var(--text-light-color);
+.modal--with_map.modal--with_map {
+  &[open] {
+    // background: var(--background-color);
+    background: #ffff00;
+  }
 
-  //   @media (max-width: ($tablet-width - 1)) {
-  //     display: none;
-  //   }
-  // }
+  .modal__inner {
+    max-width: 1920px;
+    margin: 0 auto;
+  }
 }
 
 .modal--position_center.modal--with_photo {

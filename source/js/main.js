@@ -7,8 +7,6 @@ const inputEvent = new Event('input', { bubbles: true });
 
 initSiteHeader(document.querySelector('.site-header'));
 
-// document.querySelectorAll('.site-header').forEach(initSiteHeader);
-
 let cart = null;
 const cartElement = document.querySelector('.cart');
 
@@ -28,6 +26,10 @@ document.querySelectorAll('.text-area').forEach(initTextArea);
 document.querySelectorAll('.dropdown').forEach(initDropdown);
 document.querySelectorAll('.catalog-navigation').forEach(initCatalogNavigation);
 document.querySelectorAll('.menu').forEach(initMenu);
+document.querySelectorAll('.map:not(.modal .map)').forEach(initMap);
+document.querySelectorAll('[data-modal="locations"]').forEach((modalElement) => {
+  initLocationsModal(modalElement);
+});
 
 let requestForm = null;
 const requestFormElement = document.querySelector('.request-form');
@@ -42,12 +44,4 @@ let callbackModalFormElement = document.querySelector('[data-modal="callback-for
 if (callbackModalFormElement) {
   callbackModalForm = new ModalForm(callbackModalFormElement);
 }
-
-// Пример использования:
-// showAlert({
-//   status: 'error',
-//   heading: 'Ошибка',
-//   text: 'Что-то пошло не так...',
-//   buttonText: 'Понял'
-// });
 /* * * * * * * * * * * * * * * * * * * * * * * */

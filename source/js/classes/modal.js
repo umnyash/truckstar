@@ -2,13 +2,14 @@
  * modal.js
  */
 class Modal {
-  constructor(modalElement) {
+  constructor(modalElement, { onOpenerClick } = {}) {
     this.modalElement = modalElement;
     this.name = modalElement.dataset.modal;
     this.initOpeners();
     this.closebutton = this.modalElement.querySelector('.modal__close-button');
     this.closebutton.addEventListener('click', () => this.close());
     this.modalElement.addEventListener('close', () => this.onModalClose());
+    this.onOpenerClick = onOpenerClick;
 
     if (!document.body.contains(this.modalElement)) {
       document.body.append(this.modalElement)
@@ -21,6 +22,11 @@ class Modal {
     openerElements.forEach((openerElement) => {
       openerElement.addEventListener('click', (evt) => {
         evt.preventDefault();
+
+        if (this.onOpenerClick) {
+          this.onOpenerClick(evt);
+        }
+
         this.open();
       });
     });

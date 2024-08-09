@@ -1,0 +1,39 @@
+mixin locations({ withCardAddressLinks, withCardHeadings })
+  .locations&attributes(attributes)
+    ul.locations__list
+      li.locations__item
+        +location({
+          heading: withCardHeadings && {
+            tag: 'h2',
+            text: 'Отдел продаж филиал Нижний Новгород:'
+          },
+          groups: [
+            contactsLists.address1,
+            contactsLists.phones1,
+            contactsLists.schedule,
+            contactsLists.email,
+          ],
+          location: {
+            latitude: 56.302058,
+            longitude: 43.574579,
+            link: withCardAddressLinks && 'https://yandex.ru/maps/-/CDWHyN3S',
+          },
+        })
+      li.locations__item
+        +location({
+          heading: withCardHeadings && {
+            tag: 'h2',
+            text: 'Отдел продаж филиал Рязань:'
+          },
+          groups: [
+            contactsLists.address2,
+            contactsLists.phones2,
+            contactsLists.schedule,
+            contactsLists.email,
+          ],
+          location: {
+            latitude: 54.57490,
+            longitude: 39.811555,
+            link: withCardAddressLinks && 'https://yandex.ru/maps/-/CDWHyPpo',
+          }
+        })

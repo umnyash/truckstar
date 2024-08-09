@@ -1,0 +1,32 @@
+.modal-locations {
+  padding: 24px var(--edge-indent);
+  background: var(--background-color);
+
+  @media (min-width: $tablet-width) {
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+
+  @media (min-width: $desktop-width) {
+    padding-top: 34px;
+    padding-bottom: 34px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+}
+
+.modal-locations__heading {
+  padding: 0 48px 0 0;
+  margin: 0 0 16px;
+
+  @media (min-width: $tablet-width) {
+    margin-bottom: 32px;
+  }
+
+  @media (min-width: $desktop-width) {
+    margin-bottom: 48px;
+  }
+}

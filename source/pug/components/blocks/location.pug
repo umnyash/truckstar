@@ -1,0 +1,11 @@
+mixin location({ heading, groups, location })
+  .location&attributes(attributes)
+    +contacts-card({
+      heading,
+      groups,
+      addressLink: location.link,
+    })(class='location__card')
+    +map({
+      latitude: location.latitude,
+      longitude: location.longitude
+    })(class='location__map')
