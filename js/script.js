@@ -3,7 +3,7 @@
 const LAPTOP_WIDTH_MEDIA_QUERY = '(min-width: 1280px)';
 const DESKTOP_WIDTH_MEDIA_QUERY = '(min-width: 1366px)';
 const MEDIUM_INTERACTION_DURATION = 400;
-const MODAL_ANIMATION_DURATION = 500; // Соответствует $modal-animation-duration в variables.scss
+const MODAL_ANIMATION_DURATION = 5000; // Соответствует $modal-animation-duration в variables.scss
 
 function lockPageScroll() {
   const bodyWidth = document.body.clientWidth;
@@ -92,12 +92,16 @@ async function sendData(url, body) {
  */
 class Modal {
   constructor(modalElement) {
+    let {
+      onOpenerClick
+    } = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
     this.modalElement = modalElement;
     this.name = modalElement.dataset.modal;
     this.initOpeners();
     this.closebutton = this.modalElement.querySelector('.modal__close-button');
     this.closebutton.addEventListener('click', () => this.close());
     this.modalElement.addEventListener('close', () => this.onModalClose());
+    this.onOpenerClick = onOpenerClick;
     if (!document.body.contains(this.modalElement)) {
       document.body.append(this.modalElement);
     }
@@ -107,6 +111,9 @@ class Modal {
     openerElements.forEach(openerElement => {
       openerElement.addEventListener('click', evt => {
         evt.preventDefault();
+        if (this.onOpenerClick) {
+          this.onOpenerClick(evt);
+        }
         this.open();
       });
     });
@@ -445,22 +452,6 @@ function initCheckerCardsList(listElement) {
 /* * * * * * * * * * * * * * * * * * * * * * * */
 
 /* * * * * * * * * * * * * * * * * * * * * * * *
- * contacts-modal-map.js
- */
-function initContactsModal(modalElement, openModal) {
-  document.querySelectorAll(`[data-modal-opener="contacts-map"]`).forEach(openerElement => {
-    const locationsList = modalElement.querySelector('.contacts-maps__list');
-    openerElement.addEventListener('click', evt => {
-      evt.preventDefault();
-      const locationId = evt.target.dataset.locationId;
-      locationsList.dataset.activeItem = locationId;
-      openModal(modalElement);
-    });
-  });
-}
-/* * * * * * * * * * * * * * * * * * * * * * * */
-
-/* * * * * * * * * * * * * * * * * * * * * * * *
  * dropdown.js
  */
 function initDropdown(dropdownElement) {
@@ -564,19 +555,38 @@ const initFolds = foldsElement => {
 /* * * * * * * * * * * * * * * * * * * * * * * */
 
 /* * * * * * * * * * * * * * * * * * * * * * * *
+ * contacts-modal-map.js
+ */
+async function initLocationsModal(modalElement) {
+  const headingElement = modalElement.querySelector('.modal-locations__heading');
+  const locationsList = modalElement.querySelector('.locations__list');
+  const mapElements = locationsList.querySelectorAll('.map');
+  const maps = [];
+  for (const mapElement of mapElements) {
+    const map = await initMap(mapElement);
+    maps.push(map);
+  }
+  new Modal(modalElement, {
+    onOpenerClick: evt => {
+      maps.forEach(map => map.reset());
+      const text = evt.target.closest('.checker-cards__item-label').textContent;
+      const locationId = evt.target.dataset.locationId;
+      locationsList.dataset.activeItem = locationId;
+      headingElement.textContent = text;
+    }
+  });
+}
+/* * * * * * * * * * * * * * * * * * * * * * * */
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
  * map.js
  */
 async function initMap(mapElement) {
   const latitude = mapElement.dataset.latitude;
   const longitude = mapElement.dataset.longitude;
   const zoom = mapElement.dataset.zoom;
-  // const COORDINATES = [44.008906, 56.323592];
-
-  // 56.302058, 43.574579
-  const coordinates = [longitude, latitude];
-  console.log(coordinates);
+  const center = [longitude, latitude];
   const containerElement = mapElement.querySelector('.map__inner');
-  containerElement.classList.remove('map__inner--hidden');
   containerElement.style.filter = 'hue-rotate(-180deg) grayscale(0.9)';
   await ymaps3.ready;
   const {
@@ -587,7 +597,7 @@ async function initMap(mapElement) {
   } = ymaps3;
   const map = new YMap(containerElement, {
     location: {
-      center: coordinates,
+      center,
       zoom
     }
   });
@@ -595,7 +605,7 @@ async function initMap(mapElement) {
   map.addChild(new YMapDefaultFeaturesLayer());
   const markerElement = document.querySelector('#map-marker-template').content.querySelector('.map-marker').cloneNode(true);
   const marker = new YMapMarker({
-    coordinates: coordinates
+    coordinates: center
   }, markerElement);
   const timerId = setInterval(() => {
     const canvasElement = mapElement.querySelector('canvas');
@@ -606,6 +616,13 @@ async function initMap(mapElement) {
       map.addChild(marker);
     }
   }, 1000);
+  map.reset = () => {
+    map.setLocation({
+      center,
+      zoom
+    });
+  };
+  return map;
 }
 /* * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -670,41 +687,6 @@ function initMenu(menuElement) {
     breadcrumbs.pop()?.classList.remove('menu__catalog-navigation-item--active');
     groupTitleEement.textContent = breadcrumbs.at(-1)?.querySelector('.menu__catalog-navigation-button').textContent;
   });
-}
-/* * * * * * * * * * * * * * * * * * * * * * * */
-
-/* * * * * * * * * * * * * * * * * * * * * * * *
- * modal.js
- */
-const MODAL_CLOSING_ANIMATION_DURATION = 450;
-function onModalClose(evt) {
-  const modalElement = evt.currentTarget;
-  modalElement.removeEventListener('close', onModalClose);
-  modalElement.removeEventListener('click', onModalClick);
-  setTimeout(() => {
-    unlockPageScroll();
-  }, MODAL_CLOSING_ANIMATION_DURATION);
-  if (modalElement.classList.contains('modal--with_alert')) {
-    setTimeout(() => {
-      modalElement.remove();
-    }, MODAL_CLOSING_ANIMATION_DURATION);
-  }
-}
-function onModalClick(evt) {
-  const modalElement = evt.currentTarget;
-  if (evt.target.classList.contains('modal__close-button') || evt.target.classList.contains('alert__button')) {
-    modalElement.close();
-    return;
-  }
-  if (modalElement.classList.contains('modal--with_photo') && evt.target === modalElement) {
-    modalElement.close();
-  }
-}
-function openModal(modalElement) {
-  lockPageScroll();
-  modalElement.addEventListener('close', onModalClose);
-  modalElement.addEventListener('click', onModalClick);
-  modalElement.showModal();
 }
 /* * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -987,9 +969,6 @@ const inputEvent = new Event('input', {
   bubbles: true
 });
 initSiteHeader(document.querySelector('.site-header'));
-
-// document.querySelectorAll('.site-header').forEach(initSiteHeader);
-
 let cart = null;
 const cartElement = document.querySelector('.cart');
 if (cartElement) {
@@ -1009,9 +988,9 @@ document.querySelectorAll('.text-area').forEach(initTextArea);
 document.querySelectorAll('.dropdown').forEach(initDropdown);
 document.querySelectorAll('.catalog-navigation').forEach(initCatalogNavigation);
 document.querySelectorAll('.menu').forEach(initMenu);
-document.querySelectorAll('.map').forEach(initMap);
-document.querySelectorAll('[data-modal="contacts-map"]').forEach(modalElement => {
-  initContactsModal(modalElement, openModal);
+document.querySelectorAll('.map:not(.modal .map)').forEach(initMap);
+document.querySelectorAll('[data-modal="locations"]').forEach(modalElement => {
+  initLocationsModal(modalElement);
 });
 let requestForm = null;
 const requestFormElement = document.querySelector('.request-form');
@@ -1023,12 +1002,4 @@ let callbackModalFormElement = document.querySelector('[data-modal="callback-for
 if (callbackModalFormElement) {
   callbackModalForm = new ModalForm(callbackModalFormElement);
 }
-
-// Пример использования:
-// showAlert({
-//   status: 'error',
-//   heading: 'Ошибка',
-//   text: 'Что-то пошло не так...',
-//   buttonText: 'Понял'
-// });
 /* * * * * * * * * * * * * * * * * * * * * * * */
