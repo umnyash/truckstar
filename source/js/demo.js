@@ -9,7 +9,6 @@
 /* * * * * * * * * * * * * * * * * * * * * * * *
  * Добавление обработчиков в форме "Заказать обратный звонок"
  */
-
 if (callbackModalForm) {
   callbackModalForm.setHandlers(
     () => {
@@ -24,6 +23,26 @@ if (callbackModalForm) {
         heading: 'Ошибка',
         status: 'error',
         text: 'Не удалось отправить заявку',
+        buttonText: 'Повторить'
+      });
+    }
+  );
+}
+/* * * * * * * * * * * * * * * * * * * * * * * */
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
+ * Добавление обработчиков в форме корзины
+ */
+if (cart.form) {
+  cart.form.setHandlers(
+    () => {
+      window.location.href = 'https://umnyash.github.io/truckstar/order.html';
+    },
+    () => {
+      showAlert({
+        heading: 'Ошибка',
+        status: 'error',
+        text: 'Не удалось отправить заказ',
         buttonText: 'Повторить'
       });
     }

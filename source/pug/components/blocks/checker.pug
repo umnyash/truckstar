@@ -1,5 +1,12 @@
 mixin checker({ name, type, value, checked, disabled, label })
   .checker&attributes(attributes)
     label.checker__inner
-      input.checker__control(name= name type= type value= value checked= checked disabled= disabled)
+      input.checker__control(
+        name= name
+        type= type
+        value= value
+        checked= checked && ''
+        disabled= disabled && ''
+        data-value= value
+      )
       span(class= label.hidden ? 'visually-hidden' : 'checker__label')!= label.text

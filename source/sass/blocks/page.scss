@@ -8,6 +8,7 @@
   font: 400 14px/17px $main-font-family;
   color: var(--text-color);
   background: var(--background-color);
+  scroll-behavior: smooth;
 
   @supports (min-height: 100dvh) {
     min-height: 100dvh;
@@ -70,6 +71,7 @@
   }
 }
 
+.back,
 .breadcrumbs {
   margin-top: 16px;
 
@@ -86,6 +88,7 @@
   }
 }
 
+.back + *,
 .breadcrumbs + * {
   margin-top: 16px;
 

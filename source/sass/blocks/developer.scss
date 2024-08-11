@@ -14,11 +14,16 @@
   align-items: center;
   text-decoration: none;
   color: var(--text-color);
-  transition: background-color $medium-interaction-duration;
+  transition-property: background-color, box-shadow;
+  transition-duration: $medium-interaction-duration;
 
   &:hover,
   &:active {
     background: var(--developer-color);
+  }
+
+  &:active {
+    @include main-shadow;
   }
 
   @media (min-width: $desktop-width) {

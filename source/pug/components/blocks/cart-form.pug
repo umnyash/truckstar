@@ -1,5 +1,5 @@
 mixin cart-form
-  form.cart-form(action='https://echo.htmlacademy.ru' method='post' target='_blank')&attributes(attributes)
+  form.cart-form(action='https://fakestoreapi.com/products' method='post' target='_blank')&attributes(attributes)
     .cart-form__main
       fieldset.cart-form__section.cart-form__section--products
         legend.visually-hidden Товары
@@ -25,21 +25,21 @@ mixin cart-form
             },
           ]
         })
-      fieldset.cart-form__section.cart-form__section--receiving-method
+      fieldset.cart-form__section
         legend.cart-form__section-heading Телефон
         .cart-form__section-inner
           +text-field({
-            name: 'tel',
+            name: 'phone',
             type: 'tel',
             placeholder: 'Телефон',
             required: true,
             hidableClearButton: true,
           })(class='cart-form__field cart-form__field--wide text-field--alter text-field--empty')
-      fieldset.cart-form__section.cart-form__section--receiving-method
+      fieldset.cart-form__section(data-receiving-method-section)
         legend.cart-form__section-heading Способ доставки
         .card-form__section-checker-cards-wrapper
           +checker-cards
-      fieldset.cart-form__section.cart-form__section--receiving-method
+      fieldset.cart-form__section(data-delivery-section)
         legend.cart-form__section-heading Данные для доставки
         .cart-form__section-inner
           +text-field({
@@ -81,7 +81,7 @@ mixin cart-form
             required: true,
             hidableClearButton: true,
           })(class='cart-form__field text-field--alter text-field--empty')
-      fieldset.cart-form__section.cart-form__section--receiving-method
+      fieldset.cart-form__section
         legend.cart-form__section-heading Комментарий
         .cart-form__section-inner
           +text-area({
@@ -97,7 +97,7 @@ mixin cart-form
             tag: 'button',
             type: 'submit',
             text: 'Оформить заказ',
-          })(class='cart-form__footer-submit-button button--primary-alter button--right button--size_l')
+          })(class='cart-form__footer-submit-button button--primary-alter button--right button--size_l' data-submit-button)
           small.cart-form__footer-comment Нажимая на кнопку «Оформить заказ», вы даете #[a.cart-form__footer-comment-link(href='#!' target='_blank') согласие на обработку персональных данных]
         .cart-form__footer-navigation-wrapper
           +page-navigation({

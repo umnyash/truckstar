@@ -6,7 +6,9 @@ function initTextField(fieldElement) {
   const clearButtonElement = fieldElement.querySelector('.text-field__button--clear');
 
   const updateEmptyStatus = () => {
-    fieldElement.classList.toggle('text-field--empty', !controlElement.value);
+    setTimeout(() => {
+      fieldElement.classList.toggle('text-field--empty', !controlElement.value);
+    })
   };
 
   updateEmptyStatus();

@@ -4,11 +4,11 @@
 class Form {
   constructor(formElement) {
     this.formElement = formElement;
-    this.formInnerElement = this.formElement.querySelector('[data-form-inner]')
     this.textFieldControlElements = this.formElement.querySelectorAll('.text-field__control');
     this.actionUrl = this.formElement.action;
     this.submitButtonElement = this.formElement.querySelector('[data-submit-button]');
     this.validator = new FormValidator(this.formElement);
+    this.siteHeaderElement = document.querySelector('.page__site-header');
     this.successHandler = null;
     this.errorHandler = null;
     this.init();
@@ -26,6 +26,8 @@ class Form {
       const isValid = this.validator.validate();
 
       if (isValid) {
+        console.log('Форма валидна')
+
         this.submitButtonElement.disabled = true;
         this.submitButtonElement.classList.add('button--pending');
 
@@ -45,8 +47,26 @@ class Form {
           }
         );
       } else {
-        this.formInnerElement.classList.remove('shake');
-        setTimeout(() => this.formInnerElement.classList.add('shake'), 50);
+        console.log('Форма невалидна')
+        const firstInvalidItemElement = this.formElement.querySelector('.pristine-item--invalid');
+        const modalElement = firstInvalidItemElement?.closest('.modal');
+
+        if (modalElement) {
+          modalElement.scrollTo({
+            top: firstInvalidItemElement.offsetTop,
+            behavior: 'smooth',
+          })
+        } else {
+          window.scrollTo({
+            top: firstInvalidItemElement.offsetTop - this.siteHeaderElement.offsetHeight,
+            behavior: 'smooth',
+          })
+        }
+
+
+        firstInvalidItemElement.querySelector('input').focus();
+        firstInvalidItemElement.classList.remove('shake');
+        requestAnimationFrame(() => firstInvalidItemElement.classList.add('shake'));
       }
     });
 

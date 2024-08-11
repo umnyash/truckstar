@@ -2,6 +2,8 @@
  * modal.js
  */
 class Modal {
+  static openModalsCount = 0;
+
   constructor(modalElement, { onOpenerClick } = {}) {
     this.modalElement = modalElement;
     this.name = modalElement.dataset.modal;
@@ -36,6 +38,7 @@ class Modal {
     lockPageScroll();
     requestAnimationFrame(() => {
       this.modalElement.showModal();
+      Modal.openModalsCount++;
     })
   }
 
@@ -44,8 +47,12 @@ class Modal {
   }
 
   onModalClose = () => {
+    Modal.openModalsCount--;
     setTimeout(() => {
-      unlockPageScroll();
+      if (!Modal.openModalsCount) {
+        unlockPageScroll();
+      }
+
       if (this.modalElement.classList.contains('modal--with_alert')) {
         this.modalElement.remove();
         this.modalElement = null;

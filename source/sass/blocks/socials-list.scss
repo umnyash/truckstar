@@ -25,9 +25,16 @@
   width: 32px;
   height: 32px;
   fill: var(--text-weak-color);
-  transition: fill $medium-interaction-duration;
+  transition:
+    fill $medium-interaction-duration,
+    transform $little-interaction-duration;
 }
 
 .socials-list__link:hover > * {
+  fill: var(--accent-color);
+}
+
+.socials-list__link:active > * {
   fill: var(--accent-dark-color);
+  transform: scale(0.9);
 }
