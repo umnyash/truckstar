@@ -48,25 +48,33 @@ class Form {
         );
       } else {
         console.log('Форма невалидна')
-        const firstInvalidItemElement = this.formElement.querySelector('.pristine-item--invalid');
-        const modalElement = firstInvalidItemElement?.closest('.modal');
 
-        if (modalElement) {
-          modalElement.scrollTo({
-            top: firstInvalidItemElement.offsetTop,
-            behavior: 'smooth',
-          })
+        if (this.formElement.matches('.simple-form')) {
+          const fieldWrapperElement = this.formElement.querySelector('.simple-form__inner');
+          fieldWrapperElement.classList.remove('shake');
+          requestAnimationFrame(() => fieldWrapperElement.classList.add('shake'));
+          fieldWrapperElement.querySelector('input').focus();
         } else {
-          window.scrollTo({
-            top: firstInvalidItemElement.offsetTop - this.siteHeaderElement.offsetHeight,
-            behavior: 'smooth',
-          })
+          const firstInvalidItemElement = this.formElement.querySelector('.pristine-item--invalid');
+          const modalElement = firstInvalidItemElement?.closest('.modal');
+
+          if (modalElement) {
+            modalElement.scrollTo({
+              top: firstInvalidItemElement.offsetTop,
+              behavior: 'smooth',
+            })
+          } else {
+            window.scrollTo({
+              top: firstInvalidItemElement.offsetTop - this.siteHeaderElement.offsetHeight,
+              behavior: 'smooth',
+            })
+          }
+
+
+          firstInvalidItemElement.querySelector('input, textarea').focus();
+          firstInvalidItemElement.classList.remove('shake');
+          requestAnimationFrame(() => firstInvalidItemElement.classList.add('shake'));
         }
-
-
-        firstInvalidItemElement.querySelector('input, textarea').focus();
-        firstInvalidItemElement.classList.remove('shake');
-        requestAnimationFrame(() => firstInvalidItemElement.classList.add('shake'));
       }
     });
 

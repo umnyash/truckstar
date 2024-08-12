@@ -11,14 +11,14 @@
  */
 if (callbackModalForm) {
   callbackModalForm.setHandlers(
-    () => {
+    (data) => {
       showAlert({
         heading: 'Ваша заявка успешно отправлена',
         text: 'Наш менеджер свяжется с вам в течение дня',
         buttonText: 'Закрыть'
       });
     },
-    () => {
+    (data) => {
       showAlert({
         heading: 'Ошибка',
         status: 'error',
@@ -31,11 +31,35 @@ if (callbackModalForm) {
 /* * * * * * * * * * * * * * * * * * * * * * * */
 
 /* * * * * * * * * * * * * * * * * * * * * * * *
+ * Добавление обработчиков в форме "Подписаться на рассылку"
+ */
+if (subscriptionForm) {
+  subscriptionForm.setHandlers(
+    (data) => {
+      showAlert({
+        heading: 'Спасибо за подписку',
+        text: 'Вы успешно подписались на email рассылку',
+        buttonText: 'Закрыть'
+      });
+    },
+    (data) => {
+      showAlert({
+        heading: 'Ошибка',
+        status: 'error',
+        text: 'Не удалось подписаться на рассылку',
+        buttonText: 'Повторить'
+      });
+    }
+  );
+}
+/* * * * * * * * * * * * * * * * * * * * * * * */
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
  * Добавление обработчиков в форме "Оставить отзыв"
  */
 if (reviewModalForm) {
   reviewModalForm.setHandlers(
-    () => {
+    (data) => {
       showAlert({
         heading: 'Спасибо, что оценили нашу работу',
         mode: 'alter',
@@ -43,7 +67,7 @@ if (reviewModalForm) {
         buttonText: 'Закрыть'
       });
     },
-    () => {
+    (data) => {
       showAlert({
         heading: 'Ошибка',
         status: 'error',
@@ -60,10 +84,10 @@ if (reviewModalForm) {
  */
 if (cart?.form) {
   cart.form.setHandlers(
-    () => {
+    (data) => {
       window.location.href = 'https://umnyash.github.io/truckstar/order.html';
     },
-    () => {
+    (data) => {
       showAlert({
         heading: 'Ошибка',
         status: 'error',

@@ -16,6 +16,17 @@ class FormValidator {
     const emailFieldElement = this.formElement.querySelector('[data-name="email"]');
     const messageFieldElement = this.formElement.querySelector('[data-name="message"]');
 
+    const simpleFormFieldElement = this.formElement.querySelector('.simple-form__control');
+
+    if (simpleFormFieldElement) {
+      simpleFormFieldElement.closest('.simple-form').classList.add('pristine-item');
+      simpleFormFieldElement.dataset.pristineRequiredMessage = 'Заполните это поле.';
+
+      if (simpleFormFieldElement.type === 'email') {
+        simpleFormFieldElement.dataset.pristineEmailMessage = 'Введите корректный e-mail адрес.';
+      }
+    }
+
     if (nameFieldElement) {
       nameFieldElement.closest('.text-field').classList.add('pristine-item');
       nameFieldElement.dataset.pristinePattern = '/^[a-zа-яЁё -]+$/i';

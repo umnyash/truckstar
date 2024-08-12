@@ -56,8 +56,11 @@ if (reviewModalFormElement) {
   reviewModalForm = new ModalForm(reviewModalFormElement);
 }
 
-/* * * * * * * * * * * * * * * * * * * * * * * */
+let subscriptionForm = null;
+let subscriptionFormElement = document.querySelector('.site-footer__subscription .simple-form');
 
-document.body.addEventListener('click', (evt) => {
-  console.log('click', evt.target)
-})
+if (subscriptionFormElement) {
+  subscriptionForm = new Form(subscriptionFormElement);
+}
+
+/* * * * * * * * * * * * * * * * * * * * * * * */
