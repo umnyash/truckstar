@@ -1,0 +1,23 @@
+mixin images-field
+  .images-field&attributes(attributes)
+    label.images-field__field
+      span.images-field__button
+      span.images-field__label
+        span.images-field__label Добавить фото запчасти
+        span.images-field__label-comment Допустимые форматы для загрузки: PNG, JPEG
+      input.images-field__control.visually-hidden(type='file')
+    ul.images-field__list
+      li.images-field__list-item
+        img.images-field__preview(src='img/products/3.webp' srcset='img/products/3@2x.webp 2x' alt='')
+        +image-button({
+          tag: 'button',
+          type: 'button',
+          text: 'Удалить фото'
+        })(class='images-field__delete-button image-button--size_xs image-button--primary image-button--icon_cross')
+      li.images-field__list-item
+        img.images-field__preview(src='img/products/3.webp' srcset='img/products/3@2x.webp 2x' alt='')
+        +image-button({
+          tag: 'button',
+          type: 'button',
+          text: 'Удалить фото'
+        })(class='images-field__delete-button image-button--size_xs image-button--primary image-button--icon_cross')

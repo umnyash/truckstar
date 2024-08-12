@@ -28,6 +28,18 @@
   }
 }
 
+.request-form__images-field {
+  margin: 12px 0 0;
+
+  @media (min-width: $desktop-width) {
+    margin-top: 32px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    margin-top: 40px;
+  }
+}
+
 .request-form__footer {
   margin: 24px 0 0;
 

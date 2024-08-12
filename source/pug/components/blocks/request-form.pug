@@ -1,5 +1,5 @@
 mixin request-form
-  form.request-form(action='https://echo.htmlacademy.ru' method='post' enctype='multipart/form-data' target='_blank')&attributes(attributes)
+  form.request-form(action='https://fakestoreapi.com/products' method='post' enctype='multipart/form-data' target='_blank')&attributes(attributes)
     +dropdown({
       name: 'brand',
       label: 'Выберите марку',
@@ -60,10 +60,11 @@ mixin request-form
       placeholder: 'Описание запчасти',
       required: true,
     })(class='request-form__field text-area--empty')
+    +images-field(class='request-form__images-field')
     .request-form__footer
       +button({
         tag: 'button',
         type: 'submit',
         text: 'Отправить',
-      })(class='request-form__footer-submit-button button--primary-alter button--right button--size_l')
+      })(class='request-form__footer-submit-button button--primary-alter button--right button--size_l' data-submit-button)
       small.request-form__footer-comment Нажимая на кнопку «Отправить», вы даете #[a.request-form__footer-comment-link(href='#!' target='_blank') согласие на&nbsp;обработку персональных данных]

@@ -1,0 +1,133 @@
+.images-field {
+  font-family: $main-font-family;
+}
+
+.images-field__field {
+  display: inline-grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 12px;
+  align-items: start;
+  cursor: pointer;
+
+  @media (min-width: $wide-desktop-width) {
+    column-gap: 16px;
+  }
+}
+
+.images-field__button {
+  display: flex;
+  box-sizing: border-box;
+  width: 40px;
+  height: 40px;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+
+  @media (min-width: $wide-desktop-width) {
+    width: 56px;
+    height: 56px;
+  }
+
+  &::after {
+    content: "";
+    width: 32px;
+    height: 32px;
+    margin: auto;
+    background: currentColor;
+    mask: url("../img/icons.svg#controls_plus");
+  }
+}
+
+.images-field__label {
+  display: grid;
+  align-self: center;
+  font-size: 14px;
+  line-height: 17px;
+  font-weight: 500;
+
+  @media (min-width: $desktop-width) {
+    font-size: 16px;
+    line-height: 19px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    font-size: 20px;
+    line-height: 24px;
+  }
+}
+
+.images-field__label-comment {
+  margin: 4px 0 0;
+  font-size: 12px;
+  line-height: 14px;
+  font-weight: 400;
+  color: var(--text-weak-color);
+
+  @media (min-width: $desktop-width) {
+    font-size: 14px;
+    line-height: 17px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    margin-top: 8px;
+    font-size: 16px;
+    line-height: 19px;
+  }
+}
+
+.images-field__list {
+  display: flex;
+  padding: 0;
+  margin: 12px 0 0;
+  list-style: none;
+  flex-wrap: wrap;
+  gap: 8px;
+
+  &:empty {
+    margin: 0;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    margin-top: 16px;
+    gap: 12px;
+  }
+}
+
+.images-field__list-item {
+  position: relative;
+  box-sizing: border-box;
+  width: 84px;
+  height: 48px;
+  border: 1px solid currentColor;
+  border-radius: 10px;
+  overflow: hidden;
+
+  @media (min-width: $tablet-width) {
+    width: 110px;
+    height: 64px;
+    border-radius: 16px;
+  }
+
+  @media (min-width: $desktop-width) {
+    width: 129px;
+    height: 76px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    width: 153px;
+    height: 92px;
+  }
+}
+
+.images-field__preview {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.images-field__delete-button {
+  position: absolute;
+  top: 4px;
+  right: 8px;
+}

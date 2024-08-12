@@ -5,6 +5,8 @@ class Form {
   constructor(formElement) {
     this.formElement = formElement;
     this.textFieldControlElements = this.formElement.querySelectorAll('.text-field__control, .simple-form__control');
+    this.imagesFieldElement = this.formElement.querySelector('.images-field');
+    this.imagesFieldListElement = this.formElement.querySelector('.images-field__list');
     this.actionUrl = this.formElement.action;
     this.submitButtonElement = this.formElement.querySelector('[data-submit-button]');
     this.validator = new FormValidator(this.formElement);
@@ -19,7 +21,72 @@ class Form {
     this.errorHandler = errorHandler;
   };
 
+  resetImagesField = () => {
+    if (this.imagesFieldListElement) {
+      this.imagesFieldListElement.querySelectorAll('img').forEach((imageElement) => {
+        URL.revokeObjectURL(imageElement.src);
+      });
+
+      this.imagesFieldListElement.innerHTML = '';
+    }
+
+    if (this.images) {
+      this.images.clear();
+    }
+  };
+
+  initImagesField = (fieldElement) => {
+    const controlElement = fieldElement.querySelector('.images-field__control');
+    const listElement = fieldElement.querySelector('.images-field__list');
+    this.images = new Set();
+
+    controlElement.addEventListener('change', (evt) => {
+      const newFiles = Array.from(evt.target.files);
+      newFiles.forEach((file) => {
+        if (file.type.startsWith('image/')) {
+          this.images.add(file);
+        }
+      });
+
+      updateList();
+    });
+
+    const updateList = () => {
+      const fragment = document.createDocumentFragment();
+
+      this.images.forEach((file) => {
+        const listItemElement = createElementByString(`
+          <li class="images-field__list-item">
+            <img class="images-field__preview" src=${URL.createObjectURL(file)} alt=''>
+            <button class="images-field__delete-button image-button image-button--size_xs image-button--primary image-button--icon_cross" type="button">
+              <span class="visually-hidden">Удалить фото</span>
+            </button>
+          </li>
+        `);
+
+        const previewElement = listItemElement.querySelector('.images-field__preview');
+        const deleteButtonElement = listItemElement.querySelector('.images-field__delete-button');
+
+        deleteButtonElement.addEventListener('click', (evt) => {
+          this.images.delete(file);
+          updateList();
+          URL.revokeObjectURL(previewElement.src);
+        });
+
+        fragment.append(listItemElement);
+      });
+
+      listElement.innerHTML = '';
+      listElement.append(fragment);
+    };
+  };
+
+
   init = () => {
+    if (this.imagesFieldElement) {
+      this.initImagesField(this.imagesFieldElement);
+    }
+
     this.formElement.addEventListener('submit', (evt) => {
       evt.preventDefault();
 
@@ -31,9 +98,14 @@ class Form {
         this.submitButtonElement.disabled = true;
         this.submitButtonElement.classList.add('button--pending');
 
+        const formData = new FormData(evt.target);
+        this.images?.forEach((file) => {
+          formData.append('images[]', file);
+        });
+
         sendData(
           this.actionUrl,
-          new FormData(evt.target),
+          formData,
           (data) => {
             this.formElement.reset();
             this.successHandler(data);
@@ -83,6 +155,7 @@ class Form {
         this.textFieldControlElements.forEach((textFieldElement) => {
           textFieldElement.dispatchEvent(inputEvent);
         });
+        this.resetImagesField();
         this.validator.reset();
       }, 0)
     });
