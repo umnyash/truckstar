@@ -3,7 +3,7 @@
 const LAPTOP_WIDTH_MEDIA_QUERY = '(min-width: 1280px)';
 const DESKTOP_WIDTH_MEDIA_QUERY = '(min-width: 1366px)';
 const MEDIUM_INTERACTION_DURATION = 400;
-const MODAL_ANIMATION_DURATION = 5000; // Соответствует $modal-animation-duration в variables.scss
+const MODAL_ANIMATION_DURATION = 500; // Соответствует $modal-animation-duration в variables.scss
 
 function lockPageScroll() {
   const bodyWidth = document.body.clientWidth;
@@ -97,12 +97,13 @@ class Modal {
       onOpenerClick
     } = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
     this.modalElement = modalElement;
-    this.name = modalElement.dataset.modal;
+    this.name = modalElement?.dataset.modal;
     this.initOpeners();
-    this.closebutton = this.modalElement.querySelector('.modal__close-button');
-    this.closebutton.addEventListener('click', () => this.close());
     this.modalElement.addEventListener('close', () => this.onModalClose());
     this.onOpenerClick = onOpenerClick;
+    this.modalElement.querySelectorAll('.modal__close-button, [data-modal-close-button]').forEach(buttonElement => {
+      buttonElement.addEventListener('click', () => this.close());
+    });
     if (!document.body.contains(this.modalElement)) {
       document.body.append(this.modalElement);
     }
@@ -152,12 +153,14 @@ class Alert extends Modal {
     let {
       heading,
       status,
+      mode,
       text,
       buttonText
     } = _ref;
     const modalElement = Alert.createElement({
       heading,
       status,
+      mode,
       text,
       buttonText
     });
@@ -172,6 +175,7 @@ class Alert extends Modal {
     let {
       heading,
       status,
+      mode,
       text,
       buttonText
     } = _ref2;
@@ -181,10 +185,10 @@ class Alert extends Modal {
           <button class="modal__close-button" type="button">
             <span class="visually-hidden">Закрыть</span>
           </button>
-          <section class="alert modal__alert ${status === 'error' ? 'alert--error' : ''}">
+          <section class="alert modal__alert ${status === 'error' ? 'alert--error' : ''} ${mode === 'alter' ? 'alert--alter' : ''}">
             <h2 class="alert__heading heading">${heading}</h2>
             ${text ? `<p class="alert__text">${text}</p>` : ''}
-            <button class="alert__button button--secondary button--right button--size_l" type="button">
+            <button class="alert__button button button--secondary button--right button--size_l" type="button">
               <span class="button__inner">${buttonText || 'Закрыть'}<span class="button__icon"></span></span>
             </button>
           </section>
@@ -210,7 +214,16 @@ class FormValidator {
     const surnameFieldElement = this.formElement.querySelector('[data-name="surname"]');
     const addressFieldElement = this.formElement.querySelector('[data-name="address"]');
     const phoneFieldElement = this.formElement.querySelector('[data-name="phone"]');
+    const emailFieldElement = this.formElement.querySelector('[data-name="email"]');
     const messageFieldElement = this.formElement.querySelector('[data-name="message"]');
+    const simpleFormFieldElement = this.formElement.querySelector('.simple-form__control');
+    if (simpleFormFieldElement) {
+      simpleFormFieldElement.closest('.simple-form').classList.add('pristine-item');
+      simpleFormFieldElement.dataset.pristineRequiredMessage = 'Заполните это поле.';
+      if (simpleFormFieldElement.type === 'email') {
+        simpleFormFieldElement.dataset.pristineEmailMessage = 'Введите корректный e-mail адрес.';
+      }
+    }
     if (nameFieldElement) {
       nameFieldElement.closest('.text-field').classList.add('pristine-item');
       nameFieldElement.dataset.pristinePattern = '/^[a-zа-яЁё -]+$/i';
@@ -230,6 +243,11 @@ class FormValidator {
     if (phoneFieldElement) {
       phoneFieldElement.closest('.text-field').classList.add('pristine-item');
       phoneFieldElement.dataset.pristineRequiredMessage = 'Заполните это поле.';
+    }
+    if (emailFieldElement) {
+      emailFieldElement.closest('.text-field').classList.add('pristine-item');
+      emailFieldElement.dataset.pristineRequiredMessage = 'Заполните это поле.';
+      emailFieldElement.dataset.pristineEmailMessage = 'Введите корректный e-mail адрес.';
     }
     if (messageFieldElement) {
       messageFieldElement.closest('.text-area').classList.add('pristine-item');
@@ -261,7 +279,7 @@ class FormValidator {
 class Form {
   constructor(formElement) {
     this.formElement = formElement;
-    this.textFieldControlElements = this.formElement.querySelectorAll('.text-field__control');
+    this.textFieldControlElements = this.formElement.querySelectorAll('.text-field__control, .simple-form__control');
     this.actionUrl = this.formElement.action;
     this.submitButtonElement = this.formElement.querySelector('[data-submit-button]');
     this.validator = new FormValidator(this.formElement);
@@ -293,22 +311,29 @@ class Form {
         });
       } else {
         console.log('Форма невалидна');
-        const firstInvalidItemElement = this.formElement.querySelector('.pristine-item--invalid');
-        const modalElement = firstInvalidItemElement?.closest('.modal');
-        if (modalElement) {
-          modalElement.scrollTo({
-            top: firstInvalidItemElement.offsetTop,
-            behavior: 'smooth'
-          });
+        if (this.formElement.matches('.simple-form')) {
+          const fieldWrapperElement = this.formElement.querySelector('.simple-form__inner');
+          fieldWrapperElement.classList.remove('shake');
+          requestAnimationFrame(() => fieldWrapperElement.classList.add('shake'));
+          fieldWrapperElement.querySelector('input').focus();
         } else {
-          window.scrollTo({
-            top: firstInvalidItemElement.offsetTop - this.siteHeaderElement.offsetHeight,
-            behavior: 'smooth'
-          });
+          const firstInvalidItemElement = this.formElement.querySelector('.pristine-item--invalid');
+          const modalElement = firstInvalidItemElement?.closest('.modal');
+          if (modalElement) {
+            modalElement.scrollTo({
+              top: firstInvalidItemElement.offsetTop,
+              behavior: 'smooth'
+            });
+          } else {
+            window.scrollTo({
+              top: firstInvalidItemElement.offsetTop - this.siteHeaderElement.offsetHeight,
+              behavior: 'smooth'
+            });
+          }
+          firstInvalidItemElement.querySelector('input, textarea').focus();
+          firstInvalidItemElement.classList.remove('shake');
+          requestAnimationFrame(() => firstInvalidItemElement.classList.add('shake'));
         }
-        firstInvalidItemElement.querySelector('input').focus();
-        firstInvalidItemElement.classList.remove('shake');
-        requestAnimationFrame(() => firstInvalidItemElement.classList.add('shake'));
       }
     });
     this.formElement.addEventListener('reset', () => {
@@ -512,6 +537,27 @@ function initCheckerCardsList(listElement) {
   window.addEventListener('resize', debounce(setItemElementMinHeightValue));
 }
 ;
+/* * * * * * * * * * * * * * * * * * * * * * * */
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
+ * document-modal.js
+ */
+function initDocumentModal(modalElement) {
+  const documentElement = modalElement.querySelector('.document');
+  initDocument(documentElement);
+  new Modal(modalElement);
+}
+/* * * * * * * * * * * * * * * * * * * * * * * */
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
+ * document.js
+ */
+function initDocument(documentElement) {
+  const contentElement = documentElement.querySelector('.document__content');
+  new SimpleBar(contentElement, {
+    autoHide: false
+  });
+}
 /* * * * * * * * * * * * * * * * * * * * * * * */
 
 /* * * * * * * * * * * * * * * * * * * * * * * *
@@ -940,12 +986,14 @@ function showAlert(_ref5) {
   let {
     heading,
     status,
+    mode,
     text,
     buttonText
   } = _ref5;
   const alert = new Alert({
     heading,
     status,
+    mode,
     text,
     buttonText
   });
@@ -1129,6 +1177,7 @@ document.querySelectorAll('.map:not(.modal .map)').forEach(initMap);
 document.querySelectorAll('[data-modal="locations"]').forEach(modalElement => {
   initLocationsModal(modalElement);
 });
+document.querySelectorAll('.modal--with_document').forEach(initDocumentModal);
 let requestForm = null;
 const requestFormElement = document.querySelector('.request-form');
 if (requestFormElement) {
@@ -1139,4 +1188,15 @@ let callbackModalFormElement = document.querySelector('[data-modal="callback-for
 if (callbackModalFormElement) {
   callbackModalForm = new ModalForm(callbackModalFormElement);
 }
+let reviewModalForm = null;
+let reviewModalFormElement = document.querySelector('[data-modal="review-form"]');
+if (reviewModalFormElement) {
+  reviewModalForm = new ModalForm(reviewModalFormElement);
+}
+let subscriptionForm = null;
+let subscriptionFormElement = document.querySelector('.site-footer__subscription .simple-form');
+if (subscriptionFormElement) {
+  subscriptionForm = new Form(subscriptionFormElement);
+}
+
 /* * * * * * * * * * * * * * * * * * * * * * * */
