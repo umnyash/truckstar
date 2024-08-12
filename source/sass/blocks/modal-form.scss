@@ -39,6 +39,14 @@
   margin: 0;
 }
 
+.modal-form__rating {
+  margin: 0 0 16px;
+
+  @media (min-width: $wide-desktop-width) {
+    margin-bottom: 32px;
+  }
+}
+
 .modal-form__field + .modal-form__field {
   margin-top: 8px;
 

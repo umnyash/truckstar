@@ -1,4 +1,4 @@
-function showAlert({ heading, status, text, buttonText }) {
-  const alert = new Alert({ heading, status, text, buttonText });
+function showAlert({ heading, status, mode, text, buttonText }) {
+  const alert = new Alert({ heading, status, mode, text, buttonText });
   alert.open();
 }

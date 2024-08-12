@@ -1,0 +1,105 @@
+.star-rating {
+  display: flex;
+  column-gap: 20px;
+  justify-content: space-between;
+  align-items: center;
+  font: 500 14px/17px $main-font-family;
+
+  @media (min-width: $tablet-width) {
+    font-size: 16px;
+    line-height: 19px;
+  }
+
+  @media (min-width: $desktop-width) {
+    font-size: 20px;
+    line-height: 24px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    line-height: 24px;
+    letter-spacing: -1px;
+  }
+}
+
+.star-rating__label {
+  margin: 0;
+}
+
+.star-rating__buttons {
+  --star-icon-size: 20px;
+  --star-icon-gap: 8px;
+  --star-icon-number: 5;
+
+  position: relative;
+  width: calc(var(--star-icon-size) * var(--star-icon-number) + var(--star-icon-gap) * (var(--star-icon-number) - 1));
+  height: var(--star-icon-size);
+  margin: 0;
+  background-image: url("../img/icons.svg#controls_star-off");
+  background-repeat: repeat-x;
+  background-position: calc(var(--star-icon-gap) / 2 * -1);
+  background-size: calc(var(--star-icon-size) + var(--star-icon-gap)) var(--star-icon-size);
+
+  @media (min-width: $desktop-width) {
+    --star-icon-size: 24px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    --star-icon-size: 32px;
+    --star-icon-gap: 12px;
+  }
+}
+
+
+.star-rating__button {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(var(--star-icon-size) * var(--star-icon-number) + var(--star-icon-gap) * (var(--star-icon-number) - 1));
+  height: 100%;
+  margin: 0;
+  background-repeat: repeat-x;
+  background-position: calc(var(--star-icon-gap) / 2 * -1);
+  background-size: calc(var(--star-icon-size) + var(--star-icon-gap)) var(--star-icon-size);
+  appearance: none;
+  cursor: pointer;
+
+  // opacity: 0;
+
+  &:nth-child(1) {
+    --star-icon-number: 1;
+    z-index: 5;
+  }
+
+  &:nth-child(2) {
+    --star-icon-number: 2;
+    z-index: 4;
+  }
+
+  &:nth-child(3) {
+    --star-icon-number: 3;
+    z-index: 3;
+  }
+
+  &:nth-child(4) {
+    --star-icon-number: 4;
+    z-index: 2;
+  }
+
+  &:nth-child(5) {
+    --star-icon-number: 5;
+    z-index: 1;
+  }
+
+  &:focus {
+    // outline: none;
+  }
+
+  &:hover,
+  &:checked {
+    background-image: url("../img/icons.svg#controls_star-on");
+  }
+
+  &:hover ~ .star-rating__button {
+    background-image: url("../img/icons.svg#controls_star-off");
+  }
+}

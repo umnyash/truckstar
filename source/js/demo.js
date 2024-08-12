@@ -31,9 +31,34 @@ if (callbackModalForm) {
 /* * * * * * * * * * * * * * * * * * * * * * * */
 
 /* * * * * * * * * * * * * * * * * * * * * * * *
+ * Добавление обработчиков в форме "Оставить отзыв"
+ */
+if (reviewModalForm) {
+  reviewModalForm.setHandlers(
+    () => {
+      showAlert({
+        heading: 'Спасибо, что оценили нашу работу',
+        mode: 'alter',
+        text: 'Ваш отзыв будет проверен модератором сайта, и опубликован в течение 2 рабочих дней',
+        buttonText: 'Закрыть'
+      });
+    },
+    () => {
+      showAlert({
+        heading: 'Ошибка',
+        status: 'error',
+        text: 'Не удалось отправить заявку',
+        buttonText: 'Повторить'
+      });
+    }
+  );
+}
+/* * * * * * * * * * * * * * * * * * * * * * * */
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
  * Добавление обработчиков в форме корзины
  */
-if (cart.form) {
+if (cart?.form) {
   cart.form.setHandlers(
     () => {
       window.location.href = 'https://umnyash.github.io/truckstar/order.html';

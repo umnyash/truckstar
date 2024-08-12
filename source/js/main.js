@@ -48,6 +48,14 @@ let callbackModalFormElement = document.querySelector('[data-modal="callback-for
 if (callbackModalFormElement) {
   callbackModalForm = new ModalForm(callbackModalFormElement);
 }
+
+let reviewModalForm = null;
+let reviewModalFormElement = document.querySelector('[data-modal="review-form"]');
+
+if (reviewModalFormElement) {
+  reviewModalForm = new ModalForm(reviewModalFormElement);
+}
+
 /* * * * * * * * * * * * * * * * * * * * * * * */
 
 document.body.addEventListener('click', (evt) => {

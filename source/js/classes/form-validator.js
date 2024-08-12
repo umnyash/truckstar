@@ -13,6 +13,7 @@ class FormValidator {
     const surnameFieldElement = this.formElement.querySelector('[data-name="surname"]');
     const addressFieldElement = this.formElement.querySelector('[data-name="address"]');
     const phoneFieldElement = this.formElement.querySelector('[data-name="phone"]');
+    const emailFieldElement = this.formElement.querySelector('[data-name="email"]');
     const messageFieldElement = this.formElement.querySelector('[data-name="message"]');
 
     if (nameFieldElement) {
@@ -37,6 +38,12 @@ class FormValidator {
     if (phoneFieldElement) {
       phoneFieldElement.closest('.text-field').classList.add('pristine-item');
       phoneFieldElement.dataset.pristineRequiredMessage = 'Заполните это поле.';
+    }
+
+    if (emailFieldElement) {
+      emailFieldElement.closest('.text-field').classList.add('pristine-item');
+      emailFieldElement.dataset.pristineRequiredMessage = 'Заполните это поле.';
+      emailFieldElement.dataset.pristineEmailMessage = 'Введите корректный e-mail адрес.';
     }
 
     if (messageFieldElement) {

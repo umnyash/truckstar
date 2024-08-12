@@ -50,6 +50,7 @@
 
 .alert__text {
   margin: 12px 0;
+  color: var(--text-weak-color);
 
   @media (min-width: $desktop-width) {
     margin: 8px 0;
@@ -114,6 +115,18 @@
     @media (min-width: $wide-desktop-width) {
       width: 32px;
       height: 32px;
+    }
+  }
+}
+
+.alert--alter {
+  .alert__text {
+    color: inherit;
+  }
+
+  .alert__button {
+    @media (min-width: $wide-tablet-width) {
+      width: auto;
     }
   }
 }
