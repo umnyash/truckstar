@@ -21,12 +21,21 @@ mixin site-navigation({ short })
     ul.site-navigation__list&attributes(attributes)
       if !short
         +site-navigation__item({ text:'О нас', href: 'company.html', page: 'company-page' })
-      +site-navigation__item({ text:'Гарантия', href: pageClass === page ? '#guarantee' :'info.html#guarantee', page: 'info-page' })
-      +site-navigation__item({ text:'Оплата', href: pageClass === page ? '#payment' :'info.html#payment', page: 'info-page' })
-      +site-navigation__item({ text:'Доставка', href: pageClass === page ? '#delivery' :'info.html#delivery', page: 'info-page' })
+      if pageClass === 'info-page'
+        +site-navigation__item({ text:'Гарантия', href: '#guarantee' })
+        +site-navigation__item({ text:'Оплата', href: '#payment' })
+        +site-navigation__item({ text:'Доставка', href: '#delivery' })
+      else
+        +site-navigation__item({ text:'Гарантия', href: 'info.html#guarantee' })
+        +site-navigation__item({ text:'Оплата', href: 'info.html#payment' })
+        +site-navigation__item({ text:'Доставка', href: 'info.html#delivery' })
       if !short
-        +site-navigation__item({ text:'Обмен и возврат', href: pageClass === page ? '#exchange-and-return' :'info.html#exchange-and-return', page: 'info-page' })
-        +site-navigation__item({ text:'Вопрос-ответ', href: pageClass === page ? '#faq' :'info.html#faq', page: 'info-page' })
+        if pageClass === 'info-page'
+          +site-navigation__item({ text:'Обмен и возврат', href: '#exchange-and-return' })
+          +site-navigation__item({ text:'Вопрос-ответ', href: '#faq' })
+        else
+          +site-navigation__item({ text:'Обмен и возврат', href: 'info.html#exchange-and-return' })
+          +site-navigation__item({ text:'Вопрос-ответ', href: 'info.html#faq' })
         +site-navigation__item({ text:'Отзывы', href: 'reviews.html', page: 'reviews-page' })
         +site-navigation__item({ text:'Мои заказы', href: 'account.html', page: 'account-page' })
         +site-navigation__item({ text:'Выкуп машин', href: 'company.html', page: 'company-page' })

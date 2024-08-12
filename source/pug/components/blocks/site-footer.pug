@@ -35,27 +35,48 @@ mixin site-footer
             +logo
           ul.site-footer__navigation-1
             +site-footer__navigation-item({ text: 'О нас', href: 'company.html', page: 'company-page' })
-            +site-footer__navigation-item({ text: 'Вопрос-ответ', href: 'info.html#faq', page: 'info-page' })
-            +site-footer__navigation-item({ text: 'Гарантия', href: 'info.html#guarantee', page: 'info-page' })
+
+            if pageClass === 'info-page'
+              +site-footer__navigation-item({ text: 'Вопрос-ответ', href: '#faq' })
+              +site-footer__navigation-item({ text: 'Гарантия', href: '#guarantee' })
+            else
+              +site-footer__navigation-item({ text: 'Вопрос-ответ', href: 'info.html#faq' })
+              +site-footer__navigation-item({ text: 'Гарантия', href: 'info.html#guarantee' })
+
             +site-footer__navigation-item({ text: 'Отзывы', href: 'reviews.html', page: 'reviews-page' })
-            +site-footer__navigation-item({ text: 'Оплата', href: 'info.html#payment', page: 'info-page' })
+
+            if pageClass === 'info-page'
+              +site-footer__navigation-item({ text: 'Оплата', href: '#payment' })
+            else
+              +site-footer__navigation-item({ text: 'Оплата', href: 'info.html#payment' })
+
             +site-footer__navigation-item({ text: 'Контакты', href: 'contacts.html', page: 'contacts-page' })
-            +site-footer__navigation-item({ text: 'Доставка', href: 'info.html#delivery', page: 'info-page' })
+
+            if pageClass === 'info-page'
+              +site-footer__navigation-item({ text: 'Доставка', href: '#delivery' })
+            else
+              +site-footer__navigation-item({ text: 'Доставка', href: 'info.html#delivery' })
+
             +site-footer__navigation-item({ text: 'Мои заказы', href: 'account.html', page: 'account-page' })
-            +site-footer__navigation-item({ text: 'Обмен и возврат', href: 'info.html#exchange-and-return', page: 'info-page' })
+
+            if pageClass === 'info-page'
+              +site-footer__navigation-item({ text: 'Обмен и возврат', href: '#exchange-and-return' })
+            else
+              +site-footer__navigation-item({ text: 'Обмен и возврат', href: 'info.html#exchange-and-return' })
+
             +site-footer__navigation-item({ text: 'Выкуп машин', href: '#!' })
           ul.site-footer__navigation-2
-            +site-footer__navigation-item({ text: 'Chevrolet', href: 'category.html', page: 'category-page' })
-            +site-footer__navigation-item({ text: 'Scania', href: 'category.html', page: 'category-page' })
-            +site-footer__navigation-item({ text: 'Daf', href: 'category.html', page: 'category-page' })
-            +site-footer__navigation-item({ text: 'Volvo', href: 'category.html', page: 'category-page' })
-            +site-footer__navigation-item({ text: 'Iveco', href: 'category.html', page: 'category-page' })
-            +site-footer__navigation-item({ text: 'КАМАЗ', href: 'category.html', page: 'category-page' })
-            +site-footer__navigation-item({ text: 'Man', href: 'category.html', page: 'category-page' })
-            +site-footer__navigation-item({ text: 'Lada', href: 'category.html', page: 'category-page' })
-            +site-footer__navigation-item({ text: 'Mercedes-Benz', href: 'category.html', page: 'category-page' })
-            +site-footer__navigation-item({ text: 'Tatra', href: 'category.html', page: 'category-page' })
-            +site-footer__navigation-item({ text: 'Renault', href: 'category.html', page: 'category-page' })
+            +site-footer__navigation-item({ text: 'Chevrolet', href: 'truck-categories.html', page: 'truck-categories-page' })
+            +site-footer__navigation-item({ text: 'Scania', href: 'truck-categories.html', page: 'truck-categories-page' })
+            +site-footer__navigation-item({ text: 'Daf', href: 'truck-categories.html', page: 'truck-categories-page' })
+            +site-footer__navigation-item({ text: 'Volvo', href: 'truck-categories.html', page: 'truck-categories-page' })
+            +site-footer__navigation-item({ text: 'Iveco', href: 'truck-categories.html', page: 'truck-categories-page' })
+            +site-footer__navigation-item({ text: 'КАМАЗ', href: 'truck-categories.html', page: 'truck-categories-page' })
+            +site-footer__navigation-item({ text: 'Man', href: 'truck-categories.html', page: 'truck-categories-page' })
+            +site-footer__navigation-item({ text: 'Lada', href: 'truck-categories.html', page: 'truck-categories-page' })
+            +site-footer__navigation-item({ text: 'Mercedes-Benz', href: 'truck-categories.html', page: 'truck-categories-page' })
+            +site-footer__navigation-item({ text: 'Tatra', href: 'truck-categories.html', page: 'cattruck-categories-page' })
+            +site-footer__navigation-item({ text: 'Renault', href: 'truck-categories.html', page: 'cattruck-categories-page' })
         .site-footer__bottom
           p.site-footer__copyright © 2024, Truckstar. Все права защищены
           a.site-footer__privacy-policy(href='#' target='_blank' rel='noopener' data-modal-opener='policy') Политика конфиденциальности
