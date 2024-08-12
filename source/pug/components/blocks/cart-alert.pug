@@ -1,0 +1,21 @@
+mixin cart-alert
+  .cart-alert&attributes(attributes)
+    h2.cart-alert__heading.heading.heading--size_s Товар добавлен в корзину
+    .cart-alert__product
+      h3.cart-alert__product-heading
+        a.cart-alert__product-link(href='product.html') Кронштейн крыла переднего для Man F2000 II Evolution / FE (с 1998 по 2001 год)
+      a.cart-alert__product-collection(href='truck-subcategories.html') Man 189138736 #[span.nobr (2014-2017)]
+      p.cart-alert__product-price 6 000 ₽
+      picture.cart-alert__product-image-wrapper
+        img.cart-alert__product-image(src="img/products/2.webp" width='190' height='144' srcset='img/products/2@2x.webp 2x' alt='')
+    .cart-alert__footer
+      +button({
+        tag: 'button',
+        type: 'button',
+        text: 'Продолжить покупки'
+      })(class='cart-alert__button cart-alert__button--close button--secondary button--right button--size_l' data-modal-close-button)
+      +button({
+        tag: 'a',
+        text: 'Оформить заказ',
+        href: 'cart.html'
+      })(class='cart-alert__button button--primary-alter button--right button--size_l')

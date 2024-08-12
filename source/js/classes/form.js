@@ -4,7 +4,7 @@
 class Form {
   constructor(formElement) {
     this.formElement = formElement;
-    this.textFieldControlElements = this.formElement.querySelectorAll('.text-field__control');
+    this.textFieldControlElements = this.formElement.querySelectorAll('.text-field__control, .simple-form__control');
     this.actionUrl = this.formElement.action;
     this.submitButtonElement = this.formElement.querySelector('[data-submit-button]');
     this.validator = new FormValidator(this.formElement);

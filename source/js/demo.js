@@ -80,6 +80,25 @@ if (reviewModalForm) {
 /* * * * * * * * * * * * * * * * * * * * * * * */
 
 /* * * * * * * * * * * * * * * * * * * * * * * *
+ * Добавление товара в корзину
+ */
+let cartModalAlert = null;
+const cartModalAlertElement = document.querySelector('.modal--with_cart-alert');
+
+if (cartModalAlertElement) {
+  cartModalAlert = new Modal(cartModalAlertElement);
+}
+
+document.addEventListener('click', (evt) => {
+  const productCartButtonElement = evt.target.closest('[data-product-cart-button]');
+
+  if (cartModalAlert && productCartButtonElement) {
+    cartModalAlert.open();
+  }
+});
+/* * * * * * * * * * * * * * * * * * * * * * * */
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
  * Добавление обработчиков в форме корзины
  */
 if (cart?.form) {

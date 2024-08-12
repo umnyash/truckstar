@@ -113,7 +113,6 @@
       transform: scale(0.8);
       transition-property: opacity, transform;
       transition-duration: calc($modal-animation-duration / 1.5);
-      // transition-duration: $modal-animation-duration;
     }
   }
 
@@ -135,7 +134,6 @@
       transform: scale(0.9);
       transition-property: opacity, transform;
       transition-duration: calc($modal-animation-duration / 1.5);
-      // transition-duration: $modal-animation-duration;
     }
   }
 
@@ -183,7 +181,8 @@
 }
 
 .modal--position_center.modal--with_form,
-.modal--position_center.modal--with_alert {
+.modal--position_center.modal--with_alert,
+.modal--position_center.modal--with_cart-alert {
   padding: 20px 0 0;
 
   @media (min-width: $tablet-width) {
@@ -207,8 +206,8 @@
 
 .modal--with_map.modal--with_map {
   &[open] {
-    // background: var(--background-color);
-    background: #ffff00;
+    background: var(--background-color);
+    // background: #ffff00;
   }
 
   .modal__inner {
@@ -256,8 +255,8 @@
 }
 
 .modal[open] {
-  // background-color: var(--overlay-color);
-  background: #ff0000;
+  background-color: var(--overlay-color);
+  // background: #ff0000;
   visibility: visible;
   transition-duration: calc($modal-animation-duration / 1.5);
 
