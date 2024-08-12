@@ -1270,6 +1270,12 @@ let callbackModalFormElement = document.querySelector('[data-modal="callback-for
 if (callbackModalFormElement) {
   callbackModalForm = new ModalForm(callbackModalFormElement);
 }
+let buyModalForm = null;
+let buyModalFormElement = document.querySelector('[data-modal="buy-form"]');
+if (buyModalFormElement) {
+  console.log('buy');
+  buyModalForm = new ModalForm(buyModalFormElement);
+}
 let reviewModalForm = null;
 let reviewModalFormElement = document.querySelector('[data-modal="review-form"]');
 if (reviewModalFormElement) {
