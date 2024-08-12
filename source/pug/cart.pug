@@ -16,3 +16,9 @@ block content
 append modals
   +modal(class='modal--position_cover modal--with_map' data-modal='locations')
     +modal-locations
+  +modal(class='modal--position_right modal--with_document' data-modal='payment')
+    +payment-document(class='modal__document')
+  +modal(class='modal--position_right modal--with_document' data-modal='delivery')
+    +delivery-document(class='modal__document')
+  +modal(class='modal--position_right modal--with_document' data-modal='guarantee')
+    +guarantee-document(class='modal__document')

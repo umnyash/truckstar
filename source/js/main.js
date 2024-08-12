@@ -33,6 +33,8 @@ document.querySelectorAll('[data-modal="locations"]').forEach((modalElement) => 
   initLocationsModal(modalElement);
 });
 
+document.querySelectorAll('.modal--with_document').forEach(initDocumentModal);
+
 let requestForm = null;
 const requestFormElement = document.querySelector('.request-form');
 
@@ -47,3 +49,7 @@ if (callbackModalFormElement) {
   callbackModalForm = new ModalForm(callbackModalFormElement);
 }
 /* * * * * * * * * * * * * * * * * * * * * * * */
+
+document.body.addEventListener('click', (evt) => {
+  console.log('click', evt.target)
+})

@@ -3,4 +3,4 @@ mixin page-navigation({ links })
     ul.page-navigation__list
       each link in links
         li.page-navigation__item
-          a.page-navigation__link(href= link.href)= link.text
+          a.page-navigation__link(href= link.href data-modal-opener= link.modal)= link.text
