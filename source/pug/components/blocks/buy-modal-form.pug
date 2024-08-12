@@ -1,0 +1,73 @@
+mixin buy-modal-form
+  form.modal-form(action='https://fakestoreapi.com/products' method='post' target='_blank')&attributes(attributes)
+    .modal-form__inner
+      .modal-form__header
+        h2.modal-form__heading.heading.heading--size_s Заполните форму на выкуп машины
+      +dropdown({
+        name: 'brand',
+        label: 'Марка',
+        options: [
+          {
+            text: 'Man',
+            value: 'man'
+          },
+          {
+            text: 'Mercedes-Benz',
+            value: 'mercedes-benz',
+          },
+          {
+            text: 'Scania',
+            value: 'scania'
+          },
+          {
+            text: 'КАМАЗ',
+            value: 'kamaz',
+          },
+          {
+            text: 'Chevrolet',
+            value: 'chevrolet'
+          },
+        ]
+      })(class='modal-form__field dropdown--big')
+      +dropdown({
+        name: 'year',
+        label: 'Год выпуска',
+        options: [
+          {
+            text: '2007',
+            value: '2007'
+          },
+          {
+            text: '2012',
+            value: '2012',
+          },
+          {
+            text: '2017',
+            value: '2017'
+          },
+          {
+            text: '2020',
+            value: '2020',
+          },
+        ]
+      })(class='modal-form__field dropdown--big')
+      +text-field({
+        name: 'phone',
+        type: 'tel',
+        placeholder: 'Телефон',
+        required: true,
+        hidableClearButton: true,
+      })(class='modal-form__field text-field--alter text-field--empty')
+      +text-area({
+        name: 'description',
+        placeholder: 'Описание запчасти',
+        required: true,
+      })(class='modal-form__field text-area--empty')
+      +images-field(class='modal-form__images-field')
+      .modal-form__footer
+        +button({
+          tag: 'button',
+          type: 'submit',
+          text: 'Отправить'
+        })(class='modal-form__submit-button button--secondary button--right button--size_l' data-submit-button)
+        small.modal-form__comment Нажимая на кнопку «Отправить», вы даете #[a.modal-form__comment-link(href='#!') согласие на обработку персональных данных]

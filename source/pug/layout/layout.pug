@@ -29,6 +29,8 @@ html.page(class= pageClass lang='ru')
     block modals
       +modal(class='modal--position_center modal--with_form' data-modal='callback-form')
         +callback-modal-form(class='modal__form')
+      +modal(class='modal--position_center modal--with_form' data-modal='buy-form')
+        +buy-modal-form(class='modal__form')
       +modal(class='modal--position_right modal--with_document' data-modal='policy')
         +policy-document(class='modal__document')
       +modal(class='modal--position_center modal--with_cart-alert')

@@ -1,6 +1,9 @@
-mixin site-footer__navigation-item({ text, href, page })
+mixin site-footer__navigation-item({ text, href, modal, page })
   li.site-footer__navigation-item
-    a.site-footer__navigation-link(href= !(pageClass === page) && href)&attributes(attributes)= text
+    a.site-footer__navigation-link(
+      href= !(pageClass === page) && href
+      data-modal-opener= modal
+    )&attributes(attributes)= text
 
 
 mixin site-footer
@@ -64,7 +67,7 @@ mixin site-footer
             else
               +site-footer__navigation-item({ text: 'Обмен и возврат', href: 'info.html#exchange-and-return' })
 
-            +site-footer__navigation-item({ text: 'Выкуп машин', href: '#!' })
+            +site-footer__navigation-item({ text: 'Выкуп машин', href: '#', modal: 'buy-form' })
           ul.site-footer__navigation-2
             +site-footer__navigation-item({ text: 'Chevrolet', href: 'truck-categories.html', page: 'truck-categories-page' })
             +site-footer__navigation-item({ text: 'Scania', href: 'truck-categories.html', page: 'truck-categories-page' })

@@ -7,17 +7,3 @@ mixin images-field
         span.images-field__label-comment Допустимые форматы для загрузки: PNG, JPEG
       input.images-field__control.visually-hidden(type='file' multiple accept='image/png, image/jpg, image/jpeg')
     ul.images-field__list
-      li.images-field__list-item
-        img.images-field__preview(src='img/products/3.webp' alt='')
-        +image-button({
-          tag: 'button',
-          type: 'button',
-          text: 'Удалить фото'
-        })(class='images-field__delete-button image-button--size_xs image-button--primary image-button--icon_cross')
-      li.images-field__list-item
-        img.images-field__preview(src='img/products/3.webp' alt='')
-        +image-button({
-          tag: 'button',
-          type: 'button',
-          text: 'Удалить фото'
-        })(class='images-field__delete-button image-button--size_xs image-button--primary image-button--icon_cross')

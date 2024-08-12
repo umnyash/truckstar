@@ -38,28 +38,31 @@ document.querySelectorAll('.product .page-navigation').forEach(initProductNaviga
 
 let requestForm = null;
 const requestFormElement = document.querySelector('.request-form');
-
 if (requestFormElement) {
   requestForm = new Form(requestFormElement);
 }
 
 let callbackModalForm = null;
 let callbackModalFormElement = document.querySelector('[data-modal="callback-form"]');
-
 if (callbackModalFormElement) {
   callbackModalForm = new ModalForm(callbackModalFormElement);
 }
 
+let buyModalForm = null;
+let buyModalFormElement = document.querySelector('[data-modal="buy-form"]');
+if (buyModalFormElement) {
+  console.log('buy')
+  buyModalForm = new ModalForm(buyModalFormElement);
+}
+
 let reviewModalForm = null;
 let reviewModalFormElement = document.querySelector('[data-modal="review-form"]');
-
 if (reviewModalFormElement) {
   reviewModalForm = new ModalForm(reviewModalFormElement);
 }
 
 let subscriptionForm = null;
 let subscriptionFormElement = document.querySelector('.site-footer__subscription .simple-form');
-
 if (subscriptionFormElement) {
   subscriptionForm = new Form(subscriptionFormElement);
 }
