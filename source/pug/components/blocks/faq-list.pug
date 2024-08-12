@@ -2,7 +2,7 @@ mixin faq-list({ folds, alter })
   .faq-list(class= alter && 'faq-list--alter')&attributes(attributes)
     ul.faq-list__items.folds(class= alter && 'folds--alter')
       each fold in folds
-        li.faq-list__item.folds__item(class= fold.open && 'folds__item--open')
+        li.faq-list__item.folds__item(class= fold.open && 'folds__item--open' id= fold.id)
           header.folds__item-header
             .folds__item-header-inner
               h3.faq-list__item-heading

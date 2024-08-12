@@ -58,18 +58,21 @@ mixin product
         .product__photo-slider-wrapper
           +photo-slider
         .product__links-section-wrapper
-          +links-section({ section: trucksLinksSection })
+          +links-section({ section: trucksLinksSection })(id='product-target-info')
         .product__faq-list-wrapper
           +faq-list({
             folds: [
               {
                 heading: 'Доставка',
+                id: 'product-delivery-info'
               },
               {
                 heading: 'Оплата',
+                id: 'product-payment-info'
               },
               {
                 heading: 'Гарантия',
+                id: 'product-guarantee-info',
                 open: true,
               },
             ],
