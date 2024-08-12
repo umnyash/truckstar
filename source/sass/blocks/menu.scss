@@ -194,6 +194,35 @@
   }
 }
 
+.menu__header-button.menu__header-button {
+  font-size: 16px;
+  line-height: 19px;
+
+  @media (min-width: $wide-desktop-width) {
+    font-size: 18px;
+    line-height: 20px;
+    letter-spacing: -0.01em;
+  }
+
+  .button__inner {
+    column-gap: 8px;
+
+    @media (min-width: $wide-desktop-width) {
+      column-gap: 12px;
+    }
+  }
+
+  .button__icon {
+    width: 20px;
+    height: 20px;
+
+    @media (min-width: $wide-desktop-width) {
+      width: 24px;
+      height: 24px;
+    }
+  }
+}
+
 .menu__content-wrapper {
   position: relative;
   height: 100%;
