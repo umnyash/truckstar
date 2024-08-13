@@ -101,8 +101,11 @@ class Modal {
     this.initOpeners();
     this.modalElement.addEventListener('close', () => this.onModalClose());
     this.onOpenerClick = onOpenerClick;
-    this.modalElement.querySelectorAll('.modal__button--close, [data-modal-close-button]').forEach(buttonElement => {
-      buttonElement.addEventListener('click', () => this.close());
+    this.modalElement.addEventListener('click', evt => {
+      if (evt.target === this.modalElement || evt.target.closest('[data-modal-close-button]')) {
+        evt.preventDefault();
+        this.close();
+      }
     });
     if (!document.body.contains(this.modalElement)) {
       document.body.append(this.modalElement);
@@ -748,12 +751,13 @@ function initDropdown(dropdownElement) {
   });
   function onDocumentClick(evt) {
     const targetElement = evt.target.closest('.dropdown');
-    if (targetElement !== dropdownElement) {
+    if (targetElement !== dropdownElement || evt.target.matches('.dropdown__list-wrapper')) {
+      evt.preventDefault();
       close();
     }
   }
   function open() {
-    if (!laptopWidthMediaQueryList.matches) {
+    if (!laptopWidthMediaQueryList.matches && !Modal.openModalsCount) {
       lockPageScroll();
     }
     clearTimeout(unlockingPageTimer);
@@ -765,10 +769,13 @@ function initDropdown(dropdownElement) {
   ;
   function close() {
     dropdownElement.classList.remove('dropdown--open');
+    document.removeEventListener('click', onDocumentClick);
+    if (Modal.openModalsCount) {
+      return;
+    }
     unlockingPageTimer = setTimeout(() => {
       unlockPageScroll();
     }, MEDIUM_INTERACTION_DURATION);
-    document.removeEventListener('click', onDocumentClick);
   }
   ;
 }
@@ -895,21 +902,24 @@ async function initMap(mapElement) {
 function initMenu(menuElement) {
   const menuContentElement = menuElement.querySelector('.menu__content');
   const openerElement = document.querySelector('.site-header__burger');
-  const closeButton = document.querySelector('.menu__button--close');
+  new SimpleBar(menuContentElement, {
+    autoHide: false
+  });
+  const customScrollBarContentWrapper = menuElement.querySelector('.simplebar-content-wrapper');
   openerElement.addEventListener('click', evt => {
     evt.preventDefault();
     lockPageScroll();
+    customScrollBarContentWrapper.scrollTop = 0;
     menuElement.showModal();
   });
-  closeButton.addEventListener('click', evt => {
-    evt.preventDefault();
-    menuElement.close();
-    setTimeout(() => {
-      unlockPageScroll();
-    }, MEDIUM_INTERACTION_DURATION);
-  });
-  new SimpleBar(menuContentElement, {
-    autoHide: false
+  menuElement.addEventListener('click', evt => {
+    if (evt.target === menuElement || evt.target.closest('.menu__button--close')) {
+      evt.preventDefault();
+      menuElement.close();
+      setTimeout(() => {
+        unlockPageScroll();
+      }, MEDIUM_INTERACTION_DURATION);
+    }
   });
   const headingsWrapperElement = menuElement.querySelector('.menu__headings');
   const headingElements = headingsWrapperElement.querySelectorAll('.menu__heading[data-name]');
@@ -926,6 +936,7 @@ function initMenu(menuElement) {
       headingElements[i].classList.toggle('menu__heading--active', headingElements[i].dataset.name === sectionName);
       sectionElements[i].classList.toggle('menu__catalog-navigation-section--active', sectionElements[i].dataset.name === sectionName);
     }
+    customScrollBarContentWrapper.scrollTop = 0;
   });
 
   // Навигация по спискам
@@ -1264,7 +1275,8 @@ function initSiteHeader(headerElement) {
   const userMenuElement = headerElement.querySelector('.shortcuts__item--user .shortcuts__menu');
   let unlockingPageTimer = null;
   function onDocumentClick(evt) {
-    if (evt.target.closest('.shortcuts__menu-close-button') || evt.target.closest('.shortcuts__menu-link')) {
+    console.log(evt.target);
+    if (evt.target.closest('.shortcuts__menu-close-button') || evt.target.closest('.shortcuts__menu-link') || evt.target.matches('.shortcuts__menu')) {
       closeUserMenu();
     }
   }
@@ -1293,6 +1305,7 @@ function initSiteHeader(headerElement) {
     if (userLinkElement.matches('[data-modal-opener]') || laptopWidthMediaQueryList.matches) {
       return;
     }
+    evt.preventDefault();
     openUserMenu();
   });
 
