@@ -3,13 +3,15 @@ mixin info
     .container
       .info__inner
         h1.visually-hidden Информация для клиента
-        section.info__section(id='payment')
+        section.info__section
+          span.info__section-anchor(id='payment')
           h2.info__section-heading Оплата
           .info__section-content-wrapper
             .info__section-content
               .raw-content-2
                 p Оплата любым для Вас удобным способом: Наличными при самовывозе, Безналичной оплатой по счёту без НДС, Переводом на карту по номеру карты, Через банковский терминал и через QR-код.
-        section.info__section(id='delivery')
+        section.info__section
+          span.info__section-anchor(id='delivery')
           h2.info__section-heading Доставка
           .info__section-content-wrapper
             .info__section-content
@@ -18,7 +20,8 @@ mixin info
                 p Осуществляем доставку своим транспортном по области и регионам. Стоимость доставки зависит от габаритов и массы груза, а также от выбранной транспортной компании, и уточняется до оформления заказа.
                 p Мы сами упаковываем все отправляемые запчасти и несем за это ответственность. Поэтому ситуация, когда груз повреждается при перевозке, практически исключена.
                 p Вы всегда сами можете забрать купленные запчасти с нашего склада по адресам: #[b Нижегородская область, городской округ Дзержинск, посёлок Гнилицкие Дворики, 17с1 и Рязань, ул. Новоселковская, д. 11].
-        section.info__section(id='guarantee')
+        section.info__section
+          span.info__section-anchor(id='guarantee')
           h2.info__section-heading Гарантия
           .info__section-content-wrapper
             .info__section-content
@@ -30,7 +33,8 @@ mixin info
                 p Возврат осуществляется при наличии заказ-наряда СТО с печатью, подтверждающего неисправность запчасти, данного товарного чека подписанного покупателем, сотрудником и имеющего печать компании.
                 p Все расходы транспортной компании, при отправке товара и в случае его возврата - несет покупатель.
                 strong При несоблюдение вышеперечисленных гарантийных условий, гарантия на товар не распространяется.
-        section.info__section(id='faq')
+        section.info__section
+          span.info__section-anchor(id='faq')
           h2.info__section-heading Вопрос-ответ
           .info__section-content-wrapper
             +faq-list({
@@ -50,7 +54,8 @@ mixin info
                 },
               ]
             })
-        section.info__section(id='exchange-and-return')
+        section.info__section
+          span.info__section-anchor(id='exchange-and-return')
           h2.info__section-heading Обмен и возврат
           .info__section-content-wrapper
             .info__section-content
