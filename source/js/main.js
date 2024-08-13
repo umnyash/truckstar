@@ -7,6 +7,7 @@ const inputEvent = new Event('input', { bubbles: true });
 const changeEvent = new Event('change', { bubbles: true });
 
 initSiteHeader(document.querySelector('.site-header'));
+document.querySelectorAll('.dropdown').forEach(initDropdown);
 
 let cart = null;
 const cartElement = document.querySelector('.cart');
@@ -24,7 +25,6 @@ document.querySelectorAll('.photo-slider').forEach(initPhotoSlider);
 document.querySelectorAll('.checker-cards__list').forEach(initCheckerCardsList);
 document.querySelectorAll('.text-field:not(.cart-form [data-delivery-section] .text-field)').forEach(initTextField);
 document.querySelectorAll('.text-area').forEach(initTextArea);
-document.querySelectorAll('.dropdown').forEach(initDropdown);
 document.querySelectorAll('.catalog-navigation').forEach(initCatalogNavigation);
 document.querySelectorAll('.menu').forEach(initMenu);
 document.querySelectorAll('input[type="tel"]').forEach(initPhoneField);
