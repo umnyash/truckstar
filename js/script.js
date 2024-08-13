@@ -4,7 +4,7 @@ const LAPTOP_WIDTH_MEDIA_QUERY = '(min-width: 1280px)';
 const DESKTOP_WIDTH_MEDIA_QUERY = '(min-width: 1366px)';
 const MEDIUM_INTERACTION_DURATION = 400;
 const MODAL_ANIMATION_DURATION = 500; // Соответствует $modal-animation-duration в variables.scss
-
+const CODE_LENGTH = 4;
 function lockPageScroll() {
   const bodyWidth = document.body.clientWidth;
   document.body.classList.add('scroll-lock');
@@ -101,7 +101,7 @@ class Modal {
     this.initOpeners();
     this.modalElement.addEventListener('close', () => this.onModalClose());
     this.onOpenerClick = onOpenerClick;
-    this.modalElement.querySelectorAll('.modal__close-button, [data-modal-close-button]').forEach(buttonElement => {
+    this.modalElement.querySelectorAll('.modal__button--close, [data-modal-close-button]').forEach(buttonElement => {
       buttonElement.addEventListener('click', () => this.close());
     });
     if (!document.body.contains(this.modalElement)) {
@@ -182,7 +182,7 @@ class Alert extends Modal {
     const modalString = `
       <dialog class="modal modal--position_center modal--with_alert">
         <div class="modal__inner">
-          <button class="modal__close-button" type="button">
+          <button class="modal__button modal__button--close" type="button">
             <span class="visually-hidden">Закрыть</span>
           </button>
           <section class="alert modal__alert ${status === 'error' ? 'alert--error' : ''} ${mode === 'alter' ? 'alert--alter' : ''}">
@@ -358,8 +358,10 @@ class Form {
           formData.append('images[]', file);
         });
         sendData(this.actionUrl, formData, data => {
-          this.formElement.reset();
           this.successHandler(data);
+          if (!this.formElement.matches('.modal-entry__form--code')) {
+            this.formElement.reset();
+          }
         }, data => {
           this.errorHandler(data);
         }, () => {
@@ -423,6 +425,100 @@ class ModalForm extends Modal {
     });
   };
 }
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
+ * modal-entry.js
+ */
+class ModalEntry extends Modal {
+  resendTimeInterval = 4;
+  timer = 0;
+  constructor(modalElement) {
+    super(modalElement);
+    this.backButtonElement = modalElement.querySelector('.modal__button--back');
+    this.backButtonElement.addEventListener('click', evt => {
+      evt.preventDefault();
+      this.switchStep(1);
+    });
+    this.codeFormElement = modalElement.querySelector('.modal-entry__form--code');
+    this.codeForm = new Form(this.codeFormElement);
+    this.phoneFieldElement = this.codeFormElement.querySelector('[data-name="phone"]');
+    this.loginFormElement = modalElement.querySelector('.modal-entry__form--login');
+    this.loginForm = new Form(this.loginFormElement);
+    this.currentPhoneTextElement = this.loginFormElement.querySelector('[data-current-phone-text]');
+    this.codeFieldElement = this.loginFormElement.querySelector('[data-name="code"]');
+    this.resendElement = this.loginFormElement.querySelector('.modal-form__resend');
+    this.resendTimerElement = this.resendElement.querySelector('.modal-form__resend-timer');
+    this.resendButtonElement = this.resendElement.querySelector('.modal-form__resend-button');
+    this.loginFormSubmitButtonElement = this.loginFormElement.querySelector('[data-submit-button]');
+    this.codeFieldElement.addEventListener('input', evt => {
+      if (evt.target.value.length > CODE_LENGTH) {
+        evt.target.value = evt.target.value.slice(0, CODE_LENGTH);
+      }
+      if (this.loginFormSubmitButtonElement.classList.contains('button--pending')) {
+        return;
+      }
+      this.loginFormSubmitButtonElement.disabled = !evt.target.value;
+    });
+    this.switchStep(1);
+    this.resendButtonElement.addEventListener('click', evt => {
+      evt.preventDefault();
+      this.codeFormElement.requestSubmit();
+      // this.startTimer();
+    });
+  }
+  startTimer = () => {
+    if (this.timer <= 0) {
+      this.timer = this.resendTimeInterval;
+      this.resendTimerElement.textContent = this.timer;
+      this.resendElement.classList.add('modal-form__resend--waiting');
+      const timerId = setInterval(() => {
+        this.timer--;
+        this.resendTimerElement.textContent = this.timer;
+        if (this.timer <= 0) {
+          clearInterval(timerId);
+          this.resendElement.classList.remove('modal-form__resend--waiting');
+        }
+      }, 1000);
+    }
+  };
+  switchStep = step => {
+    if (step === 1) {
+      this.backButtonElement.classList.add('modal__button--hidden');
+      this.codeFormElement.classList.remove('modal-entry__form--hidden');
+      this.loginFormElement.classList.add('modal-entry__form--hidden');
+    } else if (step === 2) {
+      this.startTimer();
+      const formattedPhone = this.phoneFieldElement.value.replace(/[()]/g, '').replace(/-/g, ' ');
+      this.currentPhoneTextElement.textContent = formattedPhone;
+      this.backButtonElement.classList.remove('modal__button--hidden');
+      this.codeFormElement.classList.add('modal-entry__form--hidden');
+      this.loginFormElement.classList.remove('modal-entry__form--hidden');
+    }
+  };
+
+  // setCodeFormHandlers = (successHandler, errorHandler) => {
+  //   this.codeForm.setHandlers(
+  //     () => {
+  //       successHandler();
+  //       this.modalElement.close();
+  //     },
+  //     () => {
+  //       errorHandler();
+  //     });
+  // };
+
+  // setHandlers = (successHandler, errorHandler) => {
+  //   this.form.setHandlers(
+  //     () => {
+  //       successHandler();
+  //       this.modalElement.close();
+  //     },
+  //     () => {
+  //       errorHandler();
+  //     });
+  // };
+}
+/* * * * * * * * * * * * * * * * * * * * * * * */
 
 /* * * * * * * * * * * * * * * * * * * * * * * *
  * cart.js
@@ -1138,7 +1234,7 @@ function initSiteHeader(headerElement) {
   }
   ;
   userLinkElement.addEventListener('click', evt => {
-    if (userLinkElement.classList.contains('shortcuts__link--user_not-authorized') || laptopWidthMediaQueryList.matches) {
+    if (userLinkElement.matches('[data-modal-opener]') || laptopWidthMediaQueryList.matches) {
       return;
     }
     openUserMenu();
@@ -1220,6 +1316,8 @@ function initTextField(fieldElement) {
     controlElement.value = '';
     updateEmptyStatus();
     controlElement.focus();
+    controlElement.dispatchEvent(inputEvent);
+    controlElement.dispatchEvent(changeEvent);
   });
 }
 /* * * * * * * * * * * * * * * * * * * * * * * */
@@ -1273,7 +1371,6 @@ if (callbackModalFormElement) {
 let buyModalForm = null;
 let buyModalFormElement = document.querySelector('[data-modal="buy-form"]');
 if (buyModalFormElement) {
-  console.log('buy');
   buyModalForm = new ModalForm(buyModalFormElement);
 }
 let reviewModalForm = null;
@@ -1285,6 +1382,11 @@ let subscriptionForm = null;
 let subscriptionFormElement = document.querySelector('.site-footer__subscription .simple-form');
 if (subscriptionFormElement) {
   subscriptionForm = new Form(subscriptionFormElement);
+}
+let modalEntry = null;
+const modalEntryElement = document.querySelector('[data-modal="entry"]');
+if (modalEntryElement) {
+  modalEntry = new ModalEntry(modalEntryElement);
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * */
