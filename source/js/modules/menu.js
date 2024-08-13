@@ -6,9 +6,14 @@ function initMenu(menuElement) {
   const openerElement = document.querySelector('.site-header__burger');
   const closeButton = document.querySelector('.menu__button--close');
 
+  new SimpleBar(menuContentElement, { autoHide: false });
+  const customScrollBarContentWrapper = menuElement.querySelector('.simplebar-content-wrapper');
+
   openerElement.addEventListener('click', (evt) => {
     evt.preventDefault();
     lockPageScroll();
+
+    customScrollBarContentWrapper.scrollTop = 0;
     menuElement.showModal();
   });
 
@@ -21,7 +26,6 @@ function initMenu(menuElement) {
     }, MEDIUM_INTERACTION_DURATION);
   });
 
-  new SimpleBar(menuContentElement, { autoHide: false });
 
 
   const headingsWrapperElement = menuElement.querySelector('.menu__headings');
@@ -48,6 +52,8 @@ function initMenu(menuElement) {
         sectionElements[i].dataset.name === sectionName
       );
     }
+
+    customScrollBarContentWrapper.scrollTop = 0;
   });
 
   // Навигация по спискам

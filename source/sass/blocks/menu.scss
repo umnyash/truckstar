@@ -328,6 +328,7 @@
   line-height: 19px;
   color: var(--text-weak-light-color);
   background: rgba(85, 85, 85, 0.2);
+  transition: border-color $medium-interaction-duration;
 
   @media (min-width: $wide-desktop-width) {
     padding: 25px 31px 26px 23px;
@@ -363,6 +364,15 @@
   border: none;
   color: var(--text-light-color);
   background: transparent;
+  transition: color $medium-interaction-duration;
+
+  &:hover {
+    color: var(--accent-color);
+  }
+
+  &:active {
+    color: var(--accent-dark-color);
+  }
 }
 
 /////////////////////////////////////// Стили для переходов между списками
