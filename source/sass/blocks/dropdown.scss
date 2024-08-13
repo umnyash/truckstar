@@ -217,17 +217,17 @@
   border-bottom-color: transparent;
 }
 
-// .dropdown--big {
-//   @media (max-width: ($desktop-width - 1)) {
-//     .dropdown__toggle-button-text {
-//       padding: 12px 0;
-//     }
+.dropdown--big {
+  @media (max-width: ($desktop-width - 1)) {
+    .dropdown__toggle-button-text {
+      padding: 12px 0;
+    }
 
-//     .dropdown__list-items {
-//       max-height: 429px; // 43px * 10 - 1px
-//     }
-//   }
-// }
+    .dropdown__list-items {
+      max-height: 429px; // 43px * 10 - 1px
+    }
+  }
+}
 
 .dropdown--open {
   .dropdown__toggle-button::after {

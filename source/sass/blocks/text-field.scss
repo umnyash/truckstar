@@ -2,20 +2,6 @@
   font: 500 16px/19px $main-font-family;
   color: var(--text-color);
 
-  //////////////////////
-  font-size: 14px; ///////////////
-  line-height: 17px; ///////////////////////////
-
-  ///////////////////////////////////////
-  @media (min-width: $desktop-width) {
-    /////////////////
-    font-size: 16px; ////////////////////////
-    line-height: 19px; ////////////////////////
-  }
-
-  ///////////////////////////////
-  ////////////////////////
-
   @media (min-width: $wide-desktop-width) {
     font-size: 20px;
     line-height: 24px;
