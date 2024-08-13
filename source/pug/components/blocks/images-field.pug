@@ -6,4 +6,6 @@ mixin images-field
         span.images-field__label Добавить фото запчасти
         span.images-field__label-comment Допустимые форматы для загрузки: PNG, JPEG
       input.images-field__control.visually-hidden(type='file' multiple accept='image/png, image/jpg, image/jpeg')
+    if requestImagesFieldError
+      p.images-field__error-text Не удалось загрузить фото, попробуйте снова
     ul.images-field__list

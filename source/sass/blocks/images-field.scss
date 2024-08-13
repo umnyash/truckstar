@@ -131,3 +131,22 @@
   top: 4px;
   right: 8px;
 }
+
+.images-field__error-text {
+  margin: 12px 0 0;
+  font-size: 14px;
+  line-height: 17px;
+  font-weight: 500;
+  color: var(--accent-color);
+
+  @media (min-width: $desktop-width) {
+    font-size: 16px;
+    line-height: 19px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    margin-top: 16px;
+    font-size: 20px;
+    line-height: 24px;
+  }
+}
