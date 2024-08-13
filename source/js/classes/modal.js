@@ -11,7 +11,7 @@ class Modal {
     this.modalElement.addEventListener('close', () => this.onModalClose());
     this.onOpenerClick = onOpenerClick;
 
-    this.modalElement.querySelectorAll('.modal__close-button, [data-modal-close-button]')
+    this.modalElement.querySelectorAll('.modal__button--close, [data-modal-close-button]')
       .forEach((buttonElement) => {
         buttonElement.addEventListener('click', () => this.close());
       })

@@ -17,7 +17,7 @@ class Alert extends Modal {
     const modalString = `
       <dialog class="modal modal--position_center modal--with_alert">
         <div class="modal__inner">
-          <button class="modal__close-button" type="button">
+          <button class="modal__button modal__button--close" type="button">
             <span class="visually-hidden">Закрыть</span>
           </button>
           <section class="alert modal__alert ${(status === 'error') ? 'alert--error' : ''} ${(mode === 'alter') ? 'alert--alter' : ''}">

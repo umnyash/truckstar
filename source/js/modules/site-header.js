@@ -42,7 +42,7 @@ function initSiteHeader(headerElement) {
   };
 
   userLinkElement.addEventListener('click', (evt) => {
-    if (userLinkElement.classList.contains('shortcuts__link--user_not-authorized') || laptopWidthMediaQueryList.matches) {
+    if (userLinkElement.matches('[data-modal-opener]') || laptopWidthMediaQueryList.matches) {
       return;
     }
 

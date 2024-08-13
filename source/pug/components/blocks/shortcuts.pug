@@ -8,7 +8,7 @@ mixin shortcuts
         a.shortcuts__link.shortcuts__link--cart(href='cart.html')
           span.visually-hidden Корзина
       li.shortcuts__item.shortcuts__item--user
-        a.shortcuts__link.shortcuts__link--user(href='#')
+        a.shortcuts__link.shortcuts__link--user(href='#' data-modal-opener= notAuthorized && 'entry' )
           span.visually-hidden Меню пользователя
 
 

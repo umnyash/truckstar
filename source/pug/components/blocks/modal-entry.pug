@@ -1,0 +1,45 @@
+mixin modal-entry
+  .modal-entry&attributes(attributes)
+    form.modal-entry__form.modal-entry__form--code.modal-form(action='https://fakestoreapi.com/products' method='post' target='_blank')
+      .modal-form__inner
+        .modal-form__header
+          h2.modal-form__heading.heading.heading--size_s Войти / зарегистрироваться
+        +text-field({
+          name: 'phone',
+          type: 'tel',
+          placeholder: 'Телефон',
+          required: true,
+          hidableClearButton: true,
+        })(class='modal-form__field text-field--alter text-field--empty')
+        .modal-form__footer
+          +button({
+            tag: 'button',
+            type: 'submit',
+            text: 'Получить код'
+          })(class='modal-form__submit-button button--primary-alter button--right button--size_l' data-submit-button)
+          small.modal-form__comment Нажимая на кнопку «Получить код», вы даете #[a.modal-form__comment-link(href='#!') согласие на обработку персональных данных]
+    form.modal-entry__form.modal-entry__form--login.modal-entry__form--hidden.modal-form.modal-form--in-step(action='https://fakestoreapi.com/products' method='post' target='_blank')
+      .modal-form__inner
+        .modal-form__header
+          h2.modal-form__heading.heading.heading--size_s Введите код подтверждения
+          p.modal-form__header-text Мы отправили SMS-сообщение с кодом подтверждения на номер #[span(data-current-phone-text) +7 964 563 73 37]
+        +text-field({
+          name: 'code',
+          type: 'number',
+          placeholder: 'Код подтверждения',
+          required: true,
+          hidableClearButton: true,
+        })(class='modal-form__field text-field--alter text-field--empty')
+        .modal-form__resend
+          p.modal-form__resend-text Повторный запрос кода доступен через #[span.modal-form__resend-timer 55] сек.
+          +button({
+            tag: 'button',
+            type: 'button',
+            text: 'отправить повторно',
+          })(class='modal-form__resend-button button--simple button--right button--size_s')
+        .modal-form__footer
+          +button({
+            tag: 'button',
+            type: 'submit',
+            text: 'Войти'
+          })(class='modal-form__submit-button button--primary-alter button--right button--size_l' disabled data-submit-button)

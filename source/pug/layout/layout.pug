@@ -35,6 +35,8 @@ html.page(class= pageClass lang='ru')
         +policy-document(class='modal__document')
       +modal(class='modal--position_center modal--with_cart-alert')
         +cart-alert
+      +modal({ backButton: true })(class='modal--position_center modal--with_form' data-modal='entry')
+        +modal-entry
     script(src='vendor/swiper/swiper-bundle.min.js')
     script(src='vendor/simplebar/simplebar.min.js')
     script(src='vendor/pristine/pristine.min.js')

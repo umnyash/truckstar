@@ -107,8 +107,11 @@ class Form {
           this.actionUrl,
           formData,
           (data) => {
-            this.formElement.reset();
             this.successHandler(data);
+
+            if (!this.formElement.matches('.modal-entry__form--code')) {
+              this.formElement.reset();
+            }
           },
           (data) => {
             this.errorHandler(data);

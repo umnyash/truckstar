@@ -51,7 +51,6 @@ if (callbackModalFormElement) {
 let buyModalForm = null;
 let buyModalFormElement = document.querySelector('[data-modal="buy-form"]');
 if (buyModalFormElement) {
-  console.log('buy')
   buyModalForm = new ModalForm(buyModalFormElement);
 }
 
@@ -65,6 +64,12 @@ let subscriptionForm = null;
 let subscriptionFormElement = document.querySelector('.site-footer__subscription .simple-form');
 if (subscriptionFormElement) {
   subscriptionForm = new Form(subscriptionFormElement);
+}
+
+let modalEntry = null;
+const modalEntryElement = document.querySelector('[data-modal="entry"]');
+if (modalEntryElement) {
+  modalEntry = new ModalEntry(modalEntryElement);
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * */

@@ -269,7 +269,8 @@
   }
 }
 
-.shortcuts__item--user:hover .shortcuts__link--user:not(.shortcuts__link--user_not-authorized) + .shortcuts__menu {
+.shortcuts__item--user:focus-within .shortcuts__link--user:not([data-modal-opener]) + .shortcuts__menu,
+.shortcuts__item--user:hover .shortcuts__link--user:not([data-modal-opener]) + .shortcuts__menu {
   @media (min-width: $laptop-width) {
     visibility: visible;
     opacity: 1;

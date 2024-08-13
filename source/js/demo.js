@@ -165,3 +165,40 @@ if (cart?.form) {
   );
 }
 /* * * * * * * * * * * * * * * * * * * * * * * */
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
+ * Добавление обработчиков в формах модального окна "Войти / Зарегистрироваться"
+ */
+if (modalEntry) {
+  modalEntry.codeForm.setHandlers(
+    (data) => {
+      console.info('Запрошен код')
+      modalEntry.switchStep(2);
+    },
+    (data) => {
+      showAlert({
+        heading: 'Ошибка',
+        status: 'error',
+        text: 'Не удалось получить код',
+        buttonText: 'Повторить'
+      });
+    }
+  );
+
+  modalEntry.loginForm.setHandlers(
+    (data) => {
+      console.info('Авторизация произошла')
+      modalEntry.close();
+      modalEntry.switchStep(1);
+    },
+    (data) => {
+      showAlert({
+        heading: 'Ошибка',
+        status: 'error',
+        text: 'Не удалось отправить код',
+        buttonText: 'Повторить'
+      });
+    }
+  );
+}
+/* * * * * * * * * * * * * * * * * * * * * * * */

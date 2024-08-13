@@ -61,6 +61,7 @@ export default {
       `${pathSrc}/js/classes/form-validator.js`,
       `${pathSrc}/js/classes/form.js`,
       `${pathSrc}/js/classes/modal-form.js`,
+      `${pathSrc}/js/classes/modal-entry.js`,
       `${pathSrc}/js/classes/cart.js`,
       `${pathSrc}/js/modules/*.js`,
       `${pathSrc}/js/main.js`,

@@ -21,6 +21,8 @@ function initTextField(fieldElement) {
     controlElement.value = '';
     updateEmptyStatus();
     controlElement.focus();
+    controlElement.dispatchEvent(inputEvent);
+    controlElement.dispatchEvent(changeEvent);
   });
 }
 /* * * * * * * * * * * * * * * * * * * * * * * */

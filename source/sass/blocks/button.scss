@@ -75,6 +75,14 @@
 }
 
 .button--simple {
+  &:hover {
+    color: var(--accent-color);
+  }
+
+  &:active {
+    color: var(--accent-dark-color);
+  }
+
   .button__icon::after {
     background: currentColor;
   }
@@ -251,6 +259,7 @@
   @media (min-width: $wide-desktop-width) {
     font-size: 18px;
     line-height: 20px;
+    letter-spacing: -0.01em;
   }
 
   .button__inner {
