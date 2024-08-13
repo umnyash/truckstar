@@ -243,7 +243,7 @@ const reviewsListWrapperElement = document.querySelector('.reviews-list');
 
 if (reviewsListWrapperElement) {
   const reviewsListElement = reviewsListWrapperElement.querySelector('.reviews-list__items');
-  const reviewsShowMoreButtonElement = reviewsListWrapperElement.querySelector('.reviews-list__button-wrapper');
+  const reviewsShowMoreButtonElement = reviewsListWrapperElement.querySelector('.reviews-list__button-wrapper .button');
 
   reviewsShowMoreButtonElement.addEventListener('click', (evt) => {
     evt.preventDefault();
