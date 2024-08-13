@@ -10,7 +10,12 @@ function initSiteHeader(headerElement) {
   let unlockingPageTimer = null;
 
   function onDocumentClick(evt) {
-    if (evt.target.closest('.shortcuts__menu-close-button') || evt.target.closest('.shortcuts__menu-link')) {
+    console.log(evt.target)
+    if (
+      evt.target.closest('.shortcuts__menu-close-button') ||
+      evt.target.closest('.shortcuts__menu-link') ||
+      evt.target.matches('.shortcuts__menu')
+    ) {
       closeUserMenu();
     }
   }
@@ -46,6 +51,7 @@ function initSiteHeader(headerElement) {
       return;
     }
 
+    evt.preventDefault();
     openUserMenu();
   });
 

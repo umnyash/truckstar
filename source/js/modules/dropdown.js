@@ -38,13 +38,14 @@ function initDropdown(dropdownElement) {
   function onDocumentClick(evt) {
     const targetElement = evt.target.closest('.dropdown');
 
-    if (targetElement !== dropdownElement) {
+    if (targetElement !== dropdownElement || evt.target.matches('.dropdown__list-wrapper')) {
+      evt.preventDefault();
       close();
     }
   }
 
   function open() {
-    if (!laptopWidthMediaQueryList.matches) {
+    if (!laptopWidthMediaQueryList.matches && !Modal.openModalsCount) {
       lockPageScroll();
     }
 
@@ -59,12 +60,15 @@ function initDropdown(dropdownElement) {
 
   function close() {
     dropdownElement.classList.remove('dropdown--open');
+    document.removeEventListener('click', onDocumentClick);
+
+    if (Modal.openModalsCount) {
+      return;
+    }
 
     unlockingPageTimer = setTimeout(() => {
       unlockPageScroll();
     }, MEDIUM_INTERACTION_DURATION);
-
-    document.removeEventListener('click', onDocumentClick);
   };
 }
 /* * * * * * * * * * * * * * * * * * * * * * * */

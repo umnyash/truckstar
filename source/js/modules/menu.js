@@ -4,7 +4,6 @@
 function initMenu(menuElement) {
   const menuContentElement = menuElement.querySelector('.menu__content');
   const openerElement = document.querySelector('.site-header__burger');
-  const closeButton = document.querySelector('.menu__button--close');
 
   new SimpleBar(menuContentElement, { autoHide: false });
   const customScrollBarContentWrapper = menuElement.querySelector('.simplebar-content-wrapper');
@@ -17,16 +16,16 @@ function initMenu(menuElement) {
     menuElement.showModal();
   });
 
-  closeButton.addEventListener('click', (evt) => {
-    evt.preventDefault();
-    menuElement.close();
+  menuElement.addEventListener('click', (evt) => {
+    if (evt.target === menuElement || evt.target.closest('.menu__button--close')) {
+      evt.preventDefault();
+      menuElement.close();
 
-    setTimeout(() => {
-      unlockPageScroll();
-    }, MEDIUM_INTERACTION_DURATION);
+      setTimeout(() => {
+        unlockPageScroll();
+      }, MEDIUM_INTERACTION_DURATION);
+    }
   });
-
-
 
   const headingsWrapperElement = menuElement.querySelector('.menu__headings');
   const headingElements = headingsWrapperElement.querySelectorAll('.menu__heading[data-name]');

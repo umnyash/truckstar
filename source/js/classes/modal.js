@@ -11,10 +11,12 @@ class Modal {
     this.modalElement.addEventListener('close', () => this.onModalClose());
     this.onOpenerClick = onOpenerClick;
 
-    this.modalElement.querySelectorAll('.modal__button--close, [data-modal-close-button]')
-      .forEach((buttonElement) => {
-        buttonElement.addEventListener('click', () => this.close());
-      })
+    this.modalElement.addEventListener('click', (evt) => {
+      if (evt.target === this.modalElement || evt.target.closest('[data-modal-close-button]')) {
+        evt.preventDefault();
+        this.close();
+      }
+    })
 
     if (!document.body.contains(this.modalElement)) {
       document.body.append(this.modalElement)

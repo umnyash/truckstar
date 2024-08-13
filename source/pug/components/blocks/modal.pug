@@ -4,6 +4,6 @@ mixin modal({ backButton } = {})
       if backButton
         button.modal__button.modal__button--back.modal__button--hidden(type='button')
           span.visually-hidden Назад
-      button.modal__button.modal__button--close(type='button')
+      button.modal__button.modal__button--close(type='button' data-modal-close-button)
         span.visually-hidden Закрыть
       block
