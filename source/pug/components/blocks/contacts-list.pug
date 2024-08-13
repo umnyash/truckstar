@@ -9,6 +9,6 @@ mixin contacts-list({ groups })
               each item in group.items
                 if item.href
                   li.contacts-list__group-item
-                    a.contacts-list__link(href= item.href)= item.text
+                    a.contacts-list__link(href= item.href target= item.target rel= item.rel)= item.text
                 else
                   li.contacts-list__group-item= item.text

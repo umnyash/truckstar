@@ -10,9 +10,9 @@ mixin contacts-card({ heading, groups, addressLink })
           dd.contacts-card__group-list
             ul.contacts-card__group-items
               each item in group.items
-                if item.href
+                if item.href && ((group.type !== 'address') || (group.type === 'address' && !addressLink))
                   li.contacts-card__group-item
-                    a.contacts-card__link(href= item.href)= item.text
+                    a.contacts-card__link(href= item.href target= item.target rel= item.rel)= item.text
                 else
                   li.contacts-card__group-item= item.text
                   if group.type === 'address' && addressLink
