@@ -9,16 +9,17 @@ mixin product
             p.product__code Артикул: 65374-4
             p.product__price 6 000 ₽
             .product__buttons
-              +button({
-                tag: 'button',
-                type: 'button',
-                text: 'В корзину',
-              })(class='button--primary-alter button--cart button--size_l' data-product-cart-button)
-              +image-button({
-                tag: 'button',
-                type: 'button',
-                text: 'Избранное'
-              })(class='image-button--size_xl image-button--secondary image-button--icon_heart')
+              .product__buttons-inner
+                +button({
+                  tag: 'button',
+                  type: 'button',
+                  text: 'В корзину',
+                })(class='button--primary-alter button--cart button--size_l' data-product-cart-button)
+                +image-button({
+                  tag: 'button',
+                  type: 'button',
+                  text: 'Избранное'
+                })(class='image-button--size_xl image-button--secondary image-button--icon_heart')
           .product__info-group
             p.product__number Номер OEM: 81612435449
             p.product__condition Бывшая в употреблении запчасть

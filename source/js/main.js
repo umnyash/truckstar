@@ -35,6 +35,7 @@ document.querySelectorAll('[data-modal="locations"]').forEach((modalElement) => 
 
 document.querySelectorAll('.modal--with_document').forEach(initDocumentModal);
 document.querySelectorAll('.product .page-navigation').forEach(initProductNavigation);
+document.querySelectorAll('.product__buttons').forEach(initProductButtons);
 
 let requestForm = null;
 const requestFormElement = document.querySelector('.request-form');
