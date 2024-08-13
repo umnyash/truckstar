@@ -202,3 +202,56 @@ if (modalEntry) {
   );
 }
 /* * * * * * * * * * * * * * * * * * * * * * * */
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
+ * Добавление отзывов, ипользование функции createReviewsListItemString для создания HTML-разметки на основе данных.
+ */
+const mockReviewsData = [
+  {
+    author: 'Кирилл',
+    text: 'Отличное место, помогли с подбором и выбором запчастей, хорошо упаковали и оперативно отправили, рекомендую.',
+    rating: 5,
+    date: '2024-07-08'
+  },
+  {
+    author: 'Кирилл',
+    text: 'Отличное место, помогли с подбором и выбором запчастей, хорошо упаковали и оперативно отправили, рекомендую. Отличное место, помогли с подбором и выбором запчастей, хорошо упаковали и оперативно отправили, рекомендую. Отличное место, помогли с подбором и выбором запчастей, хорошо упаковали и оперативно отправили, рекомендую.',
+    rating: 4,
+    date: '2024-07-25'
+  },
+  {
+    author: 'Кирилл',
+    text: 'Отличное место, помогли с подбором и выбором запчастей, хорошо упаковали и оперативно отправили, рекомендую.',
+    rating: 3,
+    date: '2024-07-26'
+  },
+  {
+    author: 'Кирилл',
+    text: 'Отличное место, помогли с подбором и выбором запчастей, хорошо упаковали и оперативно отправили, рекомендую. Отличное место, помогли с подбором и выбором запчастей, хорошо упаковали и оперативно отправили, рекомендую. Отличное место, помогли с подбором и выбором запчастей, хорошо упаковали и оперативно отправили, рекомендую.',
+    rating: 2,
+    date: '2024-07-26'
+  },
+  {
+    author: 'Кирилл',
+    text: 'Отличное место, помогли с подбором и выбором запчастей, хорошо упаковали и оперативно отправили, рекомендую.',
+    rating: 1,
+    date: '2024-08-08'
+  },
+];
+
+const reviewsListWrapperElement = document.querySelector('.reviews-list');
+
+if (reviewsListWrapperElement) {
+  const reviewsListElement = reviewsListWrapperElement.querySelector('.reviews-list__items');
+  const reviewsShowMoreButtonElement = reviewsListWrapperElement.querySelector('.reviews-list__button-wrapper');
+
+  reviewsShowMoreButtonElement.addEventListener('click', (evt) => {
+    evt.preventDefault();
+    reviewsListElement.insertAdjacentHTML(
+      'beforeend',
+      mockReviewsData.map(createReviewsListItemString).join('')
+    );
+  })
+}
+
+/* * * * * * * * * * * * * * * * * * * * * * * */
