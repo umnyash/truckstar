@@ -1,8 +1,9 @@
 /* * * * * * * * * * * * * * * * * * * * * * * *
  * form.js
  */
-class Form {
+class Form extends PubSub {
   constructor(formElement) {
+    super();
     this.formElement = formElement;
     this.textFieldControlElements = this.formElement.querySelectorAll('.text-field__control, .simple-form__control');
     this.imagesFieldElement = this.formElement.querySelector('.images-field');
@@ -95,6 +96,7 @@ class Form {
       if (isValid) {
         console.log('Форма валидна')
 
+        this.emit(FormEvents.SUBMIT_START);
         this.submitButtonElement.disabled = true;
         this.submitButtonElement.classList.add('button--pending');
 
@@ -117,6 +119,7 @@ class Form {
             this.errorHandler(data);
           },
           () => {
+            this.emit(FormEvents.SUBMIT_END);
             this.submitButtonElement.disabled = false;
             this.submitButtonElement.classList.remove('button--pending');
           }

@@ -3,7 +3,80 @@
  *
  * Здесь код для демонстрации фронтенда тестировщику и примера другим разработчикам.
  * Не подключайте этот файл к настоящему сайту.
- *
+/* * * * * * * * * * * * * * * * * * * * * * * */
+console.log('Временный файл с для демонстрации.')
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
+ * Пример реализации повторной отправки формы в случае ошибки.
+ * Функция-помошник.
+ */
+function initFormResending(form, alert) {
+  // Добавление обработчика нажатия на кнопку
+  alert.button.addEventListener('click', (evt) => {
+    evt.preventDefault();
+
+    // Подписка на начало попытки отправить форму (используется паттерн Издатель-Подписчик)
+    form.addListener(FormEvents.SUBMIT_START, onFormSubmitStart);
+
+    // Форма отправляется повторно
+    form.formElement.requestSubmit();
+  });
+
+  function onFormSubmitStart() {
+    console.log('Начата попытка отправить данные.');
+
+    // Удаление подписчика, так как модальное окно с сообщение (alert) – "одноразовое":
+    // Будет удалено, так как при завершении попытки отправки формы создаётся новое.
+    form.removeListener(FormEvents.SUBMIT_START, onFormSubmitStart);
+
+    // Подписка на завершение попытки отправить форму (используется паттерн Издатель-Подписчик)
+    form.addListener(FormEvents.SUBMIT_END, onFormSubmitEnd);
+
+    // Блокировка кнопки отправки
+    alert.button.disabled = true;
+    alert.button.classList.add('button--pending');
+  };
+
+  function onFormSubmitEnd() {
+    console.log('Попытка отправить данные завершена.');
+
+    // Удаление подписчика
+    form.removeListener(FormEvents.SUBMIT_END, onFormSubmitEnd);
+
+    // Закрытие модального окна с сообщением. При этом оно удалится из DOM.
+    alert.close();
+  }
+}
+/* * * * * * * * * * * * * * * * * * * * * * * */
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
+ * Добавление обработчиков в форме "Подписаться на рассылку"
+ */
+if (subscriptionForm) {
+  subscriptionForm.setHandlers(
+    // Колбэк, вызываемый при успешной отправке данных
+    (data) => { //
+      console.log('Распарсенный ответ сервера:', data);
+
+      showAlert({
+        heading: 'Спасибо за подписку',
+        text: 'Вы успешно подписались на email рассылку',
+      });
+    },
+    // Колбэк, вызываемый при ошибке отправки данных
+    (data) => {
+      console.log('Распарсенный ответ сервера:', data);
+
+      const alert = showAlert({
+        heading: 'Ошибка',
+        status: 'error',
+        text: 'Не удалось подписаться на рассылку',
+      });
+
+      initFormResending(subscriptionForm, alert);
+    }
+  );
+}
 /* * * * * * * * * * * * * * * * * * * * * * * */
 
 /* * * * * * * * * * * * * * * * * * * * * * * *
@@ -15,16 +88,16 @@ if (callbackModalForm) {
       showAlert({
         heading: 'Ваша заявка успешно отправлена',
         text: 'Наш менеджер свяжется с вам в течение дня',
-        buttonText: 'Закрыть'
       });
     },
     (data) => {
-      showAlert({
+      const alert = showAlert({
         heading: 'Ошибка',
         status: 'error',
         text: 'Не удалось отправить заявку',
-        buttonText: 'Повторить'
       });
+
+      initFormResending(callbackModalForm.form, alert);
     }
   );
 }
@@ -39,16 +112,16 @@ if (buyModalForm) {
       showAlert({
         heading: 'Ваша заявка успешно отправлена',
         text: 'Наш менеджер свяжется с вам в течение дня',
-        buttonText: 'Закрыть'
       });
     },
     (data) => {
-      showAlert({
+      const alert = showAlert({
         heading: 'Ошибка',
         status: 'error',
         text: 'Не удалось отправить заявку',
-        buttonText: 'Повторить'
       });
+
+      initFormResending(buyModalForm.form, alert);
     }
   );
 }
@@ -63,40 +136,16 @@ if (requestForm) {
       showAlert({
         heading: 'Ваша заявка успешно отправлена',
         text: 'Наш менеджер свяжется с вам в течение дня',
-        buttonText: 'Закрыть'
       });
     },
     (data) => {
-      showAlert({
+      const alert = showAlert({
         heading: 'Ошибка',
         status: 'error',
         text: 'Не удалось отправить заявку',
-        buttonText: 'Повторить'
       });
-    }
-  );
-}
-/* * * * * * * * * * * * * * * * * * * * * * * */
 
-/* * * * * * * * * * * * * * * * * * * * * * * *
- * Добавление обработчиков в форме "Подписаться на рассылку"
- */
-if (subscriptionForm) {
-  subscriptionForm.setHandlers(
-    (data) => {
-      showAlert({
-        heading: 'Спасибо за подписку',
-        text: 'Вы успешно подписались на email рассылку',
-        buttonText: 'Закрыть'
-      });
-    },
-    (data) => {
-      showAlert({
-        heading: 'Ошибка',
-        status: 'error',
-        text: 'Не удалось подписаться на рассылку',
-        buttonText: 'Повторить'
-      });
+      initFormResending(requestForm, alert);
     }
   );
 }
@@ -112,16 +161,16 @@ if (reviewModalForm) {
         heading: 'Спасибо, что оценили нашу работу',
         mode: 'alter',
         text: 'Ваш отзыв будет проверен модератором сайта, и опубликован в течение 2 рабочих дней',
-        buttonText: 'Закрыть'
       });
     },
     (data) => {
-      showAlert({
+      const alert = showAlert({
         heading: 'Ошибка',
         status: 'error',
         text: 'Не удалось отправить заявку',
-        buttonText: 'Повторить'
       });
+
+      initFormResending(reviewModalForm.form, alert);
     }
   );
 }
@@ -155,12 +204,13 @@ if (cart?.form) {
       window.location.href = 'https://umnyash.github.io/truckstar/order.html';
     },
     (data) => {
-      showAlert({
+      const alert = showAlert({
         heading: 'Ошибка',
         status: 'error',
         text: 'Не удалось отправить заказ',
-        buttonText: 'Повторить'
       });
+
+      initFormResending(cart.form, alert);
     }
   );
 }
@@ -180,7 +230,6 @@ if (modalEntry) {
         heading: 'Ошибка',
         status: 'error',
         text: 'Не удалось получить код',
-        buttonText: 'Повторить'
       });
     }
   );
@@ -196,7 +245,6 @@ if (modalEntry) {
         heading: 'Ошибка',
         status: 'error',
         text: 'Не удалось отправить код',
-        buttonText: 'Повторить'
       });
     }
   );
