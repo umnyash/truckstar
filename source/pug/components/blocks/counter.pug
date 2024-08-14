@@ -1,9 +1,10 @@
-mixin counter({ label, name, value })
-  p.counter&attributes(attributes)
-    label.counter__inner
-      span.visually-hidden= label
-      input.counter__control(name= name type='number' min='1' step='1' value= value placeholder='1')
-    button.counter__button.counter__button--minus(type='button')
-      span.visually-hidden Минус
-    button.counter__button.counter__button--plus(type='button')
-      span.visually-hidden Плюс
+mixin counter({ label, name, value, min = 0 })
+  .counter&attributes(attributes)
+    .counter__inner
+      label.counter__control-wrapper
+        span.visually-hidden= label
+        input.counter__control(name= name type='number' min= min step='1' value= value placeholder='1')
+      button.counter__button.counter__button--minus(type='button')
+        span.visually-hidden Минус
+      button.counter__button.counter__button--plus(type='button')
+        span.visually-hidden Плюс

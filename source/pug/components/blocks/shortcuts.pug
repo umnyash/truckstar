@@ -3,10 +3,16 @@ mixin shortcuts
     ul.shortcuts__list
       li.shortcuts__item
         a.shortcuts__link.shortcuts__link--favorites(href='favorites.html')
-          span.visually-hidden Избранное
+          span.visually-hidden Избранное.
+          span.shortcuts__item-counter
+            span.visually-hidden Количество:
+            span.shortcuts__item-counter-value 10
       li.shortcuts__item
         a.shortcuts__link.shortcuts__link--cart(href='cart.html')
           span.visually-hidden Корзина
+          span.shortcuts__item-counter
+            span.visually-hidden Количество:
+            span.shortcuts__item-counter-value 3
       li.shortcuts__item.shortcuts__item--user
         a.shortcuts__link.shortcuts__link--user(href='#' data-modal-opener= notAuthorized && 'entry' )
           span.visually-hidden Меню пользователя

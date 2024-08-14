@@ -195,6 +195,19 @@
   }
 }
 
+.product__counter {
+  display: none;
+  width: 112px;
+
+  @media (min-width: $tablet-width) and (max-width: ($laptop-width - 1)) {
+    width: 160px;
+  }
+
+  @media (min-width: $wide-desktop-width) {
+    width: 179px;
+  }
+}
+
 .product__header :last-child {
   margin-bottom: 0;
 }
@@ -362,8 +375,19 @@
   .product__buttons-inner {
     @media (max-width: ($laptop-width - 1)) {
       background: var(--background-dark-color);
+      color: var(--text-light-color);
 
       @include main-shadow;
     }
+  }
+}
+
+.product--in-cart {
+  .product__counter {
+    display: block;
+  }
+
+  .product__cart-button {
+    display: none;
   }
 }

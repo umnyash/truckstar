@@ -14,7 +14,8 @@ mixin product
                   tag: 'button',
                   type: 'button',
                   text: 'В корзину',
-                })(class='button--primary-alter button--cart button--size_l' data-product-cart-button)
+                })(class='product__cart-button button--primary-alter button--cart button--size_l' data-product-cart-button)
+                +counter({ label: 'Количество', name: 'count', value: '0' })(class='product__counter counter--big counter--accent')
                 +image-button({
                   tag: 'button',
                   type: 'button',

@@ -39,34 +39,6 @@ class Cart {
   onWindowResize = debounce(this.setPageBottomIndent, 500);
   onWindowScroll = throttle(this.toggleFormFooterStickiness, 100);
 
-  onProductsListClick = (evt) => {
-    const counterButtonElement = evt.target.closest('.counter__button');
-
-    if (!counterButtonElement) {
-      return;
-    }
-
-    const counterControlElement = counterButtonElement
-      .closest('.counter')
-      .querySelector('.counter__control');
-
-    switch (true) {
-      case counterButtonElement.matches('.counter__button--minus'):
-        counterControlElement.stepDown();
-        break;
-      case counterButtonElement.matches('.counter__button--plus'):
-        counterControlElement.stepUp();
-        break;
-    }
-
-    counterControlElement.dispatchEvent(inputEvent);
-    counterControlElement.dispatchEvent(changeEvent);
-  };
-
-  toggleDeliveryData = () => {
-
-  }
-
   onReceivingMethodSectionChange = (evt) => {
     if (evt.target.dataset.value === 'delivery') {
       this.receivingMethodSectionElement.insertAdjacentElement('afterend', this.deliverySectionElement);
@@ -99,7 +71,6 @@ class Cart {
 
     window.addEventListener('resize', this.onWindowResize);
     window.addEventListener('scroll', this.onWindowScroll);
-    this.productsList.addEventListener('click', this.onProductsListClick);
 
     this.receivingMethodSectionElement.addEventListener('change', this.onReceivingMethodSectionChange);
   }

@@ -1,5 +1,5 @@
 mixin product-card({ product })
-  article.product-card&attributes(attributes)
+  article.product-card(class= product.inCart && 'product-card--in-cart')&attributes(attributes)
     a.product-card__link(href='product.html')
       h3.product-card__heading= product.name
       case product.condition
@@ -22,6 +22,7 @@ mixin product-card({ product })
         type: 'button',
         text: 'В корзину'
       })(class='product-card__cart-button image-button--size_l image-button--primary image-button--icon_cart' data-product-cart-button)
+      +counter({ label: 'Количество', name: 'count', value: product.inCart ? '1' : '0' })(class='product-card__counter counter--big counter--accent')
     .product-card__like-button-wrapper
       +image-button({
         tag: 'button',

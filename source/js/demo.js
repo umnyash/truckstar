@@ -4,7 +4,7 @@
  * Здесь код для демонстрации фронтенда тестировщику и примера другим разработчикам.
  * Не подключайте этот файл к настоящему сайту.
 /* * * * * * * * * * * * * * * * * * * * * * * */
-console.log('Временный файл для демонстрации.')
+console.log('Подключён временный файл для демонстрации.')
 
 /* * * * * * * * * * * * * * * * * * * * * * * *
  * Пример реализации повторной отправки формы в случае ошибки.
@@ -189,7 +189,17 @@ if (cartModalAlertElement) {
 document.addEventListener('click', (evt) => {
   const productCartButtonElement = evt.target.closest('[data-product-cart-button]');
 
-  if (cartModalAlert && productCartButtonElement) {
+  if (!productCartButtonElement) {
+    return;
+  }
+
+  const productElement = productCartButtonElement.closest('.product-card, .product');
+  const counterControlElement = productElement.querySelector('.counter__control');
+  +counterControlElement.value++;
+  const productInCartClass = productElement.matches('.product-card') ? 'product-card--in-cart' : 'product--in-cart';
+  productElement.classList.add(productInCartClass);
+
+  if (cartModalAlert) {
     cartModalAlert.open();
   }
 });

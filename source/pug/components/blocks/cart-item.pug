@@ -18,7 +18,7 @@ mixin cart-item({ product })
         when 'to-order'
           p.cart-item__status.status.status--size_s.status--to-order Под заказ
     .cart-item__price-wrapper
-      +counter({ label: 'Количество', name: 'count', value: '1' })(class='cart-item__counter')
+      +counter({ label: 'Количество', name: 'count', value: '1', min: '1' })(class='cart-item__counter')
       p.cart-item__price= `${product.price} ₽`
     .cart-item__actions
       +image-button({

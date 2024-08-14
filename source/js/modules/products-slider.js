@@ -14,6 +14,7 @@ function initProductsSlider(sliderWrapperElement) {
       nextEl: nextButtonElement,
       disabledClass: 'slider-arrows__button--disabled'
     },
+    watchSlidesProgress: true,
     breakpoints: {
       768: {
         slidesPerView: 3,
