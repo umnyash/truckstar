@@ -3,7 +3,7 @@ mixin review-modal-form
     .modal-form__inner
       .modal-form__header
         h2.modal-form__heading.heading.heading--size_s Оставить отзыв
-      +star-rating(class='modal-form__rating')
+      +star-rating({ value: 5 })(class='modal-form__rating')
       +text-field({
         name: 'name',
         type: 'text',

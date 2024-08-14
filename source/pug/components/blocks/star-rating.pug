@@ -1,9 +1,9 @@
-mixin star-rating
+mixin star-rating({ value } = {})
   .star-rating&attributes(attributes)
     p.star-rating__label Оцените
     p.star-rating__buttons
-      input.star-rating__button(type='radio' name='rating' value='1' aria-label='1')
-      input.star-rating__button(type='radio' name='rating' value='2' aria-label='2')
-      input.star-rating__button(type='radio' name='rating' value='3' aria-label='3')
-      input.star-rating__button(type='radio' name='rating' value='4' aria-label='4')
-      input.star-rating__button(type='radio' name='rating' value='5' aria-label='5')
+      input.star-rating__button(type='radio' name='rating' value='1' aria-label='1' checked= value === 1)
+      input.star-rating__button(type='radio' name='rating' value='2' aria-label='2' checked= value === 2)
+      input.star-rating__button(type='radio' name='rating' value='3' aria-label='3' checked= value === 3)
+      input.star-rating__button(type='radio' name='rating' value='4' aria-label='4' checked= value === 4)
+      input.star-rating__button(type='radio' name='rating' value='5' aria-label='5' checked= value === 5)

@@ -5,7 +5,7 @@ class Form extends PubSub {
   constructor(formElement) {
     super();
     this.formElement = formElement;
-    this.textFieldControlElements = this.formElement.querySelectorAll('.text-field__control, .simple-form__control');
+    this.textFieldControlElements = this.formElement.querySelectorAll('.text-field__control, .simple-form__control, .text-area__control');
     this.imagesFieldElement = this.formElement.querySelector('.images-field');
     this.imagesFieldListElement = this.formElement.querySelector('.images-field__list');
     this.actionUrl = this.formElement.action;
@@ -158,7 +158,7 @@ class Form extends PubSub {
 
     this.formElement.addEventListener('reset', () => {
       setTimeout(() => {
-        this.textFieldControlElements.forEach((textFieldElement) => {
+        this.textFieldControlElements?.forEach((textFieldElement) => {
           textFieldElement.dispatchEvent(inputEvent);
         });
         this.resetImagesField();
