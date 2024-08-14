@@ -5,6 +5,11 @@ const DESKTOP_WIDTH_MEDIA_QUERY = '(min-width: 1366px)';
 const MEDIUM_INTERACTION_DURATION = 400;
 const MODAL_ANIMATION_DURATION = 500; // Соответствует $modal-animation-duration в variables.scss
 const CODE_LENGTH = 4;
+const FormEvents = {
+  SUBMIT_START: 'formSubmitStart',
+  SUBMIT_END: 'formSubmitEnd'
+};
+const PHOTO_TYPES = ['jpg', 'jpeg', 'png'];
 function lockPageScroll() {
   const bodyWidth = document.body.clientWidth;
   document.body.classList.add('scroll-lock');
@@ -155,44 +160,38 @@ class Alert extends Modal {
   constructor(_ref) {
     let {
       heading,
-      status,
+      status = 'success',
       mode,
-      text,
-      buttonText
+      text
     } = _ref;
     const modalElement = Alert.createElement({
       heading,
       status,
       mode,
-      text,
-      buttonText
+      text
     });
     document.body.append(modalElement);
     super(modalElement);
-    modalElement.querySelector('.alert__button').addEventListener('click', evt => {
-      evt.preventDefault();
-      this.close();
-    });
+    this.button = modalElement.querySelector('.alert__button');
   }
   static createElement(_ref2) {
     let {
       heading,
       status,
       mode,
-      text,
-      buttonText
+      text
     } = _ref2;
     const modalString = `
       <dialog class="modal modal--position_center modal--with_alert">
         <div class="modal__inner">
-          <button class="modal__button modal__button--close" type="button">
+          <button class="modal__button modal__button--close" type="button" data-modal-close-button>
             <span class="visually-hidden">Закрыть</span>
           </button>
           <section class="alert modal__alert ${status === 'error' ? 'alert--error' : ''} ${mode === 'alter' ? 'alert--alter' : ''}">
             <h2 class="alert__heading heading">${heading}</h2>
             ${text ? `<p class="alert__text">${text}</p>` : ''}
-            <button class="alert__button button button--secondary button--right button--size_l" type="button">
-              <span class="button__inner">${buttonText || 'Закрыть'}<span class="button__icon"></span></span>
+            <button class="alert__button button button--secondary button--right button--size_l" type="button" ${status === 'success' && 'data-modal-close-button'}>
+              <span class="button__inner">${status === 'error' ? 'Повторить' : 'Закрыть'}<span class="button__icon"></span></span>
             </button>
           </section>
         </div>
@@ -279,10 +278,11 @@ class FormValidator {
 /* * * * * * * * * * * * * * * * * * * * * * * *
  * form.js
  */
-class Form {
+class Form extends PubSub {
   constructor(formElement) {
+    super();
     this.formElement = formElement;
-    this.textFieldControlElements = this.formElement.querySelectorAll('.text-field__control, .simple-form__control');
+    this.textFieldControlElements = this.formElement.querySelectorAll('.text-field__control, .simple-form__control, .text-area__control');
     this.imagesFieldElement = this.formElement.querySelector('.images-field');
     this.imagesFieldListElement = this.formElement.querySelector('.images-field__list');
     this.actionUrl = this.formElement.action;
@@ -291,6 +291,7 @@ class Form {
     this.siteHeaderElement = document.querySelector('.page__site-header');
     this.successHandler = null;
     this.errorHandler = null;
+    this.imagesFieldErrorTextElement = null;
     this.init();
   }
   setHandlers = (successHandler, errorHandler) => {
@@ -313,10 +314,14 @@ class Form {
     const listElement = fieldElement.querySelector('.images-field__list');
     this.images = new Set();
     controlElement.addEventListener('change', evt => {
+      this.imagesFieldErrorTextElement?.remove();
       const newFiles = Array.from(evt.target.files);
       newFiles.forEach(file => {
-        if (file.type.startsWith('image/')) {
+        if (file.type.startsWith('image/') && PHOTO_TYPES.some(it => file.name.toLowerCase().endsWith(it))) {
           this.images.add(file);
+        } else {
+          this.imagesFieldErrorTextElement = createElementByString(`<p class="images-field__error-text">Не удалось загрузить фото, попробуйте снова</p>`);
+          listElement.insertAdjacentElement('beforebegin', this.imagesFieldErrorTextElement);
         }
       });
       updateList();
@@ -354,6 +359,7 @@ class Form {
       const isValid = this.validator.validate();
       if (isValid) {
         console.log('Форма валидна');
+        this.emit(FormEvents.SUBMIT_START);
         this.submitButtonElement.disabled = true;
         this.submitButtonElement.classList.add('button--pending');
         const formData = new FormData(evt.target);
@@ -368,6 +374,7 @@ class Form {
         }, data => {
           this.errorHandler(data);
         }, () => {
+          this.emit(FormEvents.SUBMIT_END);
           this.submitButtonElement.disabled = false;
           this.submitButtonElement.classList.remove('button--pending');
         });
@@ -400,7 +407,7 @@ class Form {
     });
     this.formElement.addEventListener('reset', () => {
       setTimeout(() => {
-        this.textFieldControlElements.forEach(textFieldElement => {
+        this.textFieldControlElements?.forEach(textFieldElement => {
           textFieldElement.dispatchEvent(inputEvent);
         });
         this.resetImagesField();
@@ -553,24 +560,6 @@ class Cart {
   };
   onWindowResize = debounce(this.setPageBottomIndent, 500);
   onWindowScroll = throttle(this.toggleFormFooterStickiness, 100);
-  onProductsListClick = evt => {
-    const counterButtonElement = evt.target.closest('.counter__button');
-    if (!counterButtonElement) {
-      return;
-    }
-    const counterControlElement = counterButtonElement.closest('.counter').querySelector('.counter__control');
-    switch (true) {
-      case counterButtonElement.matches('.counter__button--minus'):
-        counterControlElement.stepDown();
-        break;
-      case counterButtonElement.matches('.counter__button--plus'):
-        counterControlElement.stepUp();
-        break;
-    }
-    counterControlElement.dispatchEvent(inputEvent);
-    counterControlElement.dispatchEvent(changeEvent);
-  };
-  toggleDeliveryData = () => {};
   onReceivingMethodSectionChange = evt => {
     if (evt.target.dataset.value === 'delivery') {
       this.receivingMethodSectionElement.insertAdjacentElement('afterend', this.deliverySectionElement);
@@ -598,7 +587,6 @@ class Cart {
     this.toggleFormFooterStickiness();
     window.addEventListener('resize', this.onWindowResize);
     window.addEventListener('scroll', this.onWindowScroll);
-    this.productsList.addEventListener('click', this.onProductsListClick);
     this.receivingMethodSectionElement.addEventListener('change', this.onReceivingMethodSectionChange);
   }
 }
@@ -1165,6 +1153,30 @@ function initProductNavigation(navigationElement) {
 /* * * * * * * * * * * * * * * * * * * * * * * */
 
 /* * * * * * * * * * * * * * * * * * * * * * * *
+ * products-counters.js
+ */
+function initProductsCounters(productsWrapperElement) {
+  productsWrapperElement.addEventListener('click', evt => {
+    const counterButtonElement = evt.target.closest('.counter__button');
+    if (!counterButtonElement) {
+      return;
+    }
+    const counterControlElement = counterButtonElement.closest('.counter').querySelector('.counter__control');
+    switch (true) {
+      case counterButtonElement.matches('.counter__button--minus'):
+        counterControlElement.stepDown();
+        break;
+      case counterButtonElement.matches('.counter__button--plus'):
+        counterControlElement.stepUp();
+        break;
+    }
+    counterControlElement.dispatchEvent(inputEvent);
+    counterControlElement.dispatchEvent(changeEvent);
+  });
+}
+/* * * * * * * * * * * * * * * * * * * * * * * */
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
  * products-slider.js
  */
 function initProductsSlider(sliderWrapperElement) {
@@ -1179,6 +1191,7 @@ function initProductsSlider(sliderWrapperElement) {
       nextEl: nextButtonElement,
       disabledClass: 'slider-arrows__button--disabled'
     },
+    watchSlidesProgress: true,
     breakpoints: {
       768: {
         slidesPerView: 3,
@@ -1242,6 +1255,7 @@ function showAlert(_ref5) {
     buttonText
   });
   alert.open();
+  return alert;
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * *
@@ -1428,6 +1442,7 @@ document.querySelectorAll('[data-modal="locations"]').forEach(modalElement => {
 document.querySelectorAll('.modal--with_document').forEach(initDocumentModal);
 document.querySelectorAll('.product .page-navigation').forEach(initProductNavigation);
 document.querySelectorAll('.product__buttons').forEach(initProductButtons);
+document.querySelectorAll('.product, .products-list, .products-slider__list, .cart-form__products-list').forEach(initProductsCounters);
 let requestForm = null;
 const requestFormElement = document.querySelector('.request-form');
 if (requestFormElement) {
