@@ -8,3 +8,5 @@ const FormEvents = {
   SUBMIT_START: 'formSubmitStart',
   SUBMIT_END: 'formSubmitEnd',
 };
+
+const PHOTO_TYPES = ['jpg', 'jpeg', 'png'];

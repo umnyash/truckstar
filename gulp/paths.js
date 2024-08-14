@@ -56,6 +56,7 @@ export default {
       `${pathSrc}/js/const.js`,
       `${pathSrc}/js/util.js`,
       `${pathSrc}/js/api/api.js`,
+      `${pathSrc}/js/classes/pub-sub.js`,
       `${pathSrc}/js/classes/modal.js`,
       `${pathSrc}/js/classes/alert.js`,
       `${pathSrc}/js/classes/form-validator.js`,

@@ -14,6 +14,7 @@ class Form extends PubSub {
     this.siteHeaderElement = document.querySelector('.page__site-header');
     this.successHandler = null;
     this.errorHandler = null;
+    this.imagesFieldErrorTextElement = null;
     this.init();
   }
 
@@ -42,10 +43,14 @@ class Form extends PubSub {
     this.images = new Set();
 
     controlElement.addEventListener('change', (evt) => {
+      this.imagesFieldErrorTextElement?.remove();
       const newFiles = Array.from(evt.target.files);
       newFiles.forEach((file) => {
-        if (file.type.startsWith('image/')) {
+        if (file.type.startsWith('image/') && PHOTO_TYPES.some((it) => file.name.toLowerCase().endsWith(it))) {
           this.images.add(file);
+        } else {
+          this.imagesFieldErrorTextElement = createElementByString(`<p class="images-field__error-text">Не удалось загрузить фото, попробуйте снова</p>`);
+          listElement.insertAdjacentElement('beforebegin', this.imagesFieldErrorTextElement);
         }
       });
 
