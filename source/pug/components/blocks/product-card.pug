@@ -16,13 +16,13 @@ mixin product-card({ product })
       when 'to-order'
         p.product-card__status.status.status--size_m.status--to-order Под заказ
     .product-card__price-wrapper
-      p.product-card__price= product.price
+      p.product-card__price= `${product.price} ₽`
       +image-button({
         tag: 'button',
         type: 'button',
         text: 'В корзину'
       })(class='product-card__cart-button image-button--size_l image-button--primary image-button--icon_cart' data-product-cart-button)
-      +counter({ label: 'Количество', name: 'count', value: product.inCart ? '1' : '0' })(class='product-card__counter counter--big counter--accent')
+      +counter({ label: 'Количество', name: 'count', value: product.inCart ? '1' : '0' })(class='product-card__counter counter--alter counter--accent')
     .product-card__like-button-wrapper
       +image-button({
         tag: 'button',

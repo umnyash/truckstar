@@ -138,15 +138,21 @@
   display: flex;
   margin: 0 var(--product-card-inner-indent);
   justify-content: space-between;
-  column-gap: 20px;
+  gap: 4px;
   align-items: center;
+  flex-wrap: wrap;
+
+  @media (min-width: $laptop-width) {
+    gap: 8px;
+  }
 }
 
 .product-card__price {
+  margin: 0;
   font-size: 18px;
   line-height: 22px;
   font-weight: 600;
-  margin: 0;
+  white-space: nowrap;
 
   @media (min-width: $tablet-width) {
     font-size: 24px;
@@ -161,7 +167,16 @@
 
 .product-card__counter {
   display: none;
-  width: 112px;
+  margin: 0 0 0 auto;
+  width: 72px;
+
+  @media (min-width: $tablet-width) {
+    width: 80px;
+  }
+
+  @media (min-width: $laptop-width) {
+    width: 112px;
+  }
 
   @media (min-width: $wide-desktop-width) {
     width: 179px;

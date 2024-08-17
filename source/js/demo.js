@@ -187,20 +187,29 @@ if (cartModalAlertElement) {
 }
 
 document.addEventListener('click', (evt) => {
-  const productCartButtonElement = evt.target.closest('[data-product-cart-button]');
+  const cartButtonElement = evt.target.closest('[data-product-cart-button]');
+  const counterButtonMinusElement = evt.target.closest('.counter__button--minus');
 
-  if (!productCartButtonElement) {
-    return;
-  }
+  if (cartButtonElement) {
+    const productElement = cartButtonElement.closest('.product-card, .product');
+    const counterControlElement = productElement.querySelector('.counter__control');
+    +counterControlElement.value++;
+    const productInCartClass = productElement.matches('.product-card') ? 'product-card--in-cart' : 'product--in-cart';
+    productElement.classList.add(productInCartClass);
 
-  const productElement = productCartButtonElement.closest('.product-card, .product');
-  const counterControlElement = productElement.querySelector('.counter__control');
-  +counterControlElement.value++;
-  const productInCartClass = productElement.matches('.product-card') ? 'product-card--in-cart' : 'product--in-cart';
-  productElement.classList.add(productInCartClass);
+    if (cartModalAlert) {
+      cartModalAlert.open();
+    }
+  } else if (counterButtonMinusElement) {
+    const productElement = counterButtonMinusElement.closest('.product-card, .product');
+    const counterControlElement = productElement.querySelector('.counter__control');
+    +counterControlElement.value--;
 
-  if (cartModalAlert) {
-    cartModalAlert.open();
+    if (+counterControlElement.value <= 0) {
+      counterControlElement.value = 0;
+      const productInCartClass = productElement.matches('.product-card') ? 'product-card--in-cart' : 'product--in-cart';
+      productElement.classList.remove(productInCartClass);
+    }
   }
 });
 /* * * * * * * * * * * * * * * * * * * * * * * */

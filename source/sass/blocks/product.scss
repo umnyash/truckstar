@@ -197,14 +197,15 @@
 
 .product__counter {
   display: none;
-  width: 112px;
+  // width: 112px;
+  width: 128px;
 
   @media (min-width: $tablet-width) and (max-width: ($laptop-width - 1)) {
     width: 160px;
   }
 
   @media (min-width: $wide-desktop-width) {
-    width: 179px;
+    width: 200px;
   }
 }
 

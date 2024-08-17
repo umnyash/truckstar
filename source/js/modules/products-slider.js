@@ -7,7 +7,6 @@ function initProductsSlider(sliderWrapperElement) {
   const nextButtonElement = sliderWrapperElement.querySelector('.slider-arrows__button--next');
 
   new Swiper(sliderElement, {
-    slidesPerView: 2,
     spaceBetween: 15,
     navigation: {
       prevEl: prevButtonElement,
@@ -16,6 +15,10 @@ function initProductsSlider(sliderWrapperElement) {
     },
     watchSlidesProgress: true,
     breakpoints: {
+      375: {
+        slidesPerView: 2,
+        spaceBetween: 15,
+      },
       768: {
         slidesPerView: 3,
         spaceBetween: 15,

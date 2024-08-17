@@ -1,3 +1,12 @@
+.counter {
+  font: 500 16px/26px $main-font-family;
+
+  @media (min-width: $wide-desktop-width) {
+    font-size: 20px;
+    line-height: 38px;
+  }
+}
+
 .counter__inner {
   display: grid;
   box-sizing: border-box;
@@ -7,12 +16,9 @@
   border-radius: 1000px;
   grid-template-columns: auto 1fr auto;
   align-items: center;
-  font: 500 16px/26px $main-font-family;
 
   @media (min-width: $wide-desktop-width) {
     padding: 0 11px;
-    font-size: 20px;
-    line-height: 38px;
   }
 }
 
@@ -106,14 +112,59 @@
   }
 }
 
-.counter--big .counter__inner {
-  padding: 0 10px;
-  border-width: 2px;
-  font-size: 20px;
-  line-height: 36px;
+.counter--alter {
+  line-height: 28px;
+
+  @media (min-width: $tablet-width) {
+    font-size: 18px;
+    line-height: 36px;
+  }
+
+  @media (min-width: $laptop-width) {
+    font-size: 20px;
+    line-height: 36px;
+  }
 
   @media (min-width: $wide-desktop-width) {
     font-size: 24px;
     line-height: 52px;
+  }
+
+  .counter__inner {
+    padding: 0 2px;
+    border-width: 2px;
+
+    @media (min-width: $tablet-width) {
+      padding: 0 4px;
+    }
+
+    @media (min-width: $laptop-width) {
+      padding: 0 10px;
+    }
+  }
+
+  .counter__button {
+    width: 16px;
+    height: 16px;
+
+    @media (min-width: $laptop-width) {
+      width: 20px;
+      height: 20px;
+    }
+  }
+}
+
+.counter--big {
+  font-size: 20px;
+  line-height: 36px;
+
+  @media (min-width: $wide-desktop-width) {
+    font-size: 28px;
+    line-height: 58px;
+  }
+
+  .counter__inner {
+    padding: 0 10px;
+    border-width: 2px;
   }
 }
