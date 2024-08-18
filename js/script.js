@@ -1,7 +1,6 @@
 "use strict";
 
 const LAPTOP_WIDTH_MEDIA_QUERY = '(min-width: 1280px)';
-const DESKTOP_WIDTH_MEDIA_QUERY = '(min-width: 1366px)';
 const MEDIUM_INTERACTION_DURATION = 400;
 const MODAL_ANIMATION_DURATION = 500; // Соответствует $modal-animation-duration в variables.scss
 const CODE_LENGTH = 4;
@@ -1377,13 +1376,13 @@ function initSiteHeader(headerElement) {
   const searchFormElement = searchFormInnerWrapperElement.querySelector('.site-header__search-form form');
   const searchFormToggleButtonElement = document.querySelector('.site-header__user-navigation-link--search');
   function moveSearchForm() {
-    if (desktopWidthMediaQueryList.matches) {
+    if (laptopWidthMediaQueryList.matches) {
       searchFormInnerWrapperElement.append(searchFormElement);
     } else {
       searchFormOuterWrapperElement.append(searchFormElement);
     }
   }
-  desktopWidthMediaQueryList.addEventListener('change', moveSearchForm);
+  laptopWidthMediaQueryList.addEventListener('change', moveSearchForm);
   moveSearchForm();
   searchFormToggleButtonElement.addEventListener('click', evt => {
     evt.preventDefault();
@@ -1436,7 +1435,6 @@ function initTextField(fieldElement) {
  * main.js
  */
 const laptopWidthMediaQueryList = window.matchMedia(LAPTOP_WIDTH_MEDIA_QUERY);
-const desktopWidthMediaQueryList = window.matchMedia(DESKTOP_WIDTH_MEDIA_QUERY);
 const inputEvent = new Event('input', {
   bubbles: true
 });
