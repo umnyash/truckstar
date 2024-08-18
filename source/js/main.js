@@ -2,7 +2,6 @@
  * main.js
  */
 const laptopWidthMediaQueryList = window.matchMedia(LAPTOP_WIDTH_MEDIA_QUERY);
-const desktopWidthMediaQueryList = window.matchMedia(DESKTOP_WIDTH_MEDIA_QUERY);
 const inputEvent = new Event('input', { bubbles: true });
 const changeEvent = new Event('change', { bubbles: true });
 

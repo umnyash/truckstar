@@ -88,14 +88,14 @@ function initSiteHeader(headerElement) {
   const searchFormToggleButtonElement = document.querySelector('.site-header__user-navigation-link--search');
 
   function moveSearchForm() {
-    if (desktopWidthMediaQueryList.matches) {
+    if (laptopWidthMediaQueryList.matches) {
       searchFormInnerWrapperElement.append(searchFormElement);
     } else {
       searchFormOuterWrapperElement.append(searchFormElement);
     }
   }
 
-  desktopWidthMediaQueryList.addEventListener('change', moveSearchForm);
+  laptopWidthMediaQueryList.addEventListener('change', moveSearchForm);
   moveSearchForm();
 
   searchFormToggleButtonElement.addEventListener('click', (evt) => {
