@@ -1,7 +1,7 @@
 /* * * * * * * * * * * * * * * * * * * * * * * *
  * folds.js
  */
-const initFolds = (foldsElement) => {
+function initFolds(foldsElement) {
   foldsElement.addEventListener('click', ({ target }) => {
     const buttonElement = target.closest('.folds__button');
     if (!buttonElement) {
