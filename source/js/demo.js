@@ -201,7 +201,7 @@ document.addEventListener('click', (evt) => {
       cartModalAlert.open();
     }
   } else if (counterButtonMinusElement) {
-    const productElement = counterButtonMinusElement.closest('.product-card, .product');
+    const productElement = counterButtonMinusElement.closest('.product-card, .product, .cart-item');
     const counterControlElement = productElement.querySelector('.counter__control');
     +counterControlElement.value--;
 
