@@ -226,11 +226,88 @@ class Alert extends Modal {
 /* * * * * * * * * * * * * * * * * * * * * * * */
 
 /* * * * * * * * * * * * * * * * * * * * * * * *
+ * images-field.js
+ */
+class ImagesField {
+  constructor(imagesFieldElement) {
+    this.element = imagesFieldElement;
+    this.controlElement = this.element.querySelector('.images-field__control');
+    this.listElement = this.element.querySelector('.images-field__list');
+    this.errorTextElement = null;
+    this.images = new Set();
+    this.init();
+  }
+  updateList = () => {
+    const fragment = document.createDocumentFragment();
+    this.images.forEach(file => {
+      const listItemElement = createElementByString(`
+        <li class="images-field__list-item">
+          <img class="images-field__preview" src=${URL.createObjectURL(file)} alt=''>
+          <button class="images-field__delete-button image-button image-button--size_xs image-button--primary image-button--icon_cross" type="button">
+            <span class="visually-hidden">Удалить фото</span>
+          </button>
+        </li>
+      `);
+      const previewElement = listItemElement.querySelector('.images-field__preview');
+      const deleteButtonElement = listItemElement.querySelector('.images-field__delete-button');
+      deleteButtonElement.addEventListener('click', evt => {
+        evt.preventDefault();
+        this.images.delete(file);
+        this.updateList();
+        URL.revokeObjectURL(previewElement.src);
+      });
+      fragment.append(listItemElement);
+    });
+    this.listElement.innerHTML = '';
+    this.listElement.append(fragment);
+  };
+  onControlChange = evt => {
+    this.errorTextElement?.remove();
+    const newFiles = Array.from(evt.target.files);
+    newFiles.forEach(file => {
+      if (file.type.startsWith('image/') && PHOTO_TYPES.some(it => file.name.toLowerCase().endsWith(it))) {
+        this.images.add(file);
+      } else {
+        this.errorTextElement = createElementByString(`<p class="images-field__error-text">Не удалось загрузить фото, попробуйте снова</p>`);
+        this.listElement.insertAdjacentElement('beforebegin', this.errorTextElement);
+      }
+    });
+    this.updateList();
+  };
+  reset = () => {
+    this.listElement.querySelectorAll('img').forEach(imageElement => {
+      URL.revokeObjectURL(imageElement.src);
+    });
+    this.errorTextElement?.remove();
+    this.listElement.innerHTML = '';
+    this.images.clear();
+  };
+  init = () => {
+    this.controlElement.addEventListener('change', this.onControlChange);
+  };
+}
+/* * * * * * * * * * * * * * * * * * * * * * * */
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
  * form-validator.js
  */
 class FormValidator {
   constructor(formElement) {
     this.formElement = formElement;
+    this.dropdowns = Array.from(this.formElement.querySelectorAll('.dropdown')).map(dropdownElement => {
+      const radiobuttonElements = Array.from(dropdownElement.querySelectorAll('.dropdown__option-control'));
+      const isRequired = radiobuttonElements.some(radiobuttonElement => radiobuttonElement.required);
+      const checkedElement = radiobuttonElements.find(radiobuttonElement => radiobuttonElement.checked);
+      if (isRequired) {
+        radiobuttonElements.forEach(radiobuttonElement => radiobuttonElement.required = false);
+      }
+      return {
+        element: dropdownElement,
+        radiobuttonElements,
+        checkedElement,
+        isRequired
+      };
+    });
     this.addCustomErrorMessages();
     this.init();
   }
@@ -279,13 +356,62 @@ class FormValidator {
       messageFieldElement.dataset.pristineRequiredMessage = 'Заполните это поле.';
     }
   }
-  validate() {
-    return this.pristine.validate();
+  resetDropdownValidation(dropdownElement) {
+    dropdownElement.querySelector('.pristine-item__error-text')?.remove();
+    dropdownElement.classList.remove('pristine-item--invalid');
+    dropdownElement.classList.remove('shake');
   }
-  reset() {
+  validateDropdown = dropdown => {
+    const {
+      element,
+      radiobuttonElements,
+      isRequired
+    } = dropdown;
+    if (!isRequired) {
+      return true;
+    }
+    const isСhecked = radiobuttonElements.some(radiobuttonElement => radiobuttonElement.checked);
+    if (isСhecked) {
+      this.resetDropdownValidation(dropdown.element);
+    } else {
+      element.querySelector('.pristine-item__error-text')?.remove();
+      element.classList.add('pristine-item--invalid');
+      element.insertAdjacentHTML('beforeend', '<p class="pristine-item__error-text">Выберите один из вариантов.</p>');
+    }
+    return isСhecked;
+  };
+  validateDropdowns = () => {
+    let isValid = true;
+    this.dropdowns.forEach(dropdown => {
+      if (this.validateDropdown(dropdown)) {
+        return;
+      }
+      isValid = false;
+    });
+    return isValid;
+  };
+  resetDropdownsValidation = () => {
+    this.dropdowns.forEach(dropdown => this.resetDropdownValidation(dropdown.element));
+  };
+  validate = () => {
+    const dropdownsIsValid = this.validateDropdowns();
+    return this.pristine.validate() && dropdownsIsValid;
+  };
+  reset = () => {
     this.pristine.reset();
     this.formElement.querySelectorAll('.shake').forEach(element => element.classList.remove('shake'));
-  }
+    this.resetDropdownsValidation();
+    this.dropdowns.forEach(dropdown => {
+      const toggleButtonTextElement = dropdown.element.querySelector('.dropdown__toggle-button-text');
+      toggleButtonTextElement.textContent = dropdown.checkedElement ? dropdown.checkedElement.parentElement.querySelector('.dropdown__option-label').textContent : toggleButtonTextElement.dataset.label;
+    });
+  };
+  onFormChange = evt => {
+    const dropdownElement = evt.target.closest('.dropdown');
+    if (dropdownElement) {
+      this.resetDropdownValidation(dropdownElement);
+    }
+  };
   init() {
     this.pristine = new Pristine(this.formElement, {
       classTo: 'pristine-item',
@@ -294,6 +420,7 @@ class FormValidator {
       errorTextTag: 'p',
       errorTextClass: 'pristine-item__error-text'
     });
+    this.formElement.addEventListener('change', this.onFormChange);
   }
 }
 /* * * * * * * * * * * * * * * * * * * * * * * */
@@ -307,86 +434,32 @@ class Form extends PubSub {
     this.formElement = formElement;
     this.textFieldControlElements = this.formElement.querySelectorAll('.text-field__control, .simple-form__control, .text-area__control');
     this.imagesFieldElement = this.formElement.querySelector('.images-field');
-    this.imagesFieldListElement = this.formElement.querySelector('.images-field__list');
+    this.imagesField = null;
     this.actionUrl = this.formElement.action;
     this.submitButtonElement = this.formElement.querySelector('[data-submit-button]');
     this.validator = new FormValidator(this.formElement);
     this.siteHeaderElement = document.querySelector('.page__site-header');
     this.successHandler = null;
     this.errorHandler = null;
-    this.imagesFieldErrorTextElement = null;
     this.init();
   }
   setHandlers = (successHandler, errorHandler) => {
     this.successHandler = successHandler;
     this.errorHandler = errorHandler;
   };
-  resetImagesField = () => {
-    if (this.imagesFieldListElement) {
-      this.imagesFieldListElement.querySelectorAll('img').forEach(imageElement => {
-        URL.revokeObjectURL(imageElement.src);
-      });
-      this.imagesFieldListElement.innerHTML = '';
-    }
-    if (this.images) {
-      this.images.clear();
-    }
-  };
-  initImagesField = fieldElement => {
-    const controlElement = fieldElement.querySelector('.images-field__control');
-    const listElement = fieldElement.querySelector('.images-field__list');
-    this.images = new Set();
-    controlElement.addEventListener('change', evt => {
-      this.imagesFieldErrorTextElement?.remove();
-      const newFiles = Array.from(evt.target.files);
-      newFiles.forEach(file => {
-        if (file.type.startsWith('image/') && PHOTO_TYPES.some(it => file.name.toLowerCase().endsWith(it))) {
-          this.images.add(file);
-        } else {
-          this.imagesFieldErrorTextElement = createElementByString(`<p class="images-field__error-text">Не удалось загрузить фото, попробуйте снова</p>`);
-          listElement.insertAdjacentElement('beforebegin', this.imagesFieldErrorTextElement);
-        }
-      });
-      updateList();
-    });
-    const updateList = () => {
-      const fragment = document.createDocumentFragment();
-      this.images.forEach(file => {
-        const listItemElement = createElementByString(`
-          <li class="images-field__list-item">
-            <img class="images-field__preview" src=${URL.createObjectURL(file)} alt=''>
-            <button class="images-field__delete-button image-button image-button--size_xs image-button--primary image-button--icon_cross" type="button">
-              <span class="visually-hidden">Удалить фото</span>
-            </button>
-          </li>
-        `);
-        const previewElement = listItemElement.querySelector('.images-field__preview');
-        const deleteButtonElement = listItemElement.querySelector('.images-field__delete-button');
-        deleteButtonElement.addEventListener('click', evt => {
-          this.images.delete(file);
-          updateList();
-          URL.revokeObjectURL(previewElement.src);
-        });
-        fragment.append(listItemElement);
-      });
-      listElement.innerHTML = '';
-      listElement.append(fragment);
-    };
-  };
   init = () => {
     if (this.imagesFieldElement) {
-      this.initImagesField(this.imagesFieldElement);
+      this.imagesField = new ImagesField(this.imagesFieldElement);
     }
     this.formElement.addEventListener('submit', evt => {
       evt.preventDefault();
       const isValid = this.validator.validate();
       if (isValid) {
-        console.log('Форма валидна');
         this.emit(FormEvents.SUBMIT_START);
         this.submitButtonElement.disabled = true;
         this.submitButtonElement.classList.add('button--pending');
         const formData = new FormData(evt.target);
-        this.images?.forEach(file => {
+        this.imagesField?.images?.forEach(file => {
           formData.append('images[]', file);
         });
         sendData(this.actionUrl, formData, data => {
@@ -402,7 +475,6 @@ class Form extends PubSub {
           this.submitButtonElement.classList.remove('button--pending');
         });
       } else {
-        console.log('Форма невалидна');
         if (this.formElement.matches('.simple-form')) {
           const fieldWrapperElement = this.formElement.querySelector('.simple-form__inner');
           fieldWrapperElement.classList.remove('shake');
@@ -433,7 +505,7 @@ class Form extends PubSub {
         this.textFieldControlElements?.forEach(textFieldElement => {
           textFieldElement.dispatchEvent(inputEvent);
         });
-        this.resetImagesField();
+        this.imagesField?.reset();
         this.validator.reset();
       }, 0);
     });
@@ -795,7 +867,7 @@ function initDropdown(dropdownElement) {
 /* * * * * * * * * * * * * * * * * * * * * * * *
  * folds.js
  */
-const initFolds = foldsElement => {
+function initFolds(foldsElement) {
   foldsElement.addEventListener('click', _ref3 => {
     let {
       target
@@ -832,7 +904,8 @@ const initFolds = foldsElement => {
       }, 0);
     }
   });
-};
+}
+;
 /* * * * * * * * * * * * * * * * * * * * * * * */
 
 /* * * * * * * * * * * * * * * * * * * * * * * *
