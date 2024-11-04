@@ -59,6 +59,7 @@ export default {
       `${pathSrc}/js/classes/pub-sub.js`,
       `${pathSrc}/js/classes/modal.js`,
       `${pathSrc}/js/classes/alert.js`,
+      `${pathSrc}/js/classes/images-field.js`,
       `${pathSrc}/js/classes/form-validator.js`,
       `${pathSrc}/js/classes/form.js`,
       `${pathSrc}/js/classes/modal-form.js`,
