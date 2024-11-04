@@ -6,7 +6,7 @@ mixin dropdown({ label, name, options, links })
 
   .dropdown&attributes(attributes)
     button.dropdown__toggle-button(type='button')
-      span.dropdown__toggle-button-text= activeItemText || label
+      span.dropdown__toggle-button-text(data-label= label)= activeItemText || label
     .dropdown__list-wrapper
       .dropdown__list
         p.dropdown__list-heading= label
@@ -16,7 +16,7 @@ mixin dropdown({ label, name, options, links })
             each option in options
               li.dropdown__list-item
                 label.dropdown__option
-                  input.dropdown__option-control.visually-hidden(name= name type='radio' value= option.value checked= option.active && '')
+                  input.dropdown__option-control.visually-hidden(name= name type='radio' required = option.required && '' value= option.value checked= option.active && '')
                   span.dropdown__option-label= option.text
           if links
             each link in links
