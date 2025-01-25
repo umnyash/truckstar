@@ -367,7 +367,7 @@ class FormValidator {
       radiobuttonElements,
       isRequired
     } = dropdown;
-    if (!isRequired) {
+    if (!isRequired || !element.isConnected) {
       return true;
     }
     const isСhecked = radiobuttonElements.some(radiobuttonElement => radiobuttonElement.checked);
