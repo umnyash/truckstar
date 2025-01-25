@@ -90,7 +90,7 @@ class FormValidator {
   validateDropdown = (dropdown) => {
     const { element, radiobuttonElements, isRequired } = dropdown;
 
-    if (!isRequired) {
+    if (!isRequired || !element.isConnected) {
       return true;
     }
 
