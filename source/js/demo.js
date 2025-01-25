@@ -44,7 +44,9 @@ function initFormResending(form, alert) {
     form.removeListener(FormEvents.SUBMIT_END, onFormSubmitEnd);
 
     // Закрытие модального окна с сообщением. При этом оно удалится из DOM.
-    alert.close();
+    if (alert.modalElement) { // Проверка, если пользователь уже сам закрыл это окно.
+      alert.close();
+    }
   }
 }
 /* * * * * * * * * * * * * * * * * * * * * * * */
